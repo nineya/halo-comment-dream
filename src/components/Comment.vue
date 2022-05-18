@@ -131,9 +131,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 @import '../styles/global';
-@import '../styles/github-markdown.css';
+@import '../styles/github-markdown';
 </style>

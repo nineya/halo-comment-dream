@@ -6,7 +6,7 @@
     itemprop="comment"
     itemtype="https://schema.org/Comment"
   >
-    <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body markdown-body !mb-5">
+    <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body !mb-5">
       <div class="relative float-left p-0">
         <a :href="`${comment.authorUrl ? comment.authorUrl : 'javascript:void(0)'}`" rel="nofollow" target="_blank">
           <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
@@ -29,14 +29,14 @@
           </div>
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
         </div>
-        <div class="comment-content" itemprop="description">
+        <div class="markdown-body" itemprop="description">
           <span
             v-if="parent"
             @mouseenter="handleHighlightParent"
             @mouseleave="handleHighlightParent(false)"
             v-html="compileReference"
           ></span>
-          <span v-html="compileContent"></span>
+          <div class="markdown-content" v-html="compileContent"></div>
         </div>
         <div class="flex">
           <span class="cursor-pointer select-none text-sm hover:font-bold transition-all" @click="editing = !editing">
