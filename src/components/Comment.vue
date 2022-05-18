@@ -1,5 +1,5 @@
 <template>
-  <div id="halo-comment" class="halo-comment" :class="mergedConfigs.dark ? 'dark' : 'light'">
+  <div id="halo-comment" class="halo-comment" :class="mergedConfigs.night ? 'night' : ''">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
     <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
@@ -40,7 +40,7 @@ const defaultConfig = {
   autoLoad: true,
   showUserAgent: true,
   loadingStyle: 'default',
-  dark: false
+  night: (localStorage && localStorage.getItem('night') === 'true') || false
 }
 
 export default {

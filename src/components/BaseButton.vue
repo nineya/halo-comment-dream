@@ -79,7 +79,7 @@ export default {
 }
 
 .btn-secondary {
-  background: #0e1731;
+  background: var(--theme);
   @apply text-white;
 }
 

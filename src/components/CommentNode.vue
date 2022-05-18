@@ -20,22 +20,7 @@
                 <a :href="comment.authorUrl" class="self-center author-name mr-2" rel="nofollow" target="_blank">
                   {{ comment.author }}
                 </a>
-                <span v-if="comment.isAdmin" class="self-center is-admin">
-                  <svg
-                    class="icon"
-                    height="14"
-                    version="1.1"
-                    viewBox="0 0 1024 1024"
-                    width="14"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0z m0 896c-212.032 0-384-171.968-384-384S299.968 128 512 128s384 171.968 384 384-171.968 384-384 384z m94.08-513.408L512 192.064l-94.016 190.528-210.304 30.592 152.192 148.288-35.968 209.344L512 672l188.032 98.88-35.904-209.344 152.128-148.288-210.176-30.656z"
-                      fill="#1296db"
-                      p-id="6998"
-                    ></path>
-                  </svg>
-                </span>
+                <span v-if="comment.isAdmin" class="self-center is-admin">博主</span>
               </div>
             </div>
             <div v-if="configs.showUserAgent" class="useragent-info">
@@ -182,3 +167,13 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.is-admin {
+  font-size: 0.8em;
+  padding: 2px 4px;
+  background: rgb(255 136 169 / 30%);
+  color: #fb7299;
+  border-radius: 3px;
+  border: 1px solid #fb7299;
+}
+</style>

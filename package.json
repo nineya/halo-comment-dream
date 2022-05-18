@@ -1,6 +1,6 @@
 {
-  "name": "halo-comment-normal",
-  "version": "1.5.0-alpha.0",
+  "name": "halo-comment-dream",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -42,15 +42,15 @@
     "> 1%",
     "last 2 versions"
   ],
-  "description": "<h1 align=\"center\"><a href=\"https://github.com/halo-dev\" target=\"_blank\">halo-comment-normal</a></h1> > 适用于 Halo 的评论组件。",
+  "description": "适用于 halo-theme-dream 主题的评论组件。",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/halo-dev/halo-comment-normal.git"
+    "url": "git+https://github.com/nineya/halo-comment-dream.git"
   },
-  "author": "Ryan Wang",
-  "license": "ISC",
+  "author": "nineya",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/halo-dev/halo-comment-normal/issues"
+    "url": "https://github.com/nineya/halo-comment-dream/issues"
   },
-  "homepage": "https://github.com/halo-dev/halo-comment-normal#readme"
+  "homepage": "https://github.com/nineya/halo-comment-dream#readme"
 }
