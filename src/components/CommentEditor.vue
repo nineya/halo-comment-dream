@@ -1,81 +1,77 @@
 <template>
   <section class="comment-editor" role="form">
-    <div class="flex my-5">
-      <div class="mr-2">
-        <img :src="avatar" class="avatar" />
-      </div>
-      <form class="comment-form flex-1">
-        <div class="grid grid-cols-3 gap-2 mb-2">
-          <input
-            id="author"
-            v-model="comment.author"
-            aria-required="true"
-            class="w-full"
-            placeholder="* 昵称"
-            required="required"
-            type="text"
-          />
-          <input id="email" v-model="comment.email" class="w-full" placeholder="电子邮件" type="text" />
-          <input id="authorUrl" v-model="comment.authorUrl" class="w-full" placeholder="个人站点" type="text" />
-        </div>
-        <div v-if="!previewMode" class="comment-textarea mb-2">
-          <textarea
-            ref="commentTextarea"
-            class="block w-full"
-            v-model="comment.content"
-            :placeholder="options.comment_content_placeholder || '撰写评论...'"
-            aria-required="true"
-            required="required"
-          >
-          </textarea>
-          <span class="emoji-picker absolute right-0 bottom-7 cursor-pointer hover:opacity-80 transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
-              <path fill="none" d="M0 0h24v24H0z" />
-              <path
-                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                fill="rgba(174,174,174,1)"
-              />
-            </svg>
-          </span>
-        </div>
-        <div v-else class="comment-preview markdown-body mb-2 w-full" v-html="renderedContent"></div>
-        <ul>
-          <li class="inline-flex mr-2">
-            <BaseButton type="secondary" @click="handleSubmitClick">提交</BaseButton>
-          </li>
-          <li class="inline-flex" v-if="comment.content">
-            <BaseButton @click="previewMode = !previewMode">
-              {{ previewMode ? '编辑' : '预览' }}
-            </BaseButton>
-          </li>
-        </ul>
-        <div class="comment-alert">
-          <!-- Info -->
-          <template v-if="infoAlertVisible">
-            <div v-for="(info, index) in infoes" :key="index" class="alert info">
-              <span class="closebtn" @click="clearAlertClose">&times;</span>
-              <strong>{{ info }}</strong>
-            </div>
-          </template>
-
-          <!-- Success -->
-          <template v-if="successAlertVisible">
-            <div v-for="(success, index) in successes" :key="index" class="alert success">
-              <span class="closebtn" @click="clearAlertClose">&times;</span>
-              <strong>{{ success }}</strong>
-            </div>
-          </template>
-
-          <!-- Warning -->
-          <template v-if="warningAlertVisible">
-            <div v-for="(warning, index) in warnings" :key="index" class="alert warning">
-              <span class="closebtn" @click="clearAlertClose">&times;</span>
-              <strong>{{ warning }}</strong>
-            </div>
-          </template>
-        </div>
-      </form>
+    <div class="avatar-body">
+      <img :src="avatar" class="avatar" />
     </div>
+    <form class="comment-form">
+      <div class="author-info">
+        <input
+          id="author"
+          v-model="comment.author"
+          aria-required="true"
+          placeholder="* 昵称"
+          required="required"
+          type="text"
+        />
+        <input id="email" v-model="comment.email" placeholder="邮箱" type="text" />
+        <input id="authorUrl" v-model="comment.authorUrl" placeholder="个人站点" type="text" />
+      </div>
+      <div v-if="!previewMode" class="comment-textarea">
+        <textarea
+          ref="commentTextarea"
+          v-model="comment.content"
+          :placeholder="options.comment_content_placeholder || '撰写评论...'"
+          aria-required="true"
+          required="required"
+        >
+        </textarea>
+        <span class="emoji-picker">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+              fill="rgba(174,174,174,1)"
+            />
+          </svg>
+        </span>
+      </div>
+      <div v-else class="comment-preview markdown-body" v-html="renderedContent"></div>
+      <ul>
+        <li>
+          <button class="btn btn-primary" type="button" @click="handleSubmitClick">提交</button>
+        </li>
+        <li v-if="comment.content">
+          <button class="btn" type="button" @click="previewMode = !previewMode">
+            {{ previewMode ? '编辑' : '预览' }}
+          </button>
+        </li>
+      </ul>
+      <div class="comment-alert">
+        <!-- Info -->
+        <template v-if="infoAlertVisible">
+          <div v-for="(info, index) in infoes" :key="index" class="alert info">
+            <span class="closebtn" @click="clearAlertClose">&times;</span>
+            <strong>{{ info }}</strong>
+          </div>
+        </template>
+
+        <!-- Success -->
+        <template v-if="successAlertVisible">
+          <div v-for="(success, index) in successes" :key="index" class="alert success">
+            <span class="closebtn" @click="clearAlertClose">&times;</span>
+            <strong>{{ success }}</strong>
+          </div>
+        </template>
+
+        <!-- Warning -->
+        <template v-if="warningAlertVisible">
+          <div v-for="(warning, index) in warnings" :key="index" class="alert warning">
+            <span class="closebtn" @click="clearAlertClose">&times;</span>
+            <strong>{{ warning }}</strong>
+          </div>
+        </template>
+      </div>
+    </form>
   </section>
 </template>
 <script>

@@ -1,6 +1,162 @@
+$mobile-max-width: 768px;
+
+* {
+  box-sizing: border-box;
+}
+
 .halo-comment {
+  --main: #24292f;
+  --color-a: #e1e8ed;
+  --color-b: #ebeef5;
+  --bg-a: rgb(255 255 255 / 80%);
+  --radius-inner: 4px;
 
   &.night {
+    --main: #999;
+    --color-a: #414243;
+    --color-b: #414243;
+    --bg-a: rgb(40 39 39 / 60%);
+  }
+}
 
+.btn {
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  color: var(--main);
+  border: 1px solid var(--color-a);
+  border-radius: var(--radius-inner);
+  background: rgba(144, 147, 153, 0.063);
+
+  &-primary {
+    color: #fff;
+    background: var(--theme);
+    border-color: var(--theme);
+  }
+}
+
+.halo-comment {
+  font-size: 1rem;
+  color: var(--main);
+
+  .avatar-body {
+    margin-right: 0.5rem;
+  }
+
+  .avatar {
+    display: block;
+    object-fit: cover;
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    transition: all .8s;
+    border: 1px solid var(--color-a);
+    padding: 3px;
+
+    &:hover {
+      border-color: var(--theme);
+      transform: rotate(1turn);
+    }
+  }
+
+  .comment-editor {
+    display: flex;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .author-info {
+    margin-bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+
+    input {
+      width: 100%;
+
+      &#authorUrl {
+        margin: 0;
+      }
+    }
+  }
+
+  .comment-textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+
+    textarea {
+      width: 100%;
+      min-height: 90px;
+    }
+  }
+
+  .comment-form {
+    flex: 1 1 0;
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      display: inline-flex;
+
+      &:not(:last-child) {
+        margin-right: 0.5rem;
+      }
+    }
+
+    input, textarea {
+      box-shadow: none;
+      border: 1px solid var(--color-a);
+      border-radius: var(--radius-inner);
+      background: var(--bg-a);
+      box-sizing: border-box;
+      padding: 10px;
+      resize: vertical;
+      color: var(--main);
+
+      &:focus {
+        outline: 0;
+        border-color: var(--theme);
+      }
+    }
+
+    .comment-preview {
+      min-height: 90px;
+      padding: 5px 10px;
+      margin-bottom: 0.5rem;
+      overflow-wrap: break-word;
+      border: 1px solid var(--color-a);
+      border-radius: var(--radius-inner);
+      background: var(--bg-a);
+    }
+  }
+
+  .comment-nodes {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    .comment {
+      overflow: hidden;
+      margin-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--color-b);
+    }
+  }
+
+  .comment-body {
+    display: flex;
+  }
+}
+
+@media (max-width: $mobile-max-width) {
+
+  .halo-comment .author-info {
+    grid-template-columns: auto;
   }
 }

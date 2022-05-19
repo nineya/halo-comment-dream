@@ -6,8 +6,8 @@
     itemprop="comment"
     itemtype="https://schema.org/Comment"
   >
-    <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body !mb-5">
-      <div class="relative float-left p-0">
+    <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body">
+      <div class="avatar-body">
         <a :href="`${comment.authorUrl ? comment.authorUrl : 'javascript:void(0)'}`" rel="nofollow" target="_blank">
           <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
         </a>
