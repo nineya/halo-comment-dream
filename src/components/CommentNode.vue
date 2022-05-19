@@ -15,19 +15,22 @@
       <div class="comment-main">
         <div class="comment-meta">
           <div class="comment-author" itemprop="author">
-            <div class="flex justify-between">
-              <div class="self-center inline-flex">
-                <a :href="comment.authorUrl" class="self-center author-name mr-2" rel="nofollow" target="_blank">
-                  {{ comment.author }}
-                </a>
-                <span v-if="comment.isAdmin" class="self-center is-admin">博主</span>
-              </div>
+            <div class="author-info">
+              <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
+              <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>
+            <span class="btn btn-primary comment-reply" @click="editing = !editing">{{
+              editing ? '取消回复' : '回复'
+            }}</span>
+          </div>
+          <div class="comment-info">
+            <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{
+              createTimeAgo
+            }}</time>
             <div v-if="configs.showUserAgent" class="useragent-info">
               {{ compileUserAgent }}
             </div>
           </div>
-          <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
         </div>
         <div class="markdown-body" itemprop="description">
           <span
@@ -36,12 +39,14 @@
             @mouseleave="handleHighlightParent(false)"
             v-html="compileReference"
           ></span>
-          <div class="markdown-content" v-html="compileContent"></div>
-        </div>
-        <div class="flex">
-          <span class="cursor-pointer select-none text-sm hover:font-bold transition-all" @click="editing = !editing">
-            {{ editing ? '取消回复' : '回复' }}
-          </span>
+          <div class="markdown-content" v-html="compileContent">
+            <span
+              v-if="parent"
+              @mouseenter="handleHighlightParent"
+              @mouseleave="handleHighlightParent(false)"
+              v-html="compileReference"
+            ></span>
+          </div>
         </div>
       </div>
     </div>
@@ -74,6 +79,7 @@ import './index'
 import { timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
+import Vue from 'vue'
 
 export default {
   name: 'CommentNode',
@@ -131,12 +137,13 @@ export default {
     },
     compileReference() {
       if (this.parent) {
-        return marked.parse(`[@${this.parent.author}](#comment-${this.parent.id})`)
+        return `<a href="#comment-${this.parent.id}">@${this.parent.author}</a>`
+        // return marked.parse(`[@${this.parent.author}](#comment-${this.parent.id})`)
       }
       return undefined
     },
     compileContent() {
-      return marked.parse(this.comment.content, { sanitize: true })
+      return marked.parse(this.comment.content)
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)
@@ -145,7 +152,7 @@ export default {
       const parser = new ua()
       parser.setUA(this.comment.userAgent)
       const result = parser.getResult()
-      return result.browser.name + ' ' + result.browser.version + ' in ' + result.os.name + ' ' + result.os.version
+      return `（${result.browser.name} ${result.browser.version} in ${result.os.name} ${result.os.version}）`
     },
     commentClass() {
       let isChild = this.isChild ? ' ' : ' index-1'
@@ -167,13 +174,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-.is-admin {
-  font-size: 0.8em;
-  padding: 2px 4px;
-  background: rgb(255 136 169 / 30%);
-  color: #fb7299;
-  border-radius: 3px;
-  border: 1px solid #fb7299;
-}
-</style>

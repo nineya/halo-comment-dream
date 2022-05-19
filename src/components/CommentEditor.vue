@@ -14,7 +14,7 @@
           type="text"
         />
         <input id="email" v-model="comment.email" placeholder="邮箱" type="text" />
-        <input id="authorUrl" v-model="comment.authorUrl" placeholder="个人站点" type="text" />
+        <input id="authorUrl" v-model="comment.authorUrl" placeholder="网址" type="text" />
       </div>
       <div v-if="!previewMode" class="comment-textarea">
         <textarea

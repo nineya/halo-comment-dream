@@ -8,7 +8,7 @@
 
     <comment-loading v-show="list.loading" :configs="configs" />
 
-    <ol v-if="list.data.length >= 1" class="comment-nodes">
+    <ul v-if="list.data.length >= 1" class="comment-nodes">
       <template v-for="(comment, index) in list.data">
         <CommentNode
           :key="index"
@@ -19,7 +19,7 @@
           :targetId="id"
         />
       </template>
-    </ol>
+    </ul>
 
     <div v-if="list.loaded && !list.loading && list.data.length <= 0" class="comment-empty">暂无评论</div>
 
