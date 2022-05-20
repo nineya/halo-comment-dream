@@ -33,19 +33,15 @@
           </div>
         </div>
         <div class="markdown-body" itemprop="description">
-          <span
-            v-if="parent"
-            @mouseenter="handleHighlightParent"
-            @mouseleave="handleHighlightParent(false)"
-            v-html="compileReference"
-          ></span>
-          <div class="markdown-content" v-html="compileContent">
+          <div class="markdown-content" ref="comment">
             <span
               v-if="parent"
+              class="comment-reference"
               @mouseenter="handleHighlightParent"
               @mouseleave="handleHighlightParent(false)"
-              v-html="compileReference"
-            ></span>
+            >
+              <a :href="'#comment-' + this.parent.id">@{{ this.parent.author }}</a>
+            </span>
           </div>
         </div>
       </div>
@@ -79,7 +75,11 @@ import './index'
 import { timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
-import Vue from 'vue'
+
+const rendererMD = new marked.Renderer()
+rendererMD.listitem = function (text, task) {
+  return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
+}
 
 export default {
   name: 'CommentNode',
@@ -126,6 +126,13 @@ export default {
       editing: false
     }
   },
+  created: function () {
+    this.$nextTick(function () {
+      let tempNode = document.createElement('div')
+      tempNode.innerHTML = marked.parse(this.comment.content, { renderer: rendererMD })
+      tempNode.childNodes.forEach(node => this.$refs.comment.appendChild(node))
+    })
+  },
   computed: {
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
@@ -134,16 +141,6 @@ export default {
         return this.comment.avatar
       }
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`
-    },
-    compileReference() {
-      if (this.parent) {
-        return `<a href="#comment-${this.parent.id}">@${this.parent.author}</a>`
-        // return marked.parse(`[@${this.parent.author}](#comment-${this.parent.id})`)
-      }
-      return undefined
-    },
-    compileContent() {
-      return marked.parse(this.comment.content)
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

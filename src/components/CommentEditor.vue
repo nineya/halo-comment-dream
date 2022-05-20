@@ -35,7 +35,7 @@
           </svg>
         </span>
       </div>
-      <div v-else class="comment-preview markdown-body" v-html="renderedContent"></div>
+      <div v-else class="comment-preview markdown-content" v-html="renderedContent"></div>
       <ul>
         <li>
           <button class="btn btn-primary" type="button" @click="handleSubmitClick">提交</button>
@@ -81,6 +81,11 @@ import { isEmpty, isObject, validEmail } from '../utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 import { EmojiButton } from '@joeattardi/emoji-button'
+
+const rendererMD = new marked.Renderer()
+rendererMD.listitem = function (text, task) {
+  return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
+}
 
 export default {
   name: 'CommentEditor',
@@ -128,7 +133,7 @@ export default {
   },
   computed: {
     renderedContent() {
-      return this.comment.content ? marked.parse(this.comment.content) : ''
+      return this.comment.content ? marked.parse(this.comment.content, { renderer: rendererMD }) : ''
     },
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
