@@ -39,6 +39,8 @@ import apiClient from '../plugins/api-client'
 const defaultConfig = {
   autoLoad: true,
   showUserAgent: true,
+  priorityQQAvatar: false,
+  getQQInfo: false,
   loadingStyle: 'default',
   night: (localStorage && localStorage.getItem('night') === 'true') || false
 }
@@ -122,6 +124,9 @@ export default {
     async handleGetOptions() {
       const { data } = await apiClient.option.comment()
       this.options = data
+      if (this.mergedConfigs.priorityQQAvatar) {
+        this.options.gravatar_source = 'https://cravatar.cn/avatar/'
+      }
     },
 
     handlePaginationChange(page) {

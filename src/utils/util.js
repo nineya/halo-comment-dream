@@ -74,6 +74,20 @@ export function validEmail(email) {
   return re.test(email)
 }
 
+export function isQQMail(mail) {
+  var re = /^[1-9][0-9]{4,9}@qq.com$/gim
+  return !isEmpty(mail) && re.test(mail.trim())
+}
+
+export function isQQ(qq) {
+  var re = /^[1-9][0-9]{4,9}$/gim
+  return re.test(qq)
+}
+
+export function qqMailToQQ(mail) {
+  return !isEmpty(mail) && mail.trim().substring(0, mail.lastIndexOf('@'))
+}
+
 export const queryStringify = query => {
   return Object.keys(query)
     .map(key => `${key}=${encodeURIComponent(query[key] || '')}`)

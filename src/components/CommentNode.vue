@@ -133,7 +133,7 @@ export default {
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
       const gravatarSource = this.options.gravatar_source || '//cn.gravatar.com/avatar/'
-      if (this.comment.avatar) {
+      if (!this.configs.priorityQQAvatar && this.comment.avatar) {
         return this.comment.avatar
       }
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`

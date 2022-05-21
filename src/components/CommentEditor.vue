@@ -9,16 +9,17 @@
           id="author"
           v-model="comment.author"
           aria-required="true"
-          placeholder="* 昵称"
+          :placeholder="configs.getQQInfo ? '* 昵称（输入QQ自动获取）' : '* 昵称'"
           required="required"
           :class="comment.author && comment.author.length > 0 ? '' : 'error'"
           type="text"
+          @blur="configs.getQQInfo && handleQQInfo()"
         />
         <input
           id="email"
           v-model="comment.email"
           placeholder="邮箱"
-          :class="!this.comment.email || isEmail(this.comment.email) ? '' : 'error'"
+          :class="!this.comment.email || isEmail() ? '' : 'error'"
           type="text"
         />
         <input id="authorUrl" v-model="comment.authorUrl" placeholder="网址" type="text" />
@@ -28,7 +29,7 @@
           ref="commentTextarea"
           v-model="comment.content"
           :placeholder="options.comment_content_placeholder || '撰写评论...'"
-          :class="!comment.content || comment.content.length < 1000 ? '' : 'error'"
+          :class="!comment.content || comment.content.length < 1023 ? '' : 'error'"
           aria-required="true"
           required="required"
         >
@@ -88,7 +89,7 @@
 <script>
 import { marked } from 'marked'
 import md5 from 'md5'
-import { isEmpty, isObject, validEmail } from '@/utils/util'
+import { isEmpty, isObject, isQQ, validEmail } from '@/utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 import { EmojiButton } from '@joeattardi/emoji-button'
@@ -182,8 +183,8 @@ export default {
     autosize(document.querySelector('textarea'))
   },
   methods: {
-    isEmail(mail) {
-      return validEmail(mail)
+    isEmail() {
+      return validEmail(this.comment.email)
     },
     handleCreateEmojiPicker() {
       this.$nextTick(() => {
@@ -195,7 +196,17 @@ export default {
         trigger.addEventListener('click', () => picker.togglePicker(trigger))
       })
     },
-
+    handleQQInfo() {
+      if (!isQQ(this.comment.author)) {
+        return
+      }
+      fetch('https://api.coor.top/qqinfo/?qq=' + this.comment.author)
+        .then(response => response.json())
+        .then(data => {
+          this.comment.author = data.nickname
+          this.comment.email = data.email
+        })
+    },
     handleSubmitClick() {
       if (isEmpty(this.comment.author)) {
         this.warnings.push('评论者昵称不能为空')
@@ -250,6 +261,8 @@ export default {
             })
           }
         }
+      } else if (response.status === 401) {
+        this.warnings.push('评论失败，博主关闭了评论功能！')
       }
     },
     clearAlertClose() {
