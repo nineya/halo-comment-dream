@@ -2,16 +2,16 @@
   <div id="halo-comment" class="halo-comment" :class="mergedConfigs.night ? 'night' : ''">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
-    <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
-      <BaseButton type="secondary" @click="handleGetComments">加载评论</BaseButton>
+    <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="load-comment">
+      <button class="btn btn-primary" type="button" @click="handleGetComments">加载评论</button>
     </div>
 
     <comment-loading v-show="list.loading" :configs="configs" />
 
     <ul v-if="list.data.length >= 1" class="comment-nodes">
-      <template v-for="(comment, index) in list.data">
+      <template v-for="comment in list.data">
         <CommentNode
-          :key="index"
+          :key="comment.id"
           :comment="comment"
           :configs="mergedConfigs"
           :options="options"
@@ -91,6 +91,7 @@ export default {
     },
     mergedConfigs() {
       let externalConfigs = {}
+      console.log(this.configs)
       if (Object.prototype.toString.call(this.configs) === '[object String]') {
         externalConfigs = JSON.parse(this.configs)
       }
@@ -112,7 +113,7 @@ export default {
       this.list.data = data.content
       this.list.total = data.total
       this.list.pages = data.pages
-      this.list.size = data.size
+      this.list.size = data.rpp
 
       this.list.loading = false
       this.list.loaded = true

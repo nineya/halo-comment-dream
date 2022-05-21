@@ -22,7 +22,7 @@ export function timeAgo(time) {
     return hours + ' 小时前'
   }
   if (days < 0) return '刚刚'
-  if (days < 1) {
+  if (days <= 7) {
     return days + ' 天前'
   } else {
     return formatDate(time, 'yyyy/MM/dd hh:mm')

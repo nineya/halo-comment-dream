@@ -19,9 +19,11 @@
               <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
               <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>
-            <span class="btn btn-primary comment-reply" @click="editing = !editing">{{
-              editing ? '取消回复' : '回复'
-            }}</span>
+            <span
+              class="btn btn-primary comment-reply"
+              @click="globalData.replyId = globalData.replyId === comment.id ? 0 : comment.id"
+              >{{ globalData.replyId === comment.id ? '取消回复' : '回复' }}</span
+            >
           </div>
           <div class="comment-info">
             <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{
@@ -32,29 +34,27 @@
             </div>
           </div>
         </div>
-        <div class="markdown-body" itemprop="description">
-          <div class="markdown-content" ref="comment">
-            <span
-              v-if="parent"
-              class="comment-reference"
-              @mouseenter="handleHighlightParent"
-              @mouseleave="handleHighlightParent(false)"
-            >
-              <a :href="'#comment-' + this.parent.id">@{{ this.parent.author }}</a>
-            </span>
-          </div>
+        <div class="markdown-content" ref="comment" itemprop="description">
+          <span
+            v-if="parent"
+            class="comment-reference"
+            @mouseenter="handleHighlightParent"
+            @mouseleave="handleHighlightParent(false)"
+          >
+            <a :href="'#comment-' + this.parent.id">@{{ this.parent.author }}</a>
+          </span>
         </div>
       </div>
     </div>
     <comment-editor
-      v-if="editing"
+      v-if="globalData.replyId === comment.id"
       :configs="configs"
       :options="options"
       :replyComment="comment"
       :target="target"
       :targetId="targetId"
     />
-    <ol v-if="comment.children" class="children-nodes">
+    <ul v-if="comment.children" class="children-nodes">
       <template v-for="(children, index) in comment.children">
         <CommentNode
           :key="index"
@@ -67,7 +67,7 @@
           :targetId="targetId"
         />
       </template>
-    </ol>
+    </ul>
   </li>
 </template>
 <script>
@@ -75,11 +75,7 @@ import './index'
 import { timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
-
-const rendererMD = new marked.Renderer()
-rendererMD.listitem = function (text, task) {
-  return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
-}
+import globals from '@/utils/globals.js'
 
 export default {
   name: 'CommentNode',
@@ -123,13 +119,13 @@ export default {
   },
   data() {
     return {
-      editing: false
+      globalData: globals
     }
   },
   created: function () {
     this.$nextTick(function () {
       let tempNode = document.createElement('div')
-      tempNode.innerHTML = marked.parse(this.comment.content, { renderer: rendererMD })
+      tempNode.innerHTML = marked.parse(this.comment.content)
       tempNode.childNodes.forEach(node => this.$refs.comment.appendChild(node))
     })
   },

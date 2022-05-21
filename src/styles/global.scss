@@ -110,6 +110,7 @@ ul {
     display: flex;
     margin-top: 1.25rem;
     margin-bottom: 1.25rem;
+    animation: top20 500ms;
   }
 
   .comment-textarea {
@@ -160,12 +161,16 @@ ul {
       box-sizing: border-box;
       padding: 6px 10px;
       resize: vertical;
-      transition: all 0.2s;
+      transition: border-color 0.2s;
       color: var(--main);
 
       &:focus {
         outline: 0;
         border-color: var(--theme);
+      }
+
+      &.error {
+        border-color: #f56c6c;
       }
     }
 
@@ -174,6 +179,58 @@ ul {
       margin-bottom: 0.5rem;
       overflow-wrap: break-word;
     }
+  }
+
+  .load-comment {
+    text-align: center;
+    padding-bottom: 16px;
+  }
+
+  .comment-alert {
+    margin-top: 10px;
+  }
+
+  .alert {
+    color: #fff;
+    padding: 8px 16px;
+    animation: top20 .5s;
+    transition: opacity .6s;
+    background-color: rgb(244 67 54 / 80%);;
+    border-radius: var(--radius-inner);
+    margin-bottom: 15px;
+
+    &.warning {
+      background-color: rgb(255 152 0 / 80%);
+    }
+
+    &.success {
+      background-color: rgb(76 175 80 / 80%);
+    }
+
+    &.info {
+      background-color: rgb(63 184 254 / 80%);
+    }
+
+    .closebtn {
+      float: right;
+      margin-left: 15px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 16px;
+      cursor: pointer;
+      transition: .3s;
+
+      &:hover {
+        color: var(--theme);
+      }
+    }
+  }
+
+  .comment-empty {
+    margin: 30px 0;
+    text-align: center;
+    color: var(--color-f);
   }
 
   .comment-nodes, .children-nodes {
@@ -271,12 +328,9 @@ ul {
   .comment-main {
     flex: 1 1 0;
 
-    .markdown-body {
-      margin-top: 5px;
-    }
-
     .markdown-content {
       padding: 10px;
+      margin-top: 5px;
       background: var(--bg-b);
       border-radius: 0 8px 8px 8px;
     }
@@ -294,5 +348,17 @@ ul {
       opacity: 1;
       pointer-events: auto;
     }
+  }
+}
+
+@keyframes top20 {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

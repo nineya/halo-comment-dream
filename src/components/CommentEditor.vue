@@ -1,5 +1,5 @@
 <template>
-  <section class="comment-editor" role="form">
+  <section class="comment-editor" role="form" v-if="isCurrReply">
     <div class="avatar-body">
       <img :src="avatar" class="avatar" />
     </div>
@@ -11,9 +11,16 @@
           aria-required="true"
           placeholder="* 昵称"
           required="required"
+          :class="comment.author && comment.author.length > 0 ? '' : 'error'"
           type="text"
         />
-        <input id="email" v-model="comment.email" placeholder="邮箱" type="text" />
+        <input
+          id="email"
+          v-model="comment.email"
+          placeholder="邮箱"
+          :class="!this.comment.email || isEmail(this.comment.email) ? '' : 'error'"
+          type="text"
+        />
         <input id="authorUrl" v-model="comment.authorUrl" placeholder="网址" type="text" />
       </div>
       <div v-if="!previewMode" class="comment-textarea">
@@ -21,6 +28,7 @@
           ref="commentTextarea"
           v-model="comment.content"
           :placeholder="options.comment_content_placeholder || '撰写评论...'"
+          :class="!comment.content || comment.content.length < 1000 ? '' : 'error'"
           aria-required="true"
           required="required"
         >
@@ -44,6 +52,9 @@
           <button class="btn" type="button" @click="previewMode = !previewMode">
             {{ previewMode ? '编辑' : '预览' }}
           </button>
+        </li>
+        <li v-if="this.replyComment">
+          <button class="btn" type="button" @click="globalData.replyId = 0">取消</button>
         </li>
       </ul>
       <div class="comment-alert">
@@ -77,15 +88,11 @@
 <script>
 import { marked } from 'marked'
 import md5 from 'md5'
-import { isEmpty, isObject, validEmail } from '../utils/util'
+import { isEmpty, isObject, validEmail } from '@/utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 import { EmojiButton } from '@joeattardi/emoji-button'
-
-const rendererMD = new marked.Renderer()
-rendererMD.listitem = function (text, task) {
-  return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
-}
+import globals from '@/utils/globals.js'
 
 export default {
   name: 'CommentEditor',
@@ -126,14 +133,18 @@ export default {
         content: ''
       },
       previewMode: false,
+      globalData: globals,
       infoes: [],
       warnings: [],
       successes: []
     }
   },
   computed: {
+    isCurrReply() {
+      return !this.replyComment || this.globalData.replyId === this.replyComment.id
+    },
     renderedContent() {
-      return this.comment.content ? marked.parse(this.comment.content, { renderer: rendererMD }) : ''
+      return this.comment.content ? marked.parse(this.comment.content) : ''
     },
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
@@ -171,6 +182,9 @@ export default {
     autosize(document.querySelector('textarea'))
   },
   methods: {
+    isEmail(mail) {
+      return validEmail(mail)
+    },
     handleCreateEmojiPicker() {
       this.$nextTick(() => {
         const picker = new EmojiButton({ zIndex: 9999, theme: this.configs.dark ? 'dark' : 'light' })

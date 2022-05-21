@@ -157,7 +157,7 @@ export default {
 .comment-page {
   margin-top: 30px;
   text-align: center;
-  border-top: 2px solid var(--color-border-muted);
+  border-top: 2px solid var(--bg-b);
 
   .page {
     display: inline-block;
@@ -175,23 +175,23 @@ export default {
       font-size: inherit;
       font-family: inherit;
       padding: 5px 10px;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--color-a);
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.8s;
       font-weight: normal;
-      color: rgba(0, 0, 0, 0.65);
-      background-color: #fff;
+      color: var(--color-f);
+      background-color: var(--bg-a);
 
       &:hover {
-        color: #1890ff;
-        border-color: #1890ff;
+        color: var(--theme);
+        border-color: var(--theme);
       }
     }
 
     .active {
-      color: #1890ff;
-      border-color: #1890ff;
+      color: var(--theme);
+      border-color: var(--theme);
     }
   }
 }
