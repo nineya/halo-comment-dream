@@ -184,14 +184,14 @@ export default {
       background-color: var(--bg-a);
 
       &:hover {
-        color: var(--theme);
-        border-color: var(--theme);
+        color: var(--comment-theme);
+        border-color: var(--comment-theme);
       }
     }
 
     .active {
-      color: var(--theme);
-      border-color: var(--theme);
+      color: var(--comment-theme);
+      border-color: var(--comment-theme);
     }
   }
 }

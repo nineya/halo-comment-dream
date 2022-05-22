@@ -15,7 +15,7 @@
       <div class="comment-main">
         <div class="comment-meta">
           <div class="comment-author" itemprop="author">
-            <div class="author-info">
+            <div class="author-meta">
               <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
               <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>

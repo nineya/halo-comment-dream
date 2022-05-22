@@ -1,7 +1,7 @@
 <template>
   <section class="comment-editor" role="form" v-if="isCurrReply">
     <div class="avatar-body">
-      <img :src="avatar" class="avatar" />
+      <img :src="avatar" class="avatar" alt="avatar" />
     </div>
     <form class="comment-form">
       <div class="author-info">
@@ -11,7 +11,6 @@
           aria-required="true"
           :placeholder="configs.getQQInfo ? '* 昵称（输入QQ自动获取）' : '* 昵称'"
           required="required"
-          :class="comment.author && comment.author.length > 0 ? '' : 'error'"
           type="text"
           @blur="configs.getQQInfo && handleQQInfo()"
         />

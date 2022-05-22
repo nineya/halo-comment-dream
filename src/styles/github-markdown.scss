@@ -70,14 +70,14 @@
 
   a:not([class]) {
     line-height: 1.5em;
-    color: var(--theme);
-    background-image: linear-gradient(transparent calc(100% - 1px), var(--theme) 1px);
+    color: var(--comment-theme);
+    background-image: linear-gradient(transparent calc(100% - 1px), var(--comment-theme) 1px);
     background-repeat: no-repeat;
     background-size: 0 100%;
     transition: all .35s ease-in-out;
 
     &:hover {
-      color: var(--theme);
+      color: var(--comment-theme);
       background-size: 100% 100%;
     }
   }
