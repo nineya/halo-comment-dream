@@ -101,3 +101,31 @@ export function getUrlKey(name) {
     ) || null
   )
 }
+
+/**
+ * 滚动到指定控件
+ * @param element 需要被跳转到的控件
+ * @param time 跳转时间
+ * @param headingsOffset 控件距离页面顶部的距离
+ * @param callback 跳转完成后执行的函数
+ */
+export function animateScroll(element, time, headingsOffset, callback) {
+  let rect = element.getBoundingClientRect()
+  let currentY = window.scrollY
+  let targetY = currentY + rect.top - headingsOffset
+  let speed = (targetY - currentY) / time
+  let offset = currentY > targetY ? -1 : 1
+  let requestId
+  function step() {
+    currentY += speed
+    if (currentY * offset < targetY * offset) {
+      window.scrollTo(0, currentY)
+      requestId = window.requestAnimationFrame(step)
+    } else {
+      window.scrollTo(0, targetY)
+      window.cancelAnimationFrame(requestId)
+      callback && callback()
+    }
+  }
+  window.requestAnimationFrame(step)
+}

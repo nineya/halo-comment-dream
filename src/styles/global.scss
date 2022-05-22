@@ -385,7 +385,7 @@ ul {
     }
   }
 
-  .comment-ref {
+  .comment-ref, .comment-active {
     transform: translateY(-3px);
 
     .author-name, .comment-time, .useragent-info {

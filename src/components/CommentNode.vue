@@ -19,11 +19,9 @@
               <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
               <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>
-            <span
-              class="btn btn-primary comment-reply"
-              @click="globalData.replyId = globalData.replyId === comment.id ? 0 : comment.id"
-              >{{ globalData.replyId === comment.id ? '取消回复' : '回复' }}</span
-            >
+            <span class="btn btn-primary comment-reply" @click="handleCreateComment">{{
+              globalData.replyId === comment.id ? '取消回复' : '回复'
+            }}</span>
           </div>
           <div class="comment-info">
             <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{
@@ -38,6 +36,7 @@
           <span
             v-if="parent"
             class="comment-reference"
+            @click="handleToCommentRef"
             @mouseenter="handleHighlightParent"
             @mouseleave="handleHighlightParent(false)"
           >
@@ -72,7 +71,7 @@
 </template>
 <script>
 import './index'
-import { timeAgo } from '@/utils/util'
+import { animateScroll, timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
 import globals from '@/utils/globals.js'
@@ -153,6 +152,32 @@ export default {
     }
   },
   methods: {
+    handleToCommentRef() {
+      const shadowRoot = document.getElementById(this.targetId + '').shadowRoot
+      if (!shadowRoot) {
+        return
+      }
+      const commentRef = shadowRoot.getElementById(`comment-${this.parent.id}`)
+      commentRef.classList.add('comment-active')
+      animateScroll(commentRef, 20, (window.innerHeight || document.documentElement.clientHeight) / 4, () =>
+        setTimeout(() => commentRef.classList.remove('comment-active'), 500)
+      )
+    },
+    handleCreateComment() {
+      if (this.globalData.replyId === this.comment.id) {
+        this.globalData.replyId = 0
+      } else {
+        this.globalData.replyId = this.comment.id
+        this.$nextTick(() => {
+          const commentEditor = this.$el.querySelector('.comment-editor')
+          const rect = commentEditor.getBoundingClientRect()
+          const windowHeight = window.innerHeight || document.documentElement.clientHeight
+          if (rect.top < 0 || rect.bottom > windowHeight) {
+            animateScroll(commentEditor, 20, windowHeight / 2)
+          }
+        })
+      }
+    },
     handleHighlightParent(highlight) {
       const shadowRoot = document.getElementById(this.targetId + '').shadowRoot
       if (!shadowRoot) {
