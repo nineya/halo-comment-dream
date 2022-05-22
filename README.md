@@ -1,22 +1,47 @@
-<h1 align="center"><a href="https://github.com/nineya/halo-comment-dream" target="_blank">halo-comment-dream</a></h1>
+<h1 align="center">halo-comment-dream</h1>
 
-> 适用于 Halo 的评论组件。
+<p align="center">
+<a href="https://github.com/nineya/halo-comment-dream/releases"><img alt="releases" src="https://img.shields.io/github/release/nineya/halo-comment-dream.svg?style=flat-square"/></a>
+<a href="https://github.com/nineya/halo-comment-dream/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/nineya/halo-comment-dream?style=flat-square"/></a>
+<a href="https://github.com/nineya/halo-comment-dream/releases"><img alt="downloads" src="https://img.shields.io/github/downloads/nineya/halo-comment-dream/total.svg?style=flat-square"/></a>
+<a href="https://github.com/nineya/halo-comment-dream/releases"><img alt="size" src="https://img.shields.io/github/languages/code-size/nineya/halo-comment-dream?style=flat-square"/></a>
+<a href="https://github.com/nineya/halo-comment-dream/commits"><img alt="commits" src="https://img.shields.io/github/last-commit/nineya/halo-comment-dream.svg?style=flat-square"/></a>
+<a href="https://github.com/nineya/halo-comment-dream#donate"><img alt="donate" src="https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square"/></a>
+</p>
+
+
+> [halo-theme-dream](https://github.com/nineya/halo-theme-dream) 博客主题对应的博客评论组件，适用于 Halo 博客系统。
+
+
+
+## 预览
+
+![玖涯博客](https://cdn.jsdelivr.net/gh/nineya/halo-comment-dream@master/preview.png)
+
+预览地址：[https://blog.nineya.com](https://blog.nineya.com)
+
+
+
 
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
+2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/gh/halo-comment-dream@1.0.0/dist/halo-comment.min.js`
 
-2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/npm/halo-comment-normal@1.2.0/dist/halo-comment.min.js`
+
 
 ### 自定义配置
 
 如果你需要自定义该评论组件，下面提供了一些属性：
 
-| 属性           | 说明                     | 默认值                    | 可选                       |
-| -------------- | ------------------------ | ------------------------- | -------------------------- |
-| autoLoad       | 是否自动加载评论列表     | true                      | `true` `false`             |
-| showUserAgent  | 是否显示评论者的 UA 信息 | true                      | `true` `false`             |
-| loadingStyle   | 评论加载样式             | `default`                 | `default` `circle` `balls` |
+| 属性             | 说明                                   | 默认值                         | 可选                       |
+| ---------------- | -------------------------------------- | ------------------------------ | -------------------------- |
+| autoLoad         | 是否自动加载评论列表                   | true                           | `true` `false`             |
+| showUserAgent    | 是否显示评论者的 UA 信息               | true                           | `true` `false`             |
+| loadingStyle     | 评论加载样式                           | `default`                      | `default` `circle` `balls` |
+| priorityQQAvatar | 是否优先展示QQ头像                     | false                          | `true` `false`             |
+| getQQInfo        | 昵称输入框输入QQ号自动获取QQ昵称和邮箱 | false                          | `true` `false`             |
+| night            | 评论模块以黑暗模式初始化样式           | `localStorage` 中 `night` 的值 | `true` `false`             |
 
 配置方法：
 
@@ -51,9 +76,13 @@ var configs = {
 <halo-comment id="${journal.id?c}" type="journal" :configs="configs">
 ```
 
+
+
 ### 主题开发引用指南
 
-#### 方法一
+#### Vue 方式
+
+> 适用于基于 `Vue` 开发的主题，否则不能通过 `:configs` 的方式指定配置
 
 新建 comment.ftl：
 
@@ -61,7 +90,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.0/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -73,7 +102,7 @@ var configs = {
 </#macro>
 ```
 
-然后在 post.ftl/sheet.ftl 中引用：
+然后在 `post.ftl` / `sheet.ftl` 中引用：
 
 post.ftl：
 
@@ -89,50 +118,45 @@ sheet.ftl：
 <@comment target=sheet type="sheet" />
 ```
 
-#### 方法二
 
-一般在主题制作过程中，我们可以将 head 部分抽出来作为宏模板，如：<https://github.com/halo-dev/halo-theme-anatole/blob/master/module/macro.ftl>，那么我们就可以将所需要的依赖放在 head 标签中：
+
+#### 普通方式
+
+> 非 `Vue` 则需要直接将 `JSON` 格式的配置写入到 `configs` 属性。
+
+新建 comment.ftl：
 
 ```html
-<head>
-    ...
-    
-    <#if is_post?? && is_sheet??>
+<#macro comment target,type>
+    <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js'}"></script>
-        <script>
-        var configs = {
-            autoLoad: true,
-            showUserAgent: true
-        }
-        </script>
+        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.0/dist/halo-comment.min.js'}"></script>
+        <halo-comment id="${target.id?c}" type="${type}" configs='{"autoLoad": true,"showUserAgent": true}'/>
     </#if>
-    
-    ...
-</head>
+</#macro>
 ```
 
-然后在 post.ftl/sheet.ftl 中引用：
+然后在 `post.ftl` / `sheet.ftl` 中引用：
 
 post.ftl：
 
 ```html
-<#if !post.disallowComment!false>
-    <halo-comment id="${post.id?c}" type="post" :configs="configs"/>
-</#if>
+<#include "comment.ftl">
+<@comment target=post type="post" />
 ```
 
 sheet.ftl：
 
 ```html
-<#if !sheet.disallowComment!false>
-    <halo-comment id="${sheet.id?c}" type="sheet" :configs="configs"/>
-</#if>
+<#include "comment.ftl">
+<@comment target=sheet type="sheet" />
 ```
 
-#### 进阶：
 
-可以将 configs 中的属性通过 settings.yaml 保存数据库中，以供用户自行选择，如：
+
+#### 进阶
+
+可以将 `configs` 中的属性通过 `settings.yaml` 保存数据库中，以供用户自行选择，如：
 
 settings.yaml：
 
@@ -179,8 +203,40 @@ var configs = {
 </script>
 ```
 
+
+
+#### 关于明亮/黑暗模式
+
+评论模块支持明亮和黑暗两种模式，默认通过 `localStorage` 中 `night` 的值来初始化评论模块的模式。
+
+动态切换模式的 `js` 方法：
+
+```javascript
+// isNight为要切换到的模式，true表示黑暗模式
+isNight = true 
+$("halo-comment").each(function () {
+    const shadowDom = this.shadowRoot.getElementById("halo-comment");
+    $(shadowDom)[`${isNight ? "add" : "remove"}Class`]("night");
+})
+// 存储模式配置，用于打开网页时评论区的初始化
+localStorage.setItem('night', isNight);
+```
+
+
+
+#### 关于主题色
+
+评论模块支持为明亮/黑暗模式分别指定一个主题色，默认明亮模式的主题色为 `#50bfff`，黑暗模式的主题色为 `#5d93db`，你可以通过 `--theme` 属性在你的主题指定一个主题色。
+
+```css
+html {
+  --theme: #50bfff;
+}
+```
+
+
+
 #### 说明
 
 1. configs 可以不用配置。
 2. 具体主题开发文档请参考：<https://halo.run/develop/theme/ready.html>。
-
