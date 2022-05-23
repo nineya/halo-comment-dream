@@ -80,14 +80,19 @@ ul {
   border-radius: var(--radius-inner);
   background: rgb(255 255 255 / 6%);;
 
-  &-primary {
-    color: #fff;
-    background: var(--comment-theme);
+  &:hover {
+    filter: opacity(0.8);
+    color: var(--comment-theme);
     border-color: var(--comment-theme);
   }
 
-  &:hover {
-    filter: opacity(0.8);
+  &-primary {
+    color: #fff;
+    background: var(--comment-theme);
+
+    &:hover {
+      color: #fff;
+    }
   }
 }
 
@@ -139,7 +144,7 @@ ul {
 
   .emoji-picker {
     cursor: pointer;
-    float: right;
+    float: left;
     margin-top: 0.6em;
   }
 
@@ -148,6 +153,7 @@ ul {
 
     & > ul {
       list-style: none;
+      float: right;
       margin: 0;
       padding: 0;
 

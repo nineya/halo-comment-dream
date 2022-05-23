@@ -45,16 +45,16 @@
       </div>
       <div v-else class="comment-preview markdown-content" v-html="renderedContent"></div>
       <ul>
-        <li>
-          <button class="btn btn-primary" type="button" @click="handleSubmitClick">提交</button>
+        <li v-if="this.replyComment">
+          <button class="btn" type="button" @click="globalData.replyId = 0">取消</button>
         </li>
         <li v-if="comment.content">
           <button class="btn" type="button" @click="previewMode = !previewMode">
             {{ previewMode ? '编辑' : '预览' }}
           </button>
         </li>
-        <li v-if="this.replyComment">
-          <button class="btn" type="button" @click="globalData.replyId = 0">取消</button>
+        <li>
+          <button class="btn btn-primary" type="button" @click="handleSubmitClick">提交</button>
         </li>
       </ul>
       <div class="comment-alert">

@@ -8,15 +8,29 @@
   >
     <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body">
       <div class="avatar-body">
-        <a :href="`${comment.authorUrl ? comment.authorUrl : 'javascript:void(0)'}`" rel="nofollow" target="_blank">
+        <a
+          v-if="comment.authorUrl && comment.authorUrl !== ''"
+          :href="comment.authorUrl"
+          rel="nofollow"
+          target="_blank"
+        >
           <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
         </a>
+        <img v-else :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
       </div>
       <div class="comment-main">
         <div class="comment-meta">
           <div class="comment-author" itemprop="author">
             <div class="author-meta">
-              <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
+              <a
+                v-if="comment.authorUrl && comment.authorUrl !== ''"
+                :href="comment.authorUrl"
+                class="author-name"
+                rel="nofollow"
+                target="_blank"
+                >{{ comment.author }}</a
+              >
+              <a v-else class="author-name">{{ comment.author }}</a>
               <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>
             <span class="btn btn-primary comment-reply" @click="handleCreateComment">{{
