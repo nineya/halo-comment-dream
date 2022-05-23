@@ -18,7 +18,7 @@ $table-max-width: 1023px;
   --bg-c: rgb(237 244 253 / 75%);
   --bg-d: rgba(255, 255, 255, 0.8);
   --bg-e: rgb(243 244 245 / 25%);
-  --bg-f: rgb(237 244 253 / 75%);
+  --bg-f: rgb(214 239 255 / 60%);
   --radius-inner: 4px;
 
   &.night {
@@ -377,7 +377,7 @@ ul {
   .comment-main {
     flex: 1 1 0;
 
-    .markdown-content {
+    .markdown-body {
       padding: 10px;
       margin-top: 5px;
       background: var(--bg-b);
@@ -392,7 +392,7 @@ ul {
       color: var(--comment-theme);
     }
 
-    .markdown-content {
+    .markdown-body {
       background: var(--color-h);
       box-shadow: 0 24px 20px -14px rgb(63 83 122 / 30%)
     }
@@ -449,7 +449,7 @@ ul {
       height: 24px;
     }
 
-    .markdown-content {
+    .markdown-body {
       margin-left: -25px;
     }
 
@@ -457,7 +457,7 @@ ul {
       margin-left: 19px;
     }
 
-    .children-nodes .markdown-content {
+    .children-nodes .markdown-body {
       margin-left: -22px;
     }
   }

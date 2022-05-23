@@ -129,3 +129,33 @@ export function animateScroll(element, time, headingsOffset, callback) {
   }
   window.requestAnimationFrame(step)
 }
+
+/**
+ * 解码html文档编码
+ * @param text
+ * @param encode 是否需要支持html
+ */
+export function decodeHtml(text, encode) {
+  if (!encode) {
+    return text.replace(/&gt;(\s|&nbsp;)/g, '> ')
+  }
+  let elem = document.createElement('div')
+  elem.innerHTML = text
+  const html = elem.innerText || elem.textContent
+  elem = null
+  return html
+}
+
+/**
+ * 编码html文档
+ * @param html
+ * @param encode 是否需要支持html
+ */
+export function encodeHtml(html, encode) {
+  if (encode) {
+    return html
+  }
+  return html.replace(/[<&"]/g, function (c) {
+    return { '<': '&lt;', '&': '&amp;', '"': '&quot;' }[c]
+  })
+}

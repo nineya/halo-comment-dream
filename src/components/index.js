@@ -26,7 +26,8 @@ marked.use({
     listitem(text, task) {
       return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
     }
-  }
+  },
+  breaks: true
 })
 
 export default components

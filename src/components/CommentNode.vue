@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <div class="markdown-content" ref="comment" itemprop="description">
+        <div class="markdown-body" itemprop="description">
           <span
             v-if="parent"
             class="comment-reference"
@@ -42,6 +42,7 @@
           >
             <a :href="'#comment-' + this.parent.id">@{{ this.parent.author }}</a>
           </span>
+          <span class="markdown-content" v-html="compileContent"></span>
         </div>
       </div>
     </div>
@@ -75,6 +76,7 @@ import { animateScroll, timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
 import globals from '@/utils/globals.js'
+import { decodeHtml } from '../utils/util'
 
 export default {
   name: 'CommentNode',
@@ -121,13 +123,6 @@ export default {
       globalData: globals
     }
   },
-  created: function () {
-    this.$nextTick(function () {
-      let tempNode = document.createElement('div')
-      tempNode.innerHTML = marked.parse(this.comment.content)
-      tempNode.childNodes.forEach(node => this.$refs.comment.appendChild(node))
-    })
-  },
   computed: {
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
@@ -136,6 +131,9 @@ export default {
         return this.comment.avatar
       }
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`
+    },
+    compileContent() {
+      return marked.parse(decodeHtml(this.comment.content, this.configs.commentHtml))
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

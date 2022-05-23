@@ -93,6 +93,7 @@ import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 import { EmojiButton } from '@joeattardi/emoji-button'
 import globals from '@/utils/globals.js'
+import { encodeHtml } from '../utils/util'
 
 export default {
   name: 'CommentEditor',
@@ -144,7 +145,7 @@ export default {
       return !this.replyComment || this.globalData.replyId === this.replyComment.id
     },
     renderedContent() {
-      return this.comment.content ? marked.parse(this.comment.content) : ''
+      return this.comment.content ? marked.parse(encodeHtml(this.comment.content, this.configs.commentHtml)) : ''
     },
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default

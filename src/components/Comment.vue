@@ -20,9 +20,9 @@
     </div>
     <comment-loading v-show="list.loading" :configs="configs" />
     <ul v-if="list.data.length >= 1" class="comment-nodes">
-      <template v-for="comment in list.data">
+      <template v-for="(comment, index) in list.data">
         <CommentNode
-          :key="comment.id"
+          :key="index"
           :comment="comment"
           :configs="mergedConfigs"
           :options="options"
@@ -52,6 +52,7 @@ const defaultConfig = {
   showUserAgent: true,
   priorityQQAvatar: false,
   getQQInfo: false,
+  commentHtml: false,
   loadingStyle: 'default',
   night: (localStorage && localStorage.getItem('night') === 'true') || false
 }
