@@ -35,7 +35,7 @@
         </textarea>
         <span class="emoji-picker">
           <svg
-            @click="emojiDialogVisible = !emojiDialogVisible"
+            @click="handleToggleDialogEmoji"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             width="18"
@@ -47,7 +47,12 @@
               fill="rgba(174,174,174,1)"
             />
           </svg>
-          <EmojiPicker :pack="emojiPack" @select="handleSelectEmoji" v-if="emojiDialogVisible" />
+          <EmojiPicker
+            :pack="emojiPack"
+            @select="handleSelectEmoji"
+            v-if="emojiDialogCreate"
+            v-show="emojiDialogVisible"
+          />
         </span>
       </div>
       <div v-else class="comment-preview markdown-content" v-html="renderedContent"></div>
@@ -139,6 +144,7 @@ export default {
   data() {
     return {
       emojiPack: emojiData,
+      emojiDialogCreate: false,
       emojiDialogVisible: false,
       comment: {
         author: null,
@@ -265,6 +271,10 @@ export default {
       } else if (response.status === 401) {
         this.warnings.push('评论失败，博主关闭了评论功能！')
       }
+    },
+    handleToggleDialogEmoji() {
+      this.emojiDialogVisible = !this.emojiDialogVisible
+      this.emojiDialogCreate = true
     },
     handleSelectEmoji(emoji) {
       this.comment.content += `#(${emoji.name})`
