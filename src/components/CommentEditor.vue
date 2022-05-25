@@ -34,13 +34,20 @@
         >
         </textarea>
         <span class="emoji-picker">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+          <svg
+            @click="emojiDialogVisible = !emojiDialogVisible"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+          >
             <path fill="none" d="M0 0h24v24H0z" />
             <path
               d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
               fill="rgba(174,174,174,1)"
             />
           </svg>
+          <EmojiPicker :pack="emojiPack" @select="handleSelectEmoji" v-if="emojiDialogVisible" />
         </span>
       </div>
       <div v-else class="comment-preview markdown-content" v-html="renderedContent"></div>
@@ -91,12 +98,16 @@ import md5 from 'md5'
 import { isEmpty, isObject, isQQ, validEmail } from '@/utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
-import { EmojiButton } from '@joeattardi/emoji-button'
 import globals from '@/utils/globals.js'
-import { encodeHtml } from '../utils/util'
+import { encodeHtml } from '@/utils/util'
+import EmojiPicker from './dreamEmoji/EmojiPicker.vue'
+import emojiData from './dreamEmoji/emojis.js'
 
 export default {
   name: 'CommentEditor',
+  components: {
+    EmojiPicker
+  },
   props: {
     targetId: {
       type: Number,
@@ -127,6 +138,8 @@ export default {
   },
   data() {
     return {
+      emojiPack: emojiData,
+      emojiDialogVisible: false,
       comment: {
         author: null,
         authorUrl: null,
@@ -176,8 +189,6 @@ export default {
     this.comment.author = author ? author : ''
     this.comment.authorUrl = authorUrl ? authorUrl : ''
     this.comment.email = email ? email : ''
-
-    this.handleCreateEmojiPicker()
   },
   mounted() {
     autosize(document.querySelector('textarea'))
@@ -185,16 +196,6 @@ export default {
   methods: {
     isEmail() {
       return validEmail(this.comment.email)
-    },
-    handleCreateEmojiPicker() {
-      this.$nextTick(() => {
-        const picker = new EmojiButton({ zIndex: 9999, theme: this.configs.dark ? 'dark' : 'light' })
-        picker.on('emoji', selection => {
-          this.comment.content += selection.emoji
-        })
-        const trigger = this.$el.getElementsByClassName('emoji-picker')[0]
-        trigger.addEventListener('click', () => picker.togglePicker(trigger))
-      })
     },
     handleQQInfo() {
       if (!isQQ(this.comment.author)) {
@@ -264,6 +265,9 @@ export default {
       } else if (response.status === 401) {
         this.warnings.push('评论失败，博主关闭了评论功能！')
       }
+    },
+    handleSelectEmoji(emoji) {
+      this.comment.content += `#(${emoji.name})`
     },
     clearAlertClose() {
       this.infoes = []

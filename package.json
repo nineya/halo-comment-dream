@@ -5,13 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:wc": "vue-cli-service build --target wc --name halo-comment src/components/Comment.vue",
-    "dev:wc": "vue-cli-service build --target wc --name halo-comment 'src/components/Comment.vue' --watch",
+    "build:wc": "cross-env ASSETS=true npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue",
+    "dev:wc": "cross-env ASSETS=true npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue --watch",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@halo-dev/content-api": "^1.0.0",
-    "@joeattardi/emoji-button": "^4.6.4",
     "autosize": "^4.0.4",
     "marked": "^4.0.15",
     "md5": "^2.3.0",
@@ -25,6 +24,8 @@
     "@vue/cli-plugin-eslint": "~5.0.4",
     "@vue/cli-service": "~5.0.4",
     "autoprefixer": "^10.4.7",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
