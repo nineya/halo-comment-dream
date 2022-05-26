@@ -89,6 +89,7 @@ ul {
   &-primary {
     color: #fff;
     background: var(--comment-theme);
+    border-color: var(--comment-theme);
 
     &:hover {
       color: #fff;

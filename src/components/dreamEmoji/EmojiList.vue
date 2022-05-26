@@ -1,5 +1,5 @@
 <template>
-  <div id="container-emoji" class="motion-container">
+  <div class="emoji-container">
     <DreamEmoji v-for="(emoji, index) in data" :key="index" :data="emoji" @click.native="onSelect(emoji)" />
   </div>
 </template>
@@ -27,3 +27,13 @@ export default {
   }
 }
 </script>
+
+<style type="scss">
+.emoji-container {
+  .emoji-item {
+    img {
+      width: 30px;
+    }
+  }
+}
+</style>
