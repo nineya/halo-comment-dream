@@ -4,7 +4,7 @@
     margin-right: 6px;
     float: left;
 
-    &+.markdown-content>:first-child:not(p):not(a){
+    &+.markdown-content>:first-child:not(p):not(a):not(.dream-emoji){
       margin-top: 1.6rem;
     }
   }
