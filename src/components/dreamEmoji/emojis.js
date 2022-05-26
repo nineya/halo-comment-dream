@@ -16,7 +16,6 @@ const defaultEmoji = [
   new Emoji('han', '汗'),
   new Emoji('lei', '泪'),
   new Emoji('heixian', '黑线'),
-
   new Emoji('bishi', '鄙视'),
   new Emoji('bugaoxing', '不高兴'),
   new Emoji('zhenbang', '真棒'),
@@ -27,7 +26,6 @@ const defaultEmoji = [
   new Emoji('yi', '咦'),
   new Emoji('weiqu', '委屈'),
   new Emoji('huaxin', '花心'),
-
   new Emoji('hu', '呼~'),
   new Emoji('xiaoyan', '笑眼'),
   new Emoji('len', '冷'),
@@ -38,14 +36,9 @@ const defaultEmoji = [
   new Emoji('guai', '乖'),
   new Emoji('shuijiao', '睡觉'),
   new Emoji('jingku', '惊哭'),
-
   new Emoji('shengqi', '生气'),
   new Emoji('jingya', '惊讶'),
-  new Emoji('pen', '喷'),
-  new Emoji('haha', '哈哈'),
-  new Emoji('haha', '哈哈'),
-  new Emoji('haha', '哈哈'),
-  new Emoji('haha', '哈哈')
+  new Emoji('pen', '喷')
 ]
 
 export default [...defaultEmoji]

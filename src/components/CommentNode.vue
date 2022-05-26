@@ -60,14 +60,16 @@
         </div>
       </div>
     </div>
-    <comment-editor
-      v-if="globalData.replyId === comment.id"
-      :configs="configs"
-      :options="options"
-      :replyComment="comment"
-      :target="target"
-      :targetId="targetId"
-    />
+    <keep-alive>
+      <comment-editor
+        v-if="globalData.replyId === comment.id"
+        :configs="configs"
+        :options="options"
+        :replyComment="comment"
+        :target="target"
+        :targetId="targetId"
+      />
+    </keep-alive>
     <ul v-if="comment.children" class="children-nodes">
       <template v-for="(children, index) in comment.children">
         <CommentNode
