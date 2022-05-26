@@ -88,11 +88,11 @@
 </template>
 <script>
 import './index'
-import { animateScroll, timeAgo } from '@/utils/util'
+import { animateScroll, timeAgo, decodeHtml } from '@/utils/util'
 import ua from 'ua-parser-js'
 import { marked } from 'marked'
 import globals from '@/utils/globals.js'
-import { decodeHtml } from '../utils/util'
+import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
 
 export default {
   name: 'CommentNode',
@@ -149,7 +149,7 @@ export default {
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`
     },
     compileContent() {
-      return marked.parse(decodeHtml(this.comment.content, this.configs.commentHtml))
+      return marked.parse(renderedEmojiHtml(decodeHtml(this.comment.content, this.configs.commentHtml)))
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

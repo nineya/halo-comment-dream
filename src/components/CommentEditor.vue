@@ -34,7 +34,7 @@
         >
         </textarea>
         <span class="emoji-picker">
-          <span class="emoji-btn" @click="handleToggleDialogEmoji">
+          <span class="emoji-btn" :class="emojiDialogVisible ? 'emoji-open' : ''" @click="handleToggleDialogEmoji">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
               <path
                 d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
@@ -101,6 +101,7 @@ import globals from '@/utils/globals.js'
 import { encodeHtml } from '@/utils/util'
 import EmojiPicker from './dreamEmoji/EmojiPicker.vue'
 import emojiData from './dreamEmoji/emojis.js'
+import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
 
 export default {
   name: 'CommentEditor',
@@ -138,7 +139,6 @@ export default {
   data() {
     return {
       emojiPack: emojiData,
-      emojiDialogCreate: false,
       emojiDialogVisible: false,
       comment: {
         author: null,
@@ -158,7 +158,9 @@ export default {
       return !this.replyComment || this.globalData.replyId === this.replyComment.id
     },
     renderedContent() {
-      return this.comment.content ? marked.parse(encodeHtml(this.comment.content, this.configs.commentHtml)) : ''
+      return this.comment.content
+        ? marked.parse(renderedEmojiHtml(encodeHtml(this.comment.content, this.configs.commentHtml)))
+        : ''
     },
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
@@ -268,7 +270,6 @@ export default {
     },
     handleToggleDialogEmoji() {
       this.emojiDialogVisible = !this.emojiDialogVisible
-      this.emojiDialogCreate = true
     },
     handleSelectEmoji(emoji) {
       this.comment.content += `#(${emoji.name})`
