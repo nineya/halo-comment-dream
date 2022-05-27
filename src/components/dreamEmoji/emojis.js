@@ -73,7 +73,30 @@ const defaultEmoji = [
   new Emoji('望远镜', 'wangyuanjing'),
   new Emoji('不听', 'butin'),
   new Emoji('干饭', 'ganfan'),
-  new Emoji('烟花', 'yanhua')
+  new Emoji('大拇指', 'damuzhi'),
+  new Emoji('胜利', 'shengli'),
+  new Emoji('haha', 'haha2'),
+  new Emoji('OK', 'ok'),
+  new Emoji('红领巾', 'honglingjin'),
+  new Emoji('爱心', 'aixin'),
+  new Emoji('心碎', 'xinsui'),
+  new Emoji('玫瑰', 'meigui'),
+  new Emoji('礼物', 'liwu'),
+  new Emoji('烟花', 'yanhua'),
+  new Emoji('彩虹', 'caihong'),
+  new Emoji('太阳', 'taiyang'),
+  new Emoji('星星月亮', 'xingxingyueliang'),
+  new Emoji('蛋糕', 'dangao'),
+  new Emoji('茶杯', 'chabei'),
+  new Emoji('香蕉', 'xiangjiao'),
+  new Emoji('便便', 'bianbian'),
+  new Emoji('药丸', 'yaowan'),
+  new Emoji('钱币', 'qianbi'),
+  new Emoji('蜡烛', 'lazhu'),
+  new Emoji('沙发', 'shafa'),
+  new Emoji('音乐', 'yinyue'),
+  new Emoji('灯泡', 'dengpao'),
+  new Emoji('手纸', 'shouzhi')
 ]
 
 export default [...defaultEmoji]
