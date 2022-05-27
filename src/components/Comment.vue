@@ -1,6 +1,8 @@
 <template>
   <div id="halo-comment" class="halo-comment" :class="mergedConfigs.night ? 'night' : ''">
-    <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
+    <keep-alive>
+      <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
+    </keep-alive>
 
     <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="load-comment">
       <button class="btn btn-primary" type="button" @click="handleGetComments">加载评论</button>

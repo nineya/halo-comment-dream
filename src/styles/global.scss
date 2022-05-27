@@ -148,6 +148,7 @@ ul {
   .emoji-picker {
     float: left;
     margin-top: 0.3em;
+    user-select: none;
 
     .emoji-btn {
       cursor: pointer;

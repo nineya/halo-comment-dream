@@ -1,5 +1,5 @@
 <template>
-  <section class="comment-editor" role="form" v-if="isCurrReply">
+  <section class="comment-editor" role="form">
     <div class="avatar-body">
       <img :src="avatar" class="avatar" alt="avatar" />
     </div>
@@ -42,11 +42,11 @@
             </svg>
             表情
           </span>
-          <keep-alive>
-            <transition name="emoji-fade">
+          <transition name="emoji-fade">
+            <keep-alive>
               <EmojiPicker :pack="emojiPack" @select="handleSelectEmoji" v-if="emojiDialogVisible" />
-            </transition>
-          </keep-alive>
+            </keep-alive>
+          </transition>
         </span>
       </div>
       <div v-if="previewMode" class="comment-preview markdown-content" v-html="renderedContent"></div>
@@ -154,9 +154,6 @@ export default {
     }
   },
   computed: {
-    isCurrReply() {
-      return !this.replyComment || this.globalData.replyId === this.replyComment.id
-    },
     renderedContent() {
       return this.comment.content
         ? marked.parse(renderedEmojiHtml(encodeHtml(this.comment.content, this.configs.commentHtml)))
