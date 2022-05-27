@@ -1,44 +1,44 @@
 class Emoji {
-  constructor(name, description) {
+  constructor(name, fileName) {
     this.name = name
-    this.description = description
+    this.fileName = fileName
   }
 }
 
 const defaultEmoji = [
-  new Emoji('hehe', '呵呵'),
-  new Emoji('haha', '哈哈'),
-  new Emoji('tushe', '吐舌'),
-  new Emoji('a', '啊'),
-  new Emoji('ku', '酷'),
-  new Emoji('nu', '怒'),
-  new Emoji('kaixin', '开心'),
-  new Emoji('han', '汗'),
-  new Emoji('lei', '泪'),
-  new Emoji('heixian', '黑线'),
-  new Emoji('bishi', '鄙视'),
-  new Emoji('bugaoxing', '不高兴'),
-  new Emoji('zhenbang', '真棒'),
-  new Emoji('qian', '钱'),
-  new Emoji('yiwen', '疑问'),
-  new Emoji('yingxiang', '阴险'),
-  new Emoji('tu', '吐'),
-  new Emoji('yi', '咦'),
-  new Emoji('weiqu', '委屈'),
-  new Emoji('huaxin', '花心'),
-  new Emoji('hu', '呼~'),
-  new Emoji('xiaoyan', '笑眼'),
-  new Emoji('len', '冷'),
-  new Emoji('taikaixin', '太开心'),
-  new Emoji('huaji', '滑稽'),
-  new Emoji('mianqiang', '勉强'),
-  new Emoji('kuanhan', '狂汗'),
-  new Emoji('guai', '乖'),
-  new Emoji('shuijiao', '睡觉'),
-  new Emoji('jingku', '惊哭'),
-  new Emoji('shengqi', '生气'),
-  new Emoji('jingya', '惊讶'),
-  new Emoji('pen', '喷')
+  new Emoji('呵呵', 'hehe'),
+  new Emoji('哈哈', 'haha'),
+  new Emoji('吐舌', 'tushe'),
+  new Emoji('啊', 'a'),
+  new Emoji('酷', 'ku'),
+  new Emoji('怒', 'nu'),
+  new Emoji('开心', 'kaixin'),
+  new Emoji('汗', 'han'),
+  new Emoji('泪', 'lei'),
+  new Emoji('黑线', 'heixian'),
+  new Emoji('鄙视', 'bishi'),
+  new Emoji('不高兴', 'bugaoxing'),
+  new Emoji('真棒', 'zhenbang'),
+  new Emoji('钱', 'qian'),
+  new Emoji('疑问', 'yiwen'),
+  new Emoji('阴险', 'yingxiang'),
+  new Emoji('吐', 'tu'),
+  new Emoji('咦', 'yi'),
+  new Emoji('委屈', 'weiqu'),
+  new Emoji('花心', 'huaxin'),
+  new Emoji('呼~', 'hu'),
+  new Emoji('笑眼', 'xiaoyan'),
+  new Emoji('冷', 'len'),
+  new Emoji('太开心', 'taikaixin'),
+  new Emoji('滑稽', 'huaji'),
+  new Emoji('勉强', 'mianqiang'),
+  new Emoji('狂汗', 'kuanhan'),
+  new Emoji('乖', 'guai'),
+  new Emoji('睡觉', 'shuijiao'),
+  new Emoji('惊哭', 'jingku'),
+  new Emoji('生气', 'shengqi'),
+  new Emoji('惊讶', 'jingya'),
+  new Emoji('喷', 'pen')
 ]
 
 export default [...defaultEmoji]

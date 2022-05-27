@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     dreamSrc() {
-      return this.url + this.data.name + '.png'
+      return this.url + this.data.fileName + '.png'
     }
   }
 }

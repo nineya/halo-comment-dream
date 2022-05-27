@@ -6733,14 +6733,14 @@ module.exports = function getSideChannel() {
 
 "use strict";
 class Emoji {
-  constructor(name, description) {
+  constructor(name, fileName) {
     this.name = name;
-    this.description = description;
+    this.fileName = fileName;
   }
 
 }
 
-const defaultEmoji = [new Emoji('hehe', '呵呵'), new Emoji('haha', '哈哈'), new Emoji('tushe', '吐舌'), new Emoji('a', '啊'), new Emoji('ku', '酷'), new Emoji('nu', '怒'), new Emoji('kaixin', '开心'), new Emoji('han', '汗'), new Emoji('lei', '泪'), new Emoji('heixian', '黑线'), new Emoji('bishi', '鄙视'), new Emoji('bugaoxing', '不高兴'), new Emoji('zhenbang', '真棒'), new Emoji('qian', '钱'), new Emoji('yiwen', '疑问'), new Emoji('yingxiang', '阴险'), new Emoji('tu', '吐'), new Emoji('yi', '咦'), new Emoji('weiqu', '委屈'), new Emoji('huaxin', '花心'), new Emoji('hu', '呼~'), new Emoji('xiaoyan', '笑眼'), new Emoji('len', '冷'), new Emoji('taikaixin', '太开心'), new Emoji('huaji', '滑稽'), new Emoji('mianqiang', '勉强'), new Emoji('kuanhan', '狂汗'), new Emoji('guai', '乖'), new Emoji('shuijiao', '睡觉'), new Emoji('jingku', '惊哭'), new Emoji('shengqi', '生气'), new Emoji('jingya', '惊讶'), new Emoji('pen', '喷')];
+const defaultEmoji = [new Emoji('呵呵', 'hehe'), new Emoji('哈哈', 'haha'), new Emoji('吐舌', 'tushe'), new Emoji('啊', 'a'), new Emoji('酷', 'ku'), new Emoji('怒', 'nu'), new Emoji('开心', 'kaixin'), new Emoji('汗', 'han'), new Emoji('泪', 'lei'), new Emoji('黑线', 'heixian'), new Emoji('鄙视', 'bishi'), new Emoji('不高兴', 'bugaoxing'), new Emoji('真棒', 'zhenbang'), new Emoji('钱', 'qian'), new Emoji('疑问', 'yiwen'), new Emoji('阴险', 'yingxiang'), new Emoji('吐', 'tu'), new Emoji('咦', 'yi'), new Emoji('委屈', 'weiqu'), new Emoji('花心', 'huaxin'), new Emoji('呼~', 'hu'), new Emoji('笑眼', 'xiaoyan'), new Emoji('冷', 'len'), new Emoji('太开心', 'taikaixin'), new Emoji('滑稽', 'huaji'), new Emoji('勉强', 'mianqiang'), new Emoji('狂汗', 'kuanhan'), new Emoji('乖', 'guai'), new Emoji('睡觉', 'shuijiao'), new Emoji('惊哭', 'jingku'), new Emoji('生气', 'shengqi'), new Emoji('惊讶', 'jingya'), new Emoji('喷', 'pen')];
 /* harmony default export */ __webpack_exports__["Z"] = ([...defaultEmoji]);
 
 /***/ }),
@@ -9221,7 +9221,7 @@ class Tokenizer {
         l = item.header.length;
         for (j = 0; j < l; j++) {
           item.header[j].tokens = [];
-          this.lexer.inline(item.header[j].text, item.header[j].tokens);
+          this.lexer.inlineTokens(item.header[j].text, item.header[j].tokens);
         }
 
         // cell child tokens
@@ -9230,7 +9230,7 @@ class Tokenizer {
           row = item.rows[j];
           for (k = 0; k < row.length; k++) {
             row[k].tokens = [];
-            this.lexer.inline(row[k].text, row[k].tokens);
+            this.lexer.inlineTokens(row[k].text, row[k].tokens);
           }
         }
 
@@ -11288,9 +11288,9 @@ const lexer = Lexer.lex;
 
 
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=622b3666&
-var CommentEditorvue_type_template_id_622b3666_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"avatar-body"},[_c('img',{staticClass:"avatar",attrs:{"src":_vm.avatar,"alt":"avatar"}})]),_c('form',{staticClass:"comment-form"},[_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"id":"author","aria-required":"true","placeholder":_vm.configs.getQQInfo ? '* 昵称（输入QQ自动获取）' : '* 昵称',"required":"required","type":"text"},domProps:{"value":(_vm.comment.author)},on:{"blur":function($event){_vm.configs.getQQInfo && _vm.handleQQInfo()},"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],class:!this.comment.email || _vm.isEmail() ? '' : 'error',attrs:{"id":"email","placeholder":"邮箱","type":"text"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"id":"authorUrl","placeholder":"网址","type":"text"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.previewMode),expression:"!previewMode"}],staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",class:!_vm.comment.content || _vm.comment.content.length < 1023 ? '' : 'error',attrs:{"placeholder":_vm.options.comment_content_placeholder || '撰写评论...',"aria-required":"true","required":"required"},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}}),_c('span',{staticClass:"emoji-picker"},[_c('span',{staticClass:"emoji-btn",class:_vm.emojiDialogVisible ? 'emoji-open' : '',on:{"click":_vm.handleToggleDialogEmoji}},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","width":"18","height":"18"}},[_c('path',{attrs:{"d":"M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"}})]),_vm._v(" 表情 ")]),_c('transition',{attrs:{"name":"emoji-fade"}},[_c('keep-alive',[(_vm.emojiDialogVisible)?_c('EmojiPicker',{attrs:{"pack":_vm.emojiPack},on:{"select":_vm.handleSelectEmoji}}):_vm._e()],1)],1)],1)]),(_vm.previewMode)?_c('div',{staticClass:"comment-preview markdown-content",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}):_vm._e(),_c('ul',[(this.replyComment)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.globalData.replyId = 0}}},[_vm._v("取消")])]):_vm._e(),(_vm.comment.content)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.previewMode = !_vm.previewMode}}},[_vm._v(" "+_vm._s(_vm.previewMode ? '编辑' : '预览')+" ")])]):_vm._e(),_c('li',[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisible)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisible)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisible)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])}
-var CommentEditorvue_type_template_id_622b3666_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=1cfa0e03&
+var CommentEditorvue_type_template_id_1cfa0e03_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"avatar-body"},[_c('img',{staticClass:"avatar",attrs:{"src":_vm.avatar,"alt":"avatar"}})]),_c('form',{staticClass:"comment-form"},[_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"id":"author","aria-required":"true","placeholder":_vm.configs.getQQInfo ? '* 昵称（输入QQ自动获取）' : '* 昵称',"required":"required","type":"text"},domProps:{"value":(_vm.comment.author)},on:{"blur":function($event){_vm.configs.getQQInfo && _vm.handleQQInfo()},"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],class:!this.comment.email || _vm.isEmail() ? '' : 'error',attrs:{"id":"email","placeholder":"邮箱","type":"text"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"id":"authorUrl","placeholder":"网址","type":"text"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.previewMode),expression:"!previewMode"}],staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",class:!_vm.comment.content || _vm.comment.content.length < 1023 ? '' : 'error',attrs:{"placeholder":_vm.options.comment_content_placeholder || '撰写评论...',"aria-required":"true","required":"required"},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}}),_c('span',{staticClass:"emoji-picker"},[_c('span',{staticClass:"emoji-btn",class:_vm.emojiDialogVisible ? 'emoji-open' : '',on:{"click":_vm.handleToggleDialogEmoji}},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","width":"18","height":"18"}},[_c('path',{attrs:{"d":"M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"}})]),_vm._v(" 表情 ")]),_c('transition',{attrs:{"name":"emoji-fade"}},[_c('keep-alive',[(_vm.emojiDialogVisible)?_c('EmojiPicker',{attrs:{"pack":_vm.emojiPack},on:{"select":_vm.handleSelectEmoji}}):_vm._e()],1)],1)],1)]),(_vm.previewMode)?_c('div',{staticClass:"comment-preview markdown-content",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}):_vm._e(),_c('ul',[(this.replyComment)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.globalData.replyId = 0}}},[_vm._v("取消")])]):_vm._e(),(_vm.comment.content)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.previewMode = !_vm.previewMode}}},[_vm._v(" "+_vm._s(_vm.previewMode ? '编辑' : '预览')+" ")])]):_vm._e(),_c('li',[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisible)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisible)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisible)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])}
+var CommentEditorvue_type_template_id_1cfa0e03_staticRenderFns = []
 
 
 // EXTERNAL MODULE: ./node_modules/md5/md5.js
@@ -11491,9 +11491,9 @@ var EmojiListvue_type_template_id_1ca6a480_render = function () {var _vm=this;va
 var EmojiListvue_type_template_id_1ca6a480_staticRenderFns = []
 
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=template&id=62874fbe&
-var DreamEmojivue_type_template_id_62874fbe_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji-item",attrs:{"title":_vm.data.description}},[_c('img',{attrs:{"src":_vm.dreamSrc,"onerror":"this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='"}})])}
-var DreamEmojivue_type_template_id_62874fbe_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=template&id=9ece9b4c&
+var DreamEmojivue_type_template_id_9ece9b4c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji-item",attrs:{"title":_vm.data.description}},[_c('img',{attrs:{"src":_vm.dreamSrc,"onerror":"this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='"}})])}
+var DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=script&lang=js&
@@ -11520,7 +11520,7 @@ var DreamEmojivue_type_template_id_62874fbe_staticRenderFns = []
   },
   computed: {
     dreamSrc() {
-      return this.url + this.data.name + '.png';
+      return this.url + this.data.fileName + '.png';
     }
 
   }
@@ -11637,8 +11637,8 @@ function normalizeComponent (
 ;
 var component = normalizeComponent(
   dreamEmoji_DreamEmojivue_type_script_lang_js_,
-  DreamEmojivue_type_template_id_62874fbe_render,
-  DreamEmojivue_type_template_id_62874fbe_staticRenderFns,
+  DreamEmojivue_type_template_id_9ece9b4c_render,
+  DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns,
   false,
   null,
   null,
@@ -11766,8 +11766,8 @@ function renderedEmojiHtml(html) {
 
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"/themes/dream/source/lib/halo-comment@1.0.0/"}assets/emoji/${name}.png" alt="${emoji.description}"/>`;
-    html = html.replaceAll(`#(${name})`, img);
+    let img = `<img class="dream-emoji" src="${"/themes/dream/source/lib/halo-comment@1.0.0/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    html = html.replaceAll(`[/${name}]`, img);
   }
 
   return html;
@@ -12057,7 +12057,7 @@ function renderedEmojiHtml(html) {
     },
 
     handleSelectEmoji(emoji) {
-      this.comment.content += `#(${emoji.name})`;
+      this.comment.content += `[/${emoji.name}]`;
     },
 
     clearAlertClose() {
@@ -12080,8 +12080,8 @@ function renderedEmojiHtml(html) {
 ;
 var CommentEditor_component = normalizeComponent(
   components_CommentEditorvue_type_script_lang_js_,
-  CommentEditorvue_type_template_id_622b3666_render,
-  CommentEditorvue_type_template_id_622b3666_staticRenderFns,
+  CommentEditorvue_type_template_id_1cfa0e03_render,
+  CommentEditorvue_type_template_id_1cfa0e03_staticRenderFns,
   false,
   null,
   null,

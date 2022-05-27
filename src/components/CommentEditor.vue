@@ -269,7 +269,7 @@ export default {
       this.emojiDialogVisible = !this.emojiDialogVisible
     },
     handleSelectEmoji(emoji) {
-      this.comment.content += `#(${emoji.name})`
+      this.comment.content += `[/${emoji.name}]`
     },
     clearAlertClose() {
       this.infoes = []
