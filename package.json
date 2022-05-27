@@ -42,7 +42,12 @@
     "last 2 versions"
   ],
   "description": "halo-theme-dream 博客主题对应的博客评论组件，适用于 Halo 博客系统。",
-  "keywords": "halo,halo-comment,halo-comment-component,halo-comment-dream",
+  "keywords": [
+    "halo",
+    "halo-comment",
+    "halo-comment-component",
+    "halo-comment-dream"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nineya/halo-comment-dream.git"
