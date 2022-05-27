@@ -61,6 +61,7 @@ export default {
     img {
       display: block;
       width: 30px;
+      height: 30px;
     }
   }
 }

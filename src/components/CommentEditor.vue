@@ -23,7 +23,7 @@
         />
         <input id="authorUrl" v-model="comment.authorUrl" placeholder="网址" type="text" />
       </div>
-      <div v-if="!previewMode" class="comment-textarea">
+      <div v-show="!previewMode" class="comment-textarea">
         <textarea
           ref="commentTextarea"
           v-model="comment.content"
@@ -49,7 +49,7 @@
           </keep-alive>
         </span>
       </div>
-      <div v-else class="comment-preview markdown-content" v-html="renderedContent"></div>
+      <div v-if="previewMode" class="comment-preview markdown-content" v-html="renderedContent"></div>
       <ul>
         <li v-if="this.replyComment">
           <button class="btn" type="button" @click="globalData.replyId = 0">取消</button>
@@ -192,8 +192,8 @@ export default {
     this.comment.authorUrl = authorUrl ? authorUrl : ''
     this.comment.email = email ? email : ''
   },
-  mounted() {
-    autosize(document.querySelector('textarea'))
+  activated() {
+    autosize(this.$el.querySelector('textarea'))
   },
   methods: {
     isEmail() {
