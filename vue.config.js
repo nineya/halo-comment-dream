@@ -1,9 +1,9 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { version } = require('./package.json')
 
-console.log(process.env.NODE_ENV)
 module.exports = {
   productionSourceMap: false,
-  publicPath: process.env.ASSETS ? '/themes/dream/source/lib/halo-comment@1.0.0' : '/',
+  publicPath: process.env.ASSETS ? `/themes/dream/source/lib/halo-comment@${version}` : '/',
   configureWebpack: process.env.ASSETS
     ? {
         plugins: [
