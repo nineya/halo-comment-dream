@@ -5,8 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:wc": "cross-env ASSETS=true npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue",
-    "dev:wc": "cross-env ASSETS=true npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue --watch",
+    "build:wc": "cross-env ASSETS=npm npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue",
+    "build:theme": "cross-env ASSETS=theme npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue",
+    "dev:wc": "cross-env ASSETS=npm npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue --watch",
+    "dev:theme": "cross-env ASSETS=theme npx vue-cli-service build --target wc --name halo-comment src/components/Comment.vue --watch",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
