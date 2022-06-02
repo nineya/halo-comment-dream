@@ -8205,7 +8205,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.0.2/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.0.3/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -11515,7 +11515,7 @@ var DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns = []
     url: {
       type: String,
       required: false,
-      default: `${"https://unpkg.com/halo-comment-dream@1.0.2/dist/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.0.3/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -11766,7 +11766,7 @@ function renderedEmojiHtml(html) {
 
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.0.2/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.0.3/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replaceAll(`[/${name}]`, img);
   }
 
