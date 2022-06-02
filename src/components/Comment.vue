@@ -56,7 +56,7 @@ const defaultConfig = {
   getQQInfo: false,
   commentHtml: false,
   loadingStyle: 'default',
-  night: (localStorage && localStorage.getItem('night') === 'true') || false
+  night: false
 }
 
 export default {
@@ -110,6 +110,7 @@ export default {
       if (Object.prototype.toString.call(this.configs) === '[object String]') {
         externalConfigs = JSON.parse(this.configs)
       }
+      defaultConfig['night'] = (localStorage && localStorage.getItem('night') === 'true') || false
       return Object.assign(defaultConfig, externalConfigs)
     }
   },
