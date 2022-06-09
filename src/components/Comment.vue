@@ -48,6 +48,7 @@
 <script>
 import './index'
 import apiClient from '../plugins/api-client'
+import globals from '@/utils/globals.js'
 
 const defaultConfig = {
   autoLoad: true,
@@ -94,10 +95,7 @@ export default {
         total: 0,
         size: 10
       },
-
-      options: {
-        comment_gravatar_default: ''
-      }
+      globalData: globals
     }
   },
   computed: {
@@ -133,6 +131,7 @@ export default {
 
       this.list.loading = false
       this.list.loaded = true
+      this.globalData.replyId = 0
     },
 
     async handleGetOptions() {
