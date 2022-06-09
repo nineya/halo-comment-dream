@@ -95,6 +95,9 @@ export default {
         total: 0,
         size: 10
       },
+      options: {
+        comment_gravatar_default: ''
+      },
       globalData: globals
     }
   },
@@ -123,7 +126,7 @@ export default {
       this.list.loading = true
 
       const { data } = await apiClient.comment.listAsTreeView(this.target, this.id, this.list.params)
-
+      data.content && data.content.forEach(comment => (comment['replyCount'] = this.handleReplyList(comment)))
       this.list.data = data.content
       this.list.total = data.total
       this.list.pages = data.pages
@@ -140,6 +143,12 @@ export default {
       if (this.mergedConfigs.priorityQQAvatar) {
         this.options.gravatar_source = 'https://cravatar.cn/avatar/'
       }
+    },
+
+    handleReplyList(reply, no = 0) {
+      reply['no'] = no
+      reply.children && reply.children.forEach(child => (no = this.handleReplyList(child, no + 1)))
+      return no
     },
 
     handlePaginationChange(page) {
