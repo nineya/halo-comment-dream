@@ -86,7 +86,9 @@
         />
       </template>
     </ul>
-    <div v-if="!isChild && replyNum < comment.replyCount" @click="replyNum += Math.max(replyNum, 6)">展开更多回复</div>
+    <div class="unfold-reply" v-if="!isChild && replyNum < comment.replyCount">
+      <span @click="replyNum += Math.max(replyNum, 6)">展开更多回复</span>
+    </div>
   </li>
 </template>
 <script>
