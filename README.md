@@ -41,6 +41,7 @@
 | loadingStyle     | 评论加载样式                                                 | `default`                      | `default` `circle` `balls` |
 | priorityQQAvatar | 是否优先展示QQ头像                                           | false                          | `true` `false`             |
 | getQQInfo        | 昵称输入框输入QQ号自动获取QQ昵称和邮箱                       | false                          | `true` `false`             |
+| unfoldReplyNum   | 评论的回复列表默认展开的回复数量                             | 10                             | 大于 0 的正整数            |
 | night            | 评论模块以黑暗模式初始化样式                                 | `localStorage` 中 `night` 的值 | `true` `false`             |
 | commentHtml      | 开启html内容，启用后有被 `XSS` 恶意代码注入的风险，建议同时开启评论审核。 | false                          | `true` `false`             |
 

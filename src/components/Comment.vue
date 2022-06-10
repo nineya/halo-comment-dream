@@ -26,6 +26,7 @@
         <CommentNode
           :key="index"
           :comment="comment"
+          :replyNum="mergedConfigs.unfoldReplyNum"
           :configs="mergedConfigs"
           :options="options"
           :target="target"
@@ -57,6 +58,7 @@ const defaultConfig = {
   getQQInfo: false,
   commentHtml: false,
   loadingStyle: 'default',
+  unfoldReplyNum: 10,
   night: false
 }
 

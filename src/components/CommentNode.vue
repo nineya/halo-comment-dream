@@ -1,5 +1,6 @@
 <template>
   <li
+    v-if="comment.no <= replyNum"
     :id="'li-comment-' + comment.id"
     :class="commentClass"
     class="comment"
@@ -76,6 +77,7 @@
           :key="index"
           :comment="children"
           :configs="configs"
+          :replyNum="replyNum"
           :isChild="true"
           :options="options"
           :parent="comment"
@@ -84,6 +86,7 @@
         />
       </template>
     </ul>
+    <div v-if="!isChild && replyNum < comment.replyCount" @click="replyNum += Math.max(replyNum, 6)">展开更多回复</div>
   </li>
 </template>
 <script>
@@ -124,6 +127,11 @@ export default {
       required: false,
       default: () => {}
     },
+    replyNum: {
+      type: Number,
+      required: true,
+      default: 10
+    },
     options: {
       type: Object,
       required: false,
@@ -136,7 +144,8 @@ export default {
   },
   data() {
     return {
-      globalData: globals
+      globalData: globals,
+      replyNum2: this.configs.unfoldReplyNum
     }
   },
   computed: {
