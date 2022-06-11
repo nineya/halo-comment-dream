@@ -20,7 +20,7 @@
         ></path>
       </svg>
     </div>
-    <comment-loading v-show="list.loading" :configs="configs" />
+    <comment-loading v-show="list.loading" :configs="mergedConfigs" />
     <ul v-if="list.data.length >= 1" class="comment-nodes">
       <template v-for="(comment, index) in list.data">
         <CommentNode
