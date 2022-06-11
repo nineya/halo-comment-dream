@@ -26,7 +26,7 @@
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
-2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js`
+2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js`
 
 
 
@@ -92,7 +92,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -132,7 +132,7 @@ sheet.ftl：
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js'}"></script>
         <halo-comment id="${target.id?c}" type="${type}" configs='{"autoLoad": true,"showUserAgent": true}'/>
     </#if>
 </#macro>

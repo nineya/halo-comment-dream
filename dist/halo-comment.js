@@ -8205,7 +8205,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"/themes/dream/source/lib/halo-comment@1.0.3/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.0.4/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -11481,9 +11481,9 @@ const globalData = {
   replyId: 0
 };
 /* harmony default export */ var globals = (globalData);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/EmojiPicker.vue?vue&type=template&id=2d0eb79c&
-var EmojiPickervue_type_template_id_2d0eb79c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('EmojiList',{attrs:{"data":_vm.pack},on:{"select":_vm.onSelectEmoji}})}
-var EmojiPickervue_type_template_id_2d0eb79c_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/EmojiPicker.vue?vue&type=template&id=3bab4a7c&
+var EmojiPickervue_type_template_id_3bab4a7c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('EmojiList',{attrs:{"data":_vm.pack},on:{"select":_vm.onSelectEmoji}})}
+var EmojiPickervue_type_template_id_3bab4a7c_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/EmojiList.vue?vue&type=template&id=1ca6a480&
@@ -11491,12 +11491,13 @@ var EmojiListvue_type_template_id_1ca6a480_render = function () {var _vm=this;va
 var EmojiListvue_type_template_id_1ca6a480_staticRenderFns = []
 
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=template&id=9ece9b4c&
-var DreamEmojivue_type_template_id_9ece9b4c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji-item",attrs:{"title":_vm.data.description}},[_c('img',{attrs:{"src":_vm.dreamSrc,"onerror":"this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='"}})])}
-var DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=template&id=2a4d7e70&
+var DreamEmojivue_type_template_id_2a4d7e70_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji-item",attrs:{"title":_vm.data.name}},[_c('img',{attrs:{"alt":_vm.data.name,"src":_vm.dreamSrc,"onerror":"this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='"}})])}
+var DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/DreamEmoji.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -11515,7 +11516,7 @@ var DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns = []
     url: {
       type: String,
       required: false,
-      default: `${"/themes/dream/source/lib/halo-comment@1.0.3/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.0.4/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -11637,8 +11638,8 @@ function normalizeComponent (
 ;
 var component = normalizeComponent(
   dreamEmoji_DreamEmojivue_type_script_lang_js_,
-  DreamEmojivue_type_template_id_9ece9b4c_render,
-  DreamEmojivue_type_template_id_9ece9b4c_staticRenderFns,
+  DreamEmojivue_type_template_id_2a4d7e70_render,
+  DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns,
   false,
   null,
   null,
@@ -11717,10 +11718,6 @@ var EmojiList_component = normalizeComponent(
     pack: {
       type: Array,
       required: true
-    },
-    showCategory: {
-      type: Boolean,
-      default: true
     }
   },
   components: {
@@ -11748,8 +11745,8 @@ var EmojiList_component = normalizeComponent(
 ;
 var EmojiPicker_component = normalizeComponent(
   dreamEmoji_EmojiPickervue_type_script_lang_js_,
-  EmojiPickervue_type_template_id_2d0eb79c_render,
-  EmojiPickervue_type_template_id_2d0eb79c_staticRenderFns,
+  EmojiPickervue_type_template_id_3bab4a7c_render,
+  EmojiPickervue_type_template_id_3bab4a7c_staticRenderFns,
   false,
   null,
   null,
@@ -11766,7 +11763,7 @@ function renderedEmojiHtml(html) {
 
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"/themes/dream/source/lib/halo-comment@1.0.3/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.0.4/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replaceAll(`[/${name}]`, img);
   }
 
@@ -12090,9 +12087,9 @@ var CommentEditor_component = normalizeComponent(
 )
 
 /* harmony default export */ var CommentEditor = (CommentEditor_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=407ff6bb&
-var CommentNodevue_type_template_id_407ff6bb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.comment.no <= _vm.replyNum)?_c('li',{staticClass:"comment",class:_vm.commentClass,attrs:{"id":'li-comment-' + _vm.comment.id,"itemprop":"comment","itemtype":"https://schema.org/Comment"}},[_c('div',{ref:'comment-' + _vm.comment.id,staticClass:"comment-body",attrs:{"id":'comment-' + _vm.comment.id}},[_c('div',{staticClass:"avatar-body"},[(_vm.comment.authorUrl && _vm.comment.authorUrl !== '')?_c('a',{attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author + "'s avatar","src":_vm.avatar}})]):_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author + "'s avatar","src":_vm.avatar}})]),_c('div',{staticClass:"comment-main"},[_c('div',{staticClass:"comment-meta"},[_c('div',{staticClass:"comment-author",attrs:{"itemprop":"author"}},[_c('div',{staticClass:"author-meta"},[(_vm.comment.authorUrl && _vm.comment.authorUrl !== '')?_c('a',{staticClass:"author-name",attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_vm._v(_vm._s(_vm.comment.author))]):_c('a',{staticClass:"author-name"},[_vm._v(_vm._s(_vm.comment.author))]),(_vm.comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_vm._v("博主")]):_vm._e()]),_c('span',{staticClass:"btn btn-primary comment-reply",on:{"click":_vm.handleCreateComment}},[_vm._v(_vm._s(_vm.globalData.replyId === _vm.comment.id ? '取消回复' : '回复'))])]),_c('div',{staticClass:"comment-info"},[_c('time',{staticClass:"comment-time",attrs:{"datetime":_vm.comment.createTime,"itemprop":"datePublished"}},[_vm._v(_vm._s(_vm.createTimeAgo))]),(_vm.configs.showUserAgent)?_c('div',{staticClass:"useragent-info"},[_vm._v(" "+_vm._s(_vm.compileUserAgent)+" ")]):_vm._e()])]),_c('div',{staticClass:"markdown-body",attrs:{"itemprop":"description"}},[(_vm.parent)?_c('span',{staticClass:"comment-reference",on:{"click":_vm.handleToCommentRef,"mouseenter":_vm.handleHighlightParent,"mouseleave":function($event){return _vm.handleHighlightParent(false)}}},[_c('a',{attrs:{"href":'#comment-' + this.parent.id}},[_vm._v("@"+_vm._s(this.parent.author))])]):_vm._e(),_c('span',{staticClass:"markdown-content",domProps:{"innerHTML":_vm._s(_vm.compileContent)}})])])]),_c('keep-alive',[(_vm.globalData.replyId === _vm.comment.id)?_c('comment-editor',{attrs:{"configs":_vm.configs,"options":_vm.options,"replyComment":_vm.comment,"target":_vm.target,"targetId":_vm.targetId}}):_vm._e()],1),(_vm.comment.children)?_c('ul',{staticClass:"children-nodes"},[_vm._l((_vm.comment.children),function(children,index){return [_c('CommentNode',{key:index,attrs:{"comment":children,"configs":_vm.configs,"replyNum":_vm.replyNum,"isChild":true,"options":_vm.options,"parent":_vm.comment,"target":_vm.target,"targetId":_vm.targetId}})]})],2):_vm._e(),(!_vm.isChild && _vm.replyNum < _vm.comment.replyCount)?_c('div',{staticClass:"unfold-reply"},[_c('span',{on:{"click":function($event){_vm.replyNum += Math.max(_vm.replyNum, 6)}}},[_vm._v("展开更多回复")])]):_vm._e()],1):_vm._e()}
-var CommentNodevue_type_template_id_407ff6bb_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=3f5aedba&
+var CommentNodevue_type_template_id_3f5aedba_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.comment.no <= _vm.replyNum)?_c('li',{staticClass:"comment",class:_vm.commentClass,attrs:{"id":'li-comment-' + _vm.comment.id,"itemprop":"comment","itemtype":"https://schema.org/Comment"}},[_c('div',{ref:'comment-' + _vm.comment.id,staticClass:"comment-body",attrs:{"id":'comment-' + _vm.comment.id}},[_c('div',{staticClass:"avatar-body"},[(_vm.comment.authorUrl && _vm.comment.authorUrl !== '')?_c('a',{attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author + "'s avatar","src":_vm.avatar}})]):_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author + "'s avatar","src":_vm.avatar}})]),_c('div',{staticClass:"comment-main"},[_c('div',{staticClass:"comment-meta"},[_c('div',{staticClass:"comment-author",attrs:{"itemprop":"author"}},[_c('div',{staticClass:"author-meta"},[(_vm.comment.authorUrl && _vm.comment.authorUrl !== '')?_c('a',{staticClass:"author-name",attrs:{"href":_vm.comment.authorUrl,"rel":"noopener noreferrer nofollow","target":"_blank"}},[_vm._v(_vm._s(_vm.comment.author))]):_c('a',{staticClass:"author-name"},[_vm._v(_vm._s(_vm.comment.author))]),(_vm.comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_vm._v("博主")]):_vm._e()]),_c('span',{staticClass:"btn btn-primary comment-reply",on:{"click":_vm.handleCreateComment}},[_vm._v(_vm._s(_vm.globalData.replyId === _vm.comment.id ? '取消回复' : '回复'))])]),_c('div',{staticClass:"comment-info"},[_c('time',{staticClass:"comment-time",attrs:{"datetime":_vm.comment.createTime,"itemprop":"datePublished"}},[_vm._v(_vm._s(_vm.createTimeAgo))]),(_vm.configs.showUserAgent)?_c('div',{staticClass:"useragent-info"},[_vm._v(" "+_vm._s(_vm.compileUserAgent)+" ")]):_vm._e()])]),_c('div',{staticClass:"markdown-body",attrs:{"itemprop":"description"}},[(_vm.parent)?_c('span',{staticClass:"comment-reference",on:{"click":_vm.handleToCommentRef,"mouseenter":_vm.handleHighlightParent,"mouseleave":function($event){return _vm.handleHighlightParent(false)}}},[_c('a',{attrs:{"href":'#comment-' + this.parent.id}},[_vm._v("@"+_vm._s(this.parent.author))])]):_vm._e(),_c('span',{staticClass:"markdown-content",domProps:{"innerHTML":_vm._s(_vm.compileContent)}})])])]),_c('keep-alive',[(_vm.globalData.replyId === _vm.comment.id)?_c('comment-editor',{attrs:{"configs":_vm.configs,"options":_vm.options,"replyComment":_vm.comment,"target":_vm.target,"targetId":_vm.targetId}}):_vm._e()],1),(_vm.comment.children)?_c('ul',{staticClass:"children-nodes"},[_vm._l((_vm.comment.children),function(children,index){return [_c('CommentNode',{key:index,attrs:{"comment":children,"configs":_vm.configs,"replyNum":_vm.replyNum,"isChild":true,"options":_vm.options,"parent":_vm.comment,"target":_vm.target,"targetId":_vm.targetId}})]})],2):_vm._e(),(!_vm.isChild && _vm.replyNum < _vm.comment.replyCount)?_c('div',{staticClass:"unfold-reply"},[_c('span',{on:{"click":function($event){_vm.replyNum += Math.max(_vm.replyNum, 6)}}},[_vm._v("展开更多回复")])]):_vm._e()],1):_vm._e()}
+var CommentNodevue_type_template_id_3f5aedba_staticRenderFns = []
 
 
 // EXTERNAL MODULE: ./node_modules/ua-parser-js/src/ua-parser.js
@@ -12343,8 +12340,8 @@ var ua_parser_default = /*#__PURE__*/__webpack_require__.n(ua_parser);
 ;
 var CommentNode_component = normalizeComponent(
   components_CommentNodevue_type_script_lang_js_,
-  CommentNodevue_type_template_id_407ff6bb_render,
-  CommentNodevue_type_template_id_407ff6bb_staticRenderFns,
+  CommentNodevue_type_template_id_3f5aedba_render,
+  CommentNodevue_type_template_id_3f5aedba_staticRenderFns,
   false,
   null,
   null,
