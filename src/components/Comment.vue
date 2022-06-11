@@ -20,12 +20,13 @@
         ></path>
       </svg>
     </div>
-    <comment-loading v-show="list.loading" :configs="configs" />
+    <comment-loading v-show="list.loading" :configs="mergedConfigs" />
     <ul v-if="list.data.length >= 1" class="comment-nodes">
       <template v-for="(comment, index) in list.data">
         <CommentNode
           :key="index"
           :comment="comment"
+          :replyNum="mergedConfigs.unfoldReplyNum"
           :configs="mergedConfigs"
           :options="options"
           :target="target"
@@ -48,6 +49,7 @@
 <script>
 import './index'
 import apiClient from '../plugins/api-client'
+import globals from '@/utils/globals.js'
 
 const defaultConfig = {
   autoLoad: true,
@@ -56,6 +58,7 @@ const defaultConfig = {
   getQQInfo: false,
   commentHtml: false,
   loadingStyle: 'default',
+  unfoldReplyNum: 10,
   night: false
 }
 
@@ -94,10 +97,10 @@ export default {
         total: 0,
         size: 10
       },
-
       options: {
         comment_gravatar_default: ''
-      }
+      },
+      globalData: globals
     }
   },
   computed: {
@@ -125,7 +128,7 @@ export default {
       this.list.loading = true
 
       const { data } = await apiClient.comment.listAsTreeView(this.target, this.id, this.list.params)
-
+      data.content && data.content.forEach(comment => (comment['replyCount'] = this.handleReplyList(comment)))
       this.list.data = data.content
       this.list.total = data.total
       this.list.pages = data.pages
@@ -133,6 +136,7 @@ export default {
 
       this.list.loading = false
       this.list.loaded = true
+      this.globalData.replyId = 0
     },
 
     async handleGetOptions() {
@@ -141,6 +145,12 @@ export default {
       if (this.mergedConfigs.priorityQQAvatar) {
         this.options.gravatar_source = 'https://cravatar.cn/avatar/'
       }
+    },
+
+    handleReplyList(reply, no = 0) {
+      reply['no'] = no
+      reply.children && reply.children.forEach(child => (no = this.handleReplyList(child, no + 1)))
+      return no
     },
 
     handlePaginationChange(page) {

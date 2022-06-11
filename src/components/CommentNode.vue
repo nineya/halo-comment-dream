@@ -1,5 +1,6 @@
 <template>
   <li
+    v-if="comment.no <= replyNum"
     :id="'li-comment-' + comment.id"
     :class="commentClass"
     class="comment"
@@ -26,7 +27,7 @@
                 v-if="comment.authorUrl && comment.authorUrl !== ''"
                 :href="comment.authorUrl"
                 class="author-name"
-                rel="nofollow"
+                rel="noopener noreferrer nofollow"
                 target="_blank"
                 >{{ comment.author }}</a
               >
@@ -76,6 +77,7 @@
           :key="index"
           :comment="children"
           :configs="configs"
+          :replyNum="replyNum"
           :isChild="true"
           :options="options"
           :parent="comment"
@@ -84,6 +86,9 @@
         />
       </template>
     </ul>
+    <div class="unfold-reply" v-if="!isChild && replyNum < comment.replyCount">
+      <span @click="replyNum += Math.max(replyNum, 6)">展开更多回复</span>
+    </div>
   </li>
 </template>
 <script>
@@ -124,6 +129,11 @@ export default {
       required: false,
       default: () => {}
     },
+    replyNum: {
+      type: Number,
+      required: true,
+      default: 10
+    },
     options: {
       type: Object,
       required: false,
@@ -136,7 +146,8 @@ export default {
   },
   data() {
     return {
-      globalData: globals
+      globalData: globals,
+      replyNum2: this.configs.unfoldReplyNum
     }
   },
   computed: {

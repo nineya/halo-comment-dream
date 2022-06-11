@@ -8,8 +8,7 @@ import EmojiList from './EmojiList'
 export default {
   name: 'EmojiPicker',
   props: {
-    pack: { type: Array, required: true },
-    showCategory: { type: Boolean, default: true }
+    pack: { type: Array, required: true }
   },
   components: {
     EmojiList

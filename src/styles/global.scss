@@ -314,6 +314,23 @@ ul {
     list-style-type: none;
   }
 
+  .unfold-reply {
+    display: flex;
+
+    span {
+      margin: 10px 0 0 auto;
+      color: var(--theme);
+      font-size: 0.9em;
+      cursor: pointer;
+
+      &:after {
+        content: '>';
+        margin-left: 2px;
+        font-size: 1.3em;
+      }
+    }
+  }
+
   .index-1 {
     margin-top: 20px;
     padding-bottom: 20px;

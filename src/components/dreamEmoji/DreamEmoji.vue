@@ -1,6 +1,7 @@
 <template>
-  <span class="emoji-item" :title="data.description">
+  <span class="emoji-item" :title="data.name">
     <img
+      :alt="data.name"
       :src="dreamSrc"
       onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='"
     />

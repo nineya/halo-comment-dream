@@ -26,7 +26,7 @@
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
-2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js`
+2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js`
 
 
 
@@ -41,6 +41,7 @@
 | loadingStyle     | 评论加载样式                                                 | `default`                      | `default` `circle` `balls` |
 | priorityQQAvatar | 是否优先展示QQ头像                                           | false                          | `true` `false`             |
 | getQQInfo        | 昵称输入框输入QQ号自动获取QQ昵称和邮箱                       | false                          | `true` `false`             |
+| unfoldReplyNum   | 评论的回复列表默认展开的回复数量                             | 10                             | 大于 0 的正整数            |
 | night            | 评论模块以黑暗模式初始化样式                                 | `localStorage` 中 `night` 的值 | `true` `false`             |
 | commentHtml      | 开启html内容，启用后有被 `XSS` 恶意代码注入的风险，建议同时开启评论审核。 | false                          | `true` `false`             |
 
@@ -91,7 +92,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -131,7 +132,7 @@ sheet.ftl：
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/gh/halo-comment-dream@1.0.3/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.4/dist/halo-comment.min.js'}"></script>
         <halo-comment id="${target.id?c}" type="${type}" configs='{"autoLoad": true,"showUserAgent": true}'/>
     </#if>
 </#macro>
