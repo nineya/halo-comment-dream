@@ -27,7 +27,7 @@
                 v-if="comment.authorUrl && comment.authorUrl !== ''"
                 :href="comment.authorUrl"
                 class="author-name"
-                rel="nofollow"
+                rel="noopener noreferrer nofollow"
                 target="_blank"
                 >{{ comment.author }}</a
               >
