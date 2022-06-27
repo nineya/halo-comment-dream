@@ -145,27 +145,23 @@ ul {
     }
   }
 
-  .emoji-picker {
+  .edit-picker {
     float: left;
     margin-top: 0.3em;
     user-select: none;
 
-    .emoji-btn {
+    .edit-btn {
       cursor: pointer;
-      color: rgba(174, 174, 174, 1);
+      width: 1.3em;
+      vertical-align: text-top;
+      fill: rgba(174, 174, 174, 1);
 
-      &:hover, &.emoji-open {
-        color: var(--comment-theme);
-
-        svg {
-          fill: var(--comment-theme);
-        }
+      &:not(:first-child) {
+        margin-left: 6px;
       }
 
-      svg {
-        width: 1.3em;
-        vertical-align: text-top;
-        fill: rgba(174, 174, 174, 1);
+      &:hover, &.edit-open {
+        fill: var(--comment-theme);
       }
     }
   }
