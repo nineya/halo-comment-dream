@@ -59,7 +59,8 @@ const defaultConfig = {
   commentHtml: false,
   loadingStyle: 'default',
   unfoldReplyNum: 10,
-  night: false
+  night: false,
+  imageToken: undefined
 }
 
 export default {

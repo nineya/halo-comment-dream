@@ -34,34 +34,28 @@
         >
         </textarea>
         <span class="edit-picker">
-          <svg
-            class="edit-btn"
-            :class="emojiDialogVisible ? 'edit-open' : ''"
-            @click="handleToggleDialogEmoji"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-          >
-            <path
-              d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-            />
-          </svg>
-          <svg
+          <span class="edit-btn" :class="emojiDialogVisible ? 'edit-open' : ''" @click="handleToggleDialogEmoji">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+              >
+              <path
+                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+              />
+            </svg>
+            {{ configs.imageToken ? '' : '表情' }}
+          </span>
+          <span
             v-if="configs.imageToken"
             class="edit-btn"
             :class="imageDialogVisible ? 'edit-open' : ''"
             @click="handleImageUpload"
-            viewBox="0 0 1024 1024"
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
           >
-            <path
-              d="M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64h768zM288 409.6L128 569.536V832h768v-83.2l-204.8-204.8-134.4 134.4-268.8-268.8zM896 192H128v288L288 320l268.8 268.8 134.4-134.4 204.8 204.8V192z"
-            />
-            <path d="M774.08 356.736a44.8 44.8 0 1 0 0-89.6 44.8 44.8 0 0 0 0 89.6z" />
-          </svg>
+            <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+              <path
+                d="M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64h768zM288 409.6L128 569.536V832h768v-83.2l-204.8-204.8-134.4 134.4-268.8-268.8zM896 192H128v288L288 320l268.8 268.8 134.4-134.4 204.8 204.8V192z"
+              />
+              <path d="M774.08 356.736a44.8 44.8 0 1 0 0-89.6 44.8 44.8 0 0 0 0 89.6z" />
+            </svg>
+          </span>
           <transition name="emoji-fade">
             <keep-alive>
               <EmojiPicker :pack="emojiPack" @select="handleSelectEmoji" v-if="emojiDialogVisible" />
@@ -290,12 +284,15 @@ export default {
       this.emojiDialogVisible = !this.emojiDialogVisible
     },
     handleImageUpload() {
+      if (this.imageDialogVisible) return
       const fileElem = document.createElement('input')
       fileElem.setAttribute('type', 'file')
       fileElem.style.display = 'none'
       fileElem.addEventListener('change', () => {
         const file = fileElem.files[0]
         if (!file) return
+        this.imageDialogVisible = true
+        this.infoes.push('图片上传中，请稍后……')
         const formData = new FormData()
         formData.append('key', this.configs.imageToken)
         formData.append('image', file)
@@ -306,18 +303,20 @@ export default {
           .then(response => response.json())
           .then(data => {
             if (data.status !== 200) {
+              this.clearAlertClose()
               this.warnings.push(`图片上传失败：${data.error.message}`)
               return
             }
-            console.log(data)
             const image = data.data.image
             this.comment.content += `\n![${image.name}](${image.url})`
-            this.successes.push(`图片上传成功！`)
+            this.clearAlertClose()
+            this.successes.push('图片上传成功！')
           })
           .catch(e => {
-            console.log(e)
+            this.clearAlertClose()
             this.warnings.push(`图片上传失败：${e}`)
           })
+          .finally(() => (this.imageDialogVisible = false))
       })
       fileElem.click()
     },

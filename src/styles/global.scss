@@ -152,16 +152,22 @@ ul {
 
     .edit-btn {
       cursor: pointer;
-      width: 1.3em;
-      vertical-align: text-top;
-      fill: rgba(174, 174, 174, 1);
+      color: rgba(174, 174, 174, 1);
 
       &:not(:first-child) {
         margin-left: 6px;
       }
 
       &:hover, &.edit-open {
-        fill: var(--comment-theme);
+        color: var(--comment-theme);
+        svg {
+          fill: var(--comment-theme);
+        }
+      }
+
+      svg {
+        fill: rgba(174, 174, 174, 1);
+        vertical-align: bottom;
       }
     }
   }
