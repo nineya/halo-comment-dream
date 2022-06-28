@@ -304,7 +304,7 @@ export default {
               return
             }
             const image = data.data
-            this.comment.content += `\n![${image.name}](${image.url})`
+            this.comment.content += `\n![${image.name}](${image.url})\n`
             this.clearAlertClose()
             this.successes.push('图片上传成功！')
           })
