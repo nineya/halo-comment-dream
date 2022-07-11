@@ -282,6 +282,7 @@ export default {
       const fileElem = document.createElement('input')
       fileElem.setAttribute('type', 'file')
       fileElem.style.display = 'none'
+      fileElem.accept = 'image/*'
       fileElem.addEventListener('change', () => {
         const file = fileElem.files[0]
         if (!file) return
