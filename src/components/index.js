@@ -25,6 +25,11 @@ marked.use({
   renderer: {
     listitem(text, task) {
       return `<li${task ? ' class="task-list-item"' : ''}>${text}</li>`
+    },
+    image(href, title, text) {
+      return `<a class="not-render" target="_blank" href="${href}"><img src="${href}"${
+        text ? ` alt="${text}"` : ''
+      }></a>`
     }
   },
   breaks: true
