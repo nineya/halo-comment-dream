@@ -243,3 +243,10 @@ html {
 
 1. configs 可以不用配置。
 2. 具体主题开发文档请参考：<https://halo.run/develop/theme/ready.html>。
+
+
+## 打赏项目
+
+感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！本项目所有打赏收益将全部投入到支付宝公益项目，捐赠记录在[关于我的](https://blog.nineya.com/about)中可见，一起为公益事业加油。
+
+![打赏项目](https://blog.nineya.com/upload/2022/08/funding.png)
