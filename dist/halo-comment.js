@@ -12692,6 +12692,10 @@ marked.use({
 
     image(href, title, text) {
       return `<a class="not-render" target="_blank" href="${href}"><img src="${href}"${text ? ` alt="${text}"` : ''}></a>`;
+    },
+
+    link(href, title, text) {
+      return `<a target="_blank" href="${href}">${text}</a>`;
     }
 
   },
