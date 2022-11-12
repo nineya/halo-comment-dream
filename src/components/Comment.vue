@@ -35,7 +35,7 @@
       </template>
     </ul>
 
-    <div v-if="list.loaded && !list.loading && list.data.length <= 0" class="comment-empty">暂无评论</div>
+    <div v-else-if="list.loaded && !list.loading" class="comment-empty">暂无评论</div>
 
     <pagination
       v-if="list.pages > 1"
@@ -60,6 +60,7 @@ const defaultConfig = {
   loadingStyle: 'default',
   unfoldReplyNum: 10,
   night: false,
+  replyDescSoft: false,
   imageToken: undefined
 }
 
@@ -129,7 +130,9 @@ export default {
       this.list.loading = true
 
       const { data } = await apiClient.comment.listAsTreeView(this.target, this.id, this.list.params)
-      data.content && data.content.forEach(comment => (comment['replyCount'] = this.handleReplyList(comment)))
+      data.content &&
+        (data.content = this.flatReplyList(data.content)) &&
+        data.content.forEach(comment => (comment['replyCount'] = this.handleReplyList(comment)))
       this.list.data = data.content
       this.list.total = data.total
       this.list.pages = data.pages
@@ -146,6 +149,31 @@ export default {
       if (this.mergedConfigs.priorityQQAvatar) {
         this.options.gravatar_source = 'https://cravatar.cn/avatar/'
       }
+    },
+
+    /**
+     * 回复消息扁平化，同时对消息进行排序
+     * @param comments
+     */
+    flatReplyList(comments) {
+      let replyDescSoft = this.mergedConfigs.replyDescSoft
+      let softFun = function (a, b) {
+        return replyDescSoft ? b.createTime - a.createTime : a.createTime - b.createTime
+      }
+      for (let comment of comments) {
+        if (comment.children) {
+          let replys = comment.children
+          for (let i = 0; i < replys.length; i++) {
+            let reply = replys[i]
+            if (reply.children) {
+              reply.children.forEach(item => replys.push(item))
+              reply.children = null
+            }
+          }
+          comment.children.sort(softFun)
+        }
+      }
+      return comments
     },
 
     handleReplyList(reply, no = 0) {
