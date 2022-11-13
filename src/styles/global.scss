@@ -2,6 +2,21 @@ $mobile-max-width: 768px;
 // 平板最大宽度
 $table-max-width: 1023px;
 
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(160, 160, 160, .2);
+  border-radius: 2em;
+}
+
+::-webkit-scrollbar-track {
+  background: 0 0;
+  border-radius: 2em;
+}
+
 .halo-comment {
   --comment-theme: var(--theme, #50bfff);
   --main: #24292f;
@@ -160,6 +175,7 @@ ul {
 
       &:hover, &.edit-open {
         color: var(--comment-theme);
+
         svg {
           fill: var(--comment-theme);
         }
@@ -437,6 +453,7 @@ ul {
 
   .comment-main {
     flex: 1 1 0;
+    overflow: auto;
 
     .markdown-body {
       padding: 10px;
