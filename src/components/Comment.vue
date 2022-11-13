@@ -163,10 +163,14 @@ export default {
       for (let comment of comments) {
         if (comment.children) {
           let replys = comment.children
+          replys.forEach(item => (item.parent = comment))
           for (let i = 0; i < replys.length; i++) {
             let reply = replys[i]
             if (reply.children) {
-              reply.children.forEach(item => replys.push(item))
+              reply.children.forEach(item => {
+                item.parent = reply
+                replys.push(item)
+              })
               reply.children = null
             }
           }

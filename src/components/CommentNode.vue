@@ -72,6 +72,7 @@
       />
     </keep-alive>
     <ul v-if="comment.children" class="children-nodes">
+      <!-- :parent="comment" 修改为 children.parent，因为原先的树结构被破坏 -->
       <template v-for="(children, index) in comment.children">
         <CommentNode
           :key="index"
@@ -80,7 +81,7 @@
           :replyNum="replyNum"
           :isChild="true"
           :options="options"
-          :parent="comment"
+          :parent="children.parent"
           :target="target"
           :targetId="targetId"
         />
