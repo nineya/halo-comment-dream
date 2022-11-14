@@ -15,9 +15,9 @@
           rel="nofollow"
           target="_blank"
         >
-          <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
+          <avatar :src="avatar" :author="comment.author" :configs="configs" />
         </a>
-        <img v-else :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
+        <avatar v-else :src="avatar" :author="comment.author" :configs="configs" />
       </div>
       <div class="comment-main">
         <div class="comment-meta">
@@ -101,9 +101,11 @@ import ua from 'ua-parser-js'
 import { marked } from 'marked'
 import globals from '@/utils/globals.js'
 import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
+import Avatar from './Avatar'
 
 export default {
   name: 'CommentNode',
+  components: { Avatar },
   props: {
     isChild: {
       type: Boolean,
@@ -149,17 +151,16 @@ export default {
   },
   data() {
     return {
-      globalData: globals,
-      replyNum2: this.configs.unfoldReplyNum
+      globalData: globals
     }
   },
   computed: {
     avatar() {
-      const gravatarDefault = this.options.comment_gravatar_default
-      const gravatarSource = this.options.gravatar_source || '//cn.gravatar.com/avatar/'
       if (!this.configs.priorityQQAvatar && this.comment.avatar) {
         return this.comment.avatar
       }
+      const gravatarDefault = this.options.comment_gravatar_default
+      const gravatarSource = this.options.gravatar_source || '//cn.gravatar.com/avatar/'
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`
     },
     compileContent() {

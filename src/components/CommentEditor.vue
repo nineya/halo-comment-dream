@@ -1,7 +1,7 @@
 <template>
   <section class="comment-editor" role="form">
     <div class="avatar-body">
-      <img :src="avatar" class="avatar" alt="avatar" />
+      <avatar :src="avatar" :configs="configs" />
     </div>
     <form class="comment-form">
       <div class="author-info">
@@ -110,10 +110,12 @@ import { encodeHtml } from '@/utils/util'
 import EmojiPicker from './dreamEmoji/EmojiPicker.vue'
 import emojiData from './dreamEmoji/emojis.js'
 import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
+import Avatar from './Avatar'
 
 export default {
   name: 'CommentEditor',
   components: {
+    Avatar,
     EmojiPicker
   },
   props: {
