@@ -1,8 +1,8 @@
 <template>
   <div class="comment-page">
     <ul class="page">
-      <li :class="{ disabled: !hasPrev }" class="page-item">
-        <button class="prev-button" tabindex="-1" @click="handlePrevClick">上一页</button>
+      <li class="page-item">
+        <button :class="{ disabled: !hasPrev }" class="prev-button" @click="handlePrevClick">上一页</button>
       </li>
       <!-- Show first page -->
       <li v-if="firstPage != null" :class="{ active: page === firstPage }" class="page-item">
@@ -35,8 +35,8 @@
         </button>
       </li>
 
-      <li :class="{ disabled: !hasNext }" class="page-item">
-        <button class="next-button" @click="handleNextClick">下一页</button>
+      <li class="page-item">
+        <button :class="{ disabled: !hasNext }" class="next-button" @click="handleNextClick">下一页</button>
       </li>
     </ul>
   </div>
@@ -177,15 +177,18 @@ export default {
       padding: 5px 10px;
       border: 1px solid var(--color-a);
       border-radius: 4px;
-      cursor: pointer;
       transition: all 0.8s;
       font-weight: normal;
       color: var(--color-f);
       background-color: var(--bg-a);
 
-      &:hover {
-        color: var(--comment-theme);
-        border-color: var(--comment-theme);
+      &:not(.disabled) {
+        cursor: pointer;
+
+        &:hover {
+          color: var(--comment-theme);
+          border-color: var(--comment-theme);
+        }
       }
     }
 
