@@ -453,7 +453,7 @@ ul {
 
   .comment-main {
     flex: 1 1 0;
-    overflow: auto;
+    width: 0;
 
     .markdown-body {
       padding: 10px;
