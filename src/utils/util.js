@@ -127,7 +127,7 @@ export function animateScroll(element, time, headingsOffset, callback) {
       callback && callback()
     }
   }
-  window.requestAnimationFrame(step)
+  requestId = window.requestAnimationFrame(step)
 }
 
 /**
@@ -158,4 +158,76 @@ export function encodeHtml(html, encode) {
   return html.replace(/[<&"]/g, function (c) {
     return { '<': '&lt;', '&': '&amp;', '"': '&quot;' }[c]
   })
+}
+
+/**
+ * 生成一个随机的昵称
+ * @returns {string}
+ */
+export function buildNickName() {
+  let desc = [
+    '追梦',
+    '放风筝',
+    '打酱油',
+    '耍帅',
+    '卖萌',
+    '发嗲',
+    '发呆',
+    '傻笑',
+    '打盹',
+    '可爱',
+    '善良',
+    '邪恶',
+    '笨笨',
+    '聪明',
+    '美丽',
+    '智慧',
+    '温柔',
+    '调皮',
+    '动人',
+    '活泼',
+    '任性',
+    '苗条',
+    '纯洁',
+    '娇小',
+    '体贴',
+    '贪嘴',
+    '朴实',
+    '机灵',
+    '机智',
+    '搞笑'
+  ]
+  let name = [
+    '法师',
+    '猛男',
+    '少女',
+    '勇士',
+    '帅哥',
+    '英雄',
+    '老者',
+    '小矮人',
+    '天才',
+    '旺财',
+    '小熊',
+    '少年',
+    '驴',
+    '猪',
+    '恶龙',
+    '天使',
+    '恶魔',
+    '仙女',
+    '哥布林',
+    '企鹅',
+    '小提莫',
+    '爵士',
+    '骑士',
+    '国王',
+    '公主',
+    '王子',
+    '太监',
+    '猪儿虫',
+    '猫猫',
+    '上仙'
+  ]
+  return `${desc[Math.floor(Math.random() * desc.length)]}的${name[Math.floor(Math.random() * name.length)]}`
 }

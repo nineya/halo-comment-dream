@@ -1,7 +1,7 @@
 <template>
   <section class="comment-editor" role="form">
     <div class="avatar-body">
-      <avatar :src="avatar" :configs="configs" />
+      <avatar :src="avatar" :configs="configs" @click="randomAuthor" style="cursor: pointer" title="点击头像试试" />
     </div>
     <form class="comment-form">
       <div class="author-info">
@@ -102,7 +102,7 @@
 <script>
 import { marked } from 'marked'
 import md5 from 'md5'
-import { isEmpty, isObject, isQQ, validEmail } from '@/utils/util'
+import { buildNickName, isEmpty, isObject, isQQ, validEmail } from '@/utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 import globals from '@/utils/globals.js'
@@ -204,6 +204,9 @@ export default {
     autosize(this.$el.querySelector('textarea'))
   },
   methods: {
+    randomAuthor() {
+      this.comment.author = buildNickName()
+    },
     isEmail() {
       return validEmail(this.comment.email)
     },

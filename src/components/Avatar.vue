@@ -3,6 +3,7 @@
     :alt="author ? author + `'s avatar` : 'avatar'"
     :src="configs.avatarLoading"
     class="avatar"
+    @click="click"
     @load="handleAvatarLoading"
     @error="handleAvatarError"
   />
@@ -37,6 +38,9 @@ export default {
       img.onerror = null
       img.finish = true
       img.src = this.configs.defaultAvatar
+    },
+    click() {
+      this.$emit('click')
     }
   }
 }
