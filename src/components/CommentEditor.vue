@@ -42,7 +42,12 @@
               />
             </svg>
           </span>
-          <span class="edit-btn" :class="imageDialogVisible ? 'edit-open' : ''" @click="handleImageUpload">
+          <span
+            v-if="configs.enableImageUpload"
+            class="edit-btn"
+            :class="imageDialogVisible ? 'edit-open' : ''"
+            @click="handleImageUpload"
+          >
             <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
               <path
                 d="M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64h768zM288 409.6L128 569.536V832h768v-83.2l-204.8-204.8-134.4 134.4-268.8-268.8zM896 192H128v288L288 320l268.8 268.8 134.4-134.4 204.8 204.8V192z"

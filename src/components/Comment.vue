@@ -44,7 +44,13 @@
       :total="list.total"
       @change="handlePaginationChange"
     />
-    <bullet-screen :target="target" :id="id" :configs="mergedConfigs" :options="options" />
+    <bullet-screen
+      v-if="mergedConfigs.enableBulletScreen"
+      :target="target"
+      :id="id"
+      :configs="mergedConfigs"
+      :options="options"
+    />
   </div>
 </template>
 <script>
@@ -62,8 +68,8 @@ const defaultConfig = {
   unfoldReplyNum: 10,
   night: false,
   replyDescSoft: false,
-  openImageUpload: true,
-  openBulletScreen: false,
+  enableImageUpload: false,
+  enableBulletScreen: false,
   imageToken: undefined,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`

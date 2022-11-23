@@ -260,10 +260,7 @@ export default {
 
   .markdown-content {
     max-height: 300px;
-    &::-webkit-scrollbar {
-      height: 4px;
-      width: 4px;
-    }
+    cursor: initial;
   }
 }
 </style>
