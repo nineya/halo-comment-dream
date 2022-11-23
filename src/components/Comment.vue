@@ -62,6 +62,8 @@ const defaultConfig = {
   unfoldReplyNum: 10,
   night: false,
   replyDescSoft: false,
+  openImageUpload: true,
+  openBulletScreen: false,
   imageToken: undefined,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`

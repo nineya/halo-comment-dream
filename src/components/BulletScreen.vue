@@ -3,15 +3,41 @@
     <template v-for="comment of comments">
       <div
         class="bullet-screen"
-        :class="[comment.stop ? 'stagnation' : '']"
+        :class="[comment.stop ? 'stagnation' + (comment.click ? ' click' : '') : '']"
         v-if="comment.style.left"
         :style="comment.style"
         :key="comment.id"
+        @click="() => (comment.click = true)"
         @mouseenter="() => (comment.stop = true)"
-        @mouseleave="() => (comment.stop = false)"
+        @mouseleave="() => handleMouseleave(comment)"
       >
-        <avatar :key="comment.id" :src="avatar(comment)" :author="comment.author" :configs="configs" />
-        <p v-html="comment.content"></p>
+        <template v-if="comment.click">
+          <div class="comment-meta">
+            <avatar :key="comment.id" :src="avatar(comment)" :author="comment.author" :configs="configs" />
+            <div class="comment-author">
+              <div class="author-meta">
+                <a
+                  v-if="comment.authorUrl && comment.authorUrl !== ''"
+                  :href="comment.authorUrl"
+                  class="author-name"
+                  rel="noopener noreferrer nofollow"
+                  target="_blank"
+                  >{{ comment.author }}</a
+                >
+                <a v-else class="author-name">{{ comment.author }}</a>
+                <span v-if="comment.isAdmin" class="is-admin">博主</span>
+              </div>
+              <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{
+                createTimeAgo(comment.createTime)
+              }}</time>
+            </div>
+          </div>
+          <span class="markdown-content" v-html="comment.content"></span>
+        </template>
+        <template v-else>
+          <avatar :key="comment.id" :src="avatar(comment)" :author="comment.author" :configs="configs" />
+          <p class="comment-content" v-html="comment.summary"></p>
+        </template>
       </div>
     </template>
   </div>
@@ -20,7 +46,7 @@
 <script>
 import apiClient from '../plugins/api-client'
 import Avatar from './Avatar'
-import { buildRandomNum, buildSummary, decodeHtml } from '@/utils/util'
+import { buildRandomNum, buildSummary, decodeHtml, timeAgo } from '@/utils/util'
 import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
 import { marked } from 'marked'
 
@@ -64,6 +90,16 @@ export default {
     }
   },
   methods: {
+    /* 处理鼠标离开事件 */
+    handleMouseleave(comment) {
+      comment.click = false
+      comment.stop = false
+    },
+    /* 转换时间格式 */
+    createTimeAgo(createTime) {
+      return timeAgo(createTime)
+    },
+    /* 取得图片链接 */
     avatar(comment) {
       if (!this.configs.priorityQQAvatar && comment.avatar) {
         return comment.avatar
@@ -78,14 +114,17 @@ export default {
       // eslint-disable-next-line no-constant-condition
       while (true) {
         const { data } = await apiClient.comment.listTopComments(this.target, this.id, { page: page++ })
+        let time = data.content.length * 1200
         for (let comment of data.content) {
-          comment.content = renderedEmojiHtml(
-            buildSummary(marked.parse(decodeHtml(comment.content, this.configs.commentHtml)))
-          )
+          let content = marked.parse(decodeHtml(comment.content, this.configs.commentHtml))
+          comment.summary = renderedEmojiHtml(buildSummary(content))
+          comment.content = renderedEmojiHtml(content)
           comment.top = buildRandomNum(50, window.innerHeight - 350)
-          comment.startTime = new Date().getTime() + buildRandomNum(0, 10000)
+          comment.startTime = new Date().getTime() + buildRandomNum(0, time)
           comment.speed = buildRandomNum(0.5, 3)
           this.$set(comment, 'style', { top: comment.top + 'px' })
+          this.$set(comment, 'stop', false)
+          this.$set(comment, 'click', false)
         }
         this.comments.push(...data.content)
         if (!data.hasNext) {
@@ -132,13 +171,11 @@ export default {
 .bullet-screen {
   position: fixed;
   z-index: 1000;
-  height: 26px;
-  max-width: 420px;
   cursor: pointer;
   overflow: hidden;
   background: var(--bg-a);
-  border-radius: 999px;
-  transition: color 0.8s;
+  border-radius: 13px;
+  transition: color 0.8s, max-width 0.5s, max-height 0.5s;
   border: 1px solid var(--color-a);
 
   &:hover,
@@ -155,7 +192,7 @@ export default {
     cursor: pointer;
   }
 
-  p {
+  .comment-content {
     line-height: 26px;
     padding: 0 8px 0 4px;
     white-space: nowrap;
@@ -172,6 +209,61 @@ export default {
 
   &.stagnation {
     z-index: 1001;
+  }
+
+  &:not(.click) {
+    max-height: 26px;
+    max-width: 420px;
+  }
+
+  &.click {
+    padding: 4px;
+    overflow-y: auto;
+    max-height: 350px;
+    min-width: 140px;
+    max-width: 600px;
+  }
+
+  .comment-meta {
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--color-a);
+    .avatar {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .comment-author {
+    max-height: 50px;
+    margin-left: 4px;
+    display: inline-block !important;
+  }
+
+  .is-admin {
+    height: 1.5em !important;
+    line-height: 1.5em !important;
+  }
+
+  .author-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1.1em !important;
+  }
+
+  .comment-time {
+    display: block;
+    font-size: 0.8em;
+    color: var(--color-c);
+  }
+
+  .markdown-content {
+    max-height: 300px;
+    &::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
   }
 }
 </style>

@@ -167,28 +167,11 @@ export function encodeHtml(html, encode) {
  */
 export function buildSummary(html) {
   return html.replace(/<\/*([^/\s>]+)[^>]*>/g, function (c, match) {
-    if (
-      [
-        'img',
-        'a',
-        'ul',
-        'li',
-        'ol',
-        'p',
-        'span',
-        'div',
-        'blockquote',
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'input',
-        'code'
-      ].includes(match)
-    ) {
+    if (['img', 'ul', 'ol', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'input', 'code'].includes(match)) {
       return ''
+    }
+    if (['hr', 'br', 'p', 'li', 'a', 'blockquote'].includes(match)) {
+      return ' '
     }
     return c
   })

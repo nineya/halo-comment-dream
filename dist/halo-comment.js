@@ -5526,7 +5526,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bullet-screen{position:fixed;z-index:1000;height:26px;max-width:420px;cursor:pointer;overflow:hidden;background:var(--bg-a);border-radius:999px;-webkit-transition:color .8s;transition:color .8s;border:1px solid var(--color-a)}.bullet-screen:hover,.bullet-screen:hover .avatar{border-color:var(--comment-theme)}.bullet-screen .avatar{padding:0;margin:-1px;float:left;width:26px;height:26px;cursor:pointer}.bullet-screen p{line-height:26px;padding:0 8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.bullet-screen p .dream-emoji{height:24px;margin:auto 2px;vertical-align:middle}.bullet-screen.stagnation{z-index:1001}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bullet-screen{position:fixed;z-index:1000;cursor:pointer;overflow:hidden;background:var(--bg-a);border-radius:13px;-webkit-transition:color .8s,max-width .5s,max-height .5s;transition:color .8s,max-width .5s,max-height .5s;border:1px solid var(--color-a)}.bullet-screen:hover,.bullet-screen:hover .avatar{border-color:var(--comment-theme)}.bullet-screen .avatar{padding:0;margin:-1px;float:left;width:26px;height:26px;cursor:pointer}.bullet-screen .comment-content{line-height:26px;padding:0 8px 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}.bullet-screen .comment-content .dream-emoji{height:24px;margin:auto 2px;vertical-align:middle}.bullet-screen.stagnation{z-index:1001}.bullet-screen:not(.click){max-height:26px;max-width:420px}.bullet-screen.click{padding:4px;overflow-y:auto;max-height:350px;min-width:140px;max-width:600px}.bullet-screen .comment-meta{padding-bottom:2px;margin-bottom:4px;border-bottom:1px solid var(--color-a)}.bullet-screen .comment-meta .avatar{width:32px;height:32px}.bullet-screen .comment-author{max-height:50px;margin-left:4px;display:inline-block!important}.bullet-screen .is-admin{height:1.5em!important;line-height:1.5em!important}.bullet-screen .author-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1.1em!important}.bullet-screen .comment-time{display:block;font-size:.8em;color:var(--color-c)}.bullet-screen .markdown-content{max-height:300px}.bullet-screen .markdown-content::-webkit-scrollbar{height:4px;width:4px}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -10092,7 +10092,7 @@ function wrap (Vue, Component) {
 
 // EXTERNAL MODULE: ./node_modules/css-loader/dist/runtime/api.js
 var api = __webpack_require__(3645);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=e58f4450&shadow
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=d9d7880e&shadow
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"halo-comment",class:_vm.mergedConfigs.night ? 'night' : '',attrs:{"id":"halo-comment"}},[_c('keep-alive',[_c('comment-editor',{attrs:{"configs":_vm.mergedConfigs,"options":_vm.options,"target":_vm.target,"targetId":_vm.id}})],1),(!_vm.mergedConfigs.autoLoad && !_vm.list.loaded)?_c('div',{staticClass:"load-comment"},[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleGetComments}},[_vm._v("加载评论")])]):_vm._e(),(_vm.list.loaded)?_c('div',{staticClass:"comment-action"},[_c('h3',{staticClass:"comment-title"},[_vm._v(_vm._s(_vm.list.total)+" 条评论")]),_c('svg',{staticClass:"comment-refresh",attrs:{"viewBox":"0 0 1024 1024","xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){return _vm.handlePaginationChange(0)}}},[_c('path',{attrs:{"d":"M55.935033 264.48948c0 0 85.897017-132.548409 221.81443-203.673173 135.916406-71.121743 303.368504-50.646859 413.187968 18.319527 109.819465 68.970415 146.791894 127.160016 146.791894 127.160016l94.59499-53.879895c0 0 19.576483-9.697092 19.576483 12.932142l0 338.379961c0 0 0 30.17399-22.837719 19.395191-19.210878-9.062571-226.959086-127.198289-292.424528-164.466828-35.950145-16.035251-4.365101-29.062068-4.365101-29.062068l91.284402-52.173738c0 0-52.068992-65.209619-128.278989-99.744682-81.576231-42.501826-157.948384-47.541735-251.497925-12.224097-61.002644 23.025054-132.823368 81.988166-184.553949 169.082716L55.935033 264.48948 55.935033 264.48948 55.935033 264.48948zM904.056909 711.697844c0 0-85.897017 132.550423-221.816444 203.671159-135.917413 71.12275-303.366489 50.651895-413.186961-18.315498-109.825508-68.972429-146.790886-127.165052-146.790886-127.165052L27.662591 823.768348c0 0-19.572454 9.703135-19.572454-12.932142L8.090137 472.459267c0 0 0-30.170968 22.831676-19.397205 19.211885 9.067607 226.965129 127.198289 292.430571 164.470856 35.950145 16.035251 4.366109 29.058039 4.366109 29.058039l-91.285409 52.175753c0 0 52.071006 65.206598 128.279996 99.744682 81.57321 42.498804 157.942341 47.540728 251.496918 12.222082 60.998616-23.026061 132.820346-81.983131 184.546898-169.082716L904.056909 711.697844 904.056909 711.697844 904.056909 711.697844zM904.056909 711.697844"}})])]):_vm._e(),_c('comment-loading',{directives:[{name:"show",rawName:"v-show",value:(_vm.list.loading),expression:"list.loading"}],attrs:{"configs":_vm.mergedConfigs}}),(_vm.list.data.length >= 1)?_c('ul',{staticClass:"comment-nodes"},[_vm._l((_vm.list.data),function(comment,index){return [_c('CommentNode',{key:index,attrs:{"comment":comment,"replyNum":_vm.mergedConfigs.unfoldReplyNum,"configs":_vm.mergedConfigs,"options":_vm.options,"target":_vm.target,"targetId":_vm.id}})]})],2):(_vm.list.loaded && !_vm.list.loading)?_c('div',{staticClass:"comment-empty"},[_vm._v("暂无评论")]):_vm._e(),(_vm.list.pages > 1)?_c('pagination',{attrs:{"page":_vm.list.params.page,"size":_vm.list.size,"total":_vm.list.total},on:{"change":_vm.handlePaginationChange}}):_vm._e(),_c('bullet-screen',{attrs:{"target":_vm.target,"id":_vm.id,"configs":_vm.mergedConfigs,"options":_vm.options}})],1)}
 var staticRenderFns = []
 
@@ -10815,7 +10815,7 @@ class Tokenizer {
         l = item.header.length;
         for (j = 0; j < l; j++) {
           item.header[j].tokens = [];
-          this.lexer.inline(item.header[j].text, item.header[j].tokens);
+          this.lexer.inlineTokens(item.header[j].text, item.header[j].tokens);
         }
 
         // cell child tokens
@@ -10824,7 +10824,7 @@ class Tokenizer {
           row = item.rows[j];
           for (k = 0; k < row.length; k++) {
             row[k].tokens = [];
-            this.lexer.inline(row[k].text, row[k].tokens);
+            this.lexer.inlineTokens(row[k].text, row[k].tokens);
           }
         }
 
@@ -13069,8 +13069,12 @@ function encodeHtml(html, encode) {
 
 function buildSummary(html) {
   return html.replace(/<\/*([^/\s>]+)[^>]*>/g, function (c, match) {
-    if (['img', 'a', 'ul', 'li', 'ol', 'p', 'span', 'div', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'input', 'code'].includes(match)) {
+    if (['img', 'ul', 'ol', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'input', 'code'].includes(match)) {
       return '';
+    }
+
+    if (['hr', 'br', 'p', 'li', 'a', 'blockquote'].includes(match)) {
+      return ' ';
     }
 
     return c;
@@ -14386,12 +14390,38 @@ var Pagination_component = normalizeComponent(
 )
 
 /* harmony default export */ var Pagination = (Pagination_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=template&id=2a6f3d4e&
-var BulletScreenvue_type_template_id_2a6f3d4e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.comments),function(comment){return [(comment.style.left)?_c('div',{key:comment.id,staticClass:"bullet-screen",class:[comment.stop ? 'stagnation' : ''],style:(comment.style),on:{"mouseenter":function () { return (comment.stop = true); },"mouseleave":function () { return (comment.stop = false); }}},[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('p',{domProps:{"innerHTML":_vm._s(comment.content)}})],1):_vm._e()]})],2)}
-var BulletScreenvue_type_template_id_2a6f3d4e_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=template&id=038d8aba&
+var BulletScreenvue_type_template_id_038d8aba_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.comments),function(comment){return [(comment.style.left)?_c('div',{key:comment.id,staticClass:"bullet-screen",class:[comment.stop ? 'stagnation' + (comment.click ? ' click' : '') : ''],style:(comment.style),on:{"click":function () { return (comment.click = true); },"mouseenter":function () { return (comment.stop = true); },"mouseleave":function () { return _vm.handleMouseleave(comment); }}},[(comment.click)?[_c('div',{staticClass:"comment-meta"},[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('div',{staticClass:"comment-author"},[_c('div',{staticClass:"author-meta"},[(comment.authorUrl && comment.authorUrl !== '')?_c('a',{staticClass:"author-name",attrs:{"href":comment.authorUrl,"rel":"noopener noreferrer nofollow","target":"_blank"}},[_vm._v(_vm._s(comment.author))]):_c('a',{staticClass:"author-name"},[_vm._v(_vm._s(comment.author))]),(comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_vm._v("博主")]):_vm._e()]),_c('time',{staticClass:"comment-time",attrs:{"datetime":comment.createTime,"itemprop":"datePublished"}},[_vm._v(_vm._s(_vm.createTimeAgo(comment.createTime)))])])],1),_c('span',{staticClass:"markdown-content",domProps:{"innerHTML":_vm._s(comment.content)}})]:[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('p',{staticClass:"comment-content",domProps:{"innerHTML":_vm._s(comment.summary)}})]],2):_vm._e()]})],2)}
+var BulletScreenvue_type_template_id_038d8aba_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14462,6 +14492,18 @@ var BulletScreenvue_type_template_id_2a6f3d4e_staticRenderFns = []
   },
 
   methods: {
+    /* 处理鼠标离开事件 */
+    handleMouseleave(comment) {
+      comment.click = false;
+      comment.stop = false;
+    },
+
+    /* 转换时间格式 */
+    createTimeAgo(createTime) {
+      return timeAgo(createTime);
+    },
+
+    /* 取得图片链接 */
     avatar(comment) {
       if (!this.configs.priorityQQAvatar && comment.avatar) {
         return comment.avatar;
@@ -14482,15 +14524,20 @@ var BulletScreenvue_type_template_id_2a6f3d4e_staticRenderFns = []
         } = await api_client.comment.listTopComments(this.target, this.id, {
           page: page++
         });
+        let time = data.content.length * 1200;
 
         for (let comment of data.content) {
-          comment.content = renderedEmojiHtml(buildSummary(marked.parse(decodeHtml(comment.content, this.configs.commentHtml))));
+          let content = marked.parse(decodeHtml(comment.content, this.configs.commentHtml));
+          comment.summary = renderedEmojiHtml(buildSummary(content));
+          comment.content = renderedEmojiHtml(content);
           comment.top = buildRandomNum(50, window.innerHeight - 350);
-          comment.startTime = new Date().getTime() + buildRandomNum(0, 10000);
+          comment.startTime = new Date().getTime() + buildRandomNum(0, time);
           comment.speed = buildRandomNum(0.5, 3);
           this.$set(comment, 'style', {
             top: comment.top + 'px'
           });
+          this.$set(comment, 'stop', false);
+          this.$set(comment, 'click', false);
         }
 
         this.comments.push(...data.content);
@@ -14564,8 +14611,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var BulletScreen_component = normalizeComponent(
   components_BulletScreenvue_type_script_lang_js_,
-  BulletScreenvue_type_template_id_2a6f3d4e_render,
-  BulletScreenvue_type_template_id_2a6f3d4e_staticRenderFns,
+  BulletScreenvue_type_template_id_038d8aba_render,
+  BulletScreenvue_type_template_id_038d8aba_staticRenderFns,
   false,
   BulletScreen_injectStyles,
   null,
@@ -14676,6 +14723,8 @@ const defaultConfig = {
   unfoldReplyNum: 10,
   night: false,
   replyDescSoft: false,
+  openImageUpload: true,
+  openBulletScreen: false,
   imageToken: undefined,
   avatarLoading: `${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/img/loading.svg`,
   defaultAvatar: `${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/img/avatar.svg`
