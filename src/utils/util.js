@@ -161,6 +161,50 @@ export function encodeHtml(html, encode) {
 }
 
 /**
+ * 生成评论摘要，去除html标签
+ * @param html
+ * @returns {any}
+ */
+export function buildSummary(html) {
+  return html.replace(/<\/*([^/\s>]+)[^>]*>/g, function (c, match) {
+    if (
+      [
+        'img',
+        'a',
+        'ul',
+        'li',
+        'ol',
+        'p',
+        'span',
+        'div',
+        'blockquote',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'input',
+        'code'
+      ].includes(match)
+    ) {
+      return ''
+    }
+    return c
+  })
+}
+
+/**
+ * 生成一个指定范围的随机数
+ * @param minNum 最小值
+ * @param maxNum 最大值
+ * @returns {number}
+ */
+export function buildRandomNum(minNum = 0, maxNum = 1) {
+  return Math.random() * (maxNum - minNum) + minNum
+}
+
+/**
  * 生成一个随机的昵称
  * @returns {string}
  */

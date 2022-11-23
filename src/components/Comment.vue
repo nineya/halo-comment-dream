@@ -44,6 +44,7 @@
       :total="list.total"
       @change="handlePaginationChange"
     />
+    <bullet-screen :target="target" :id="id" :configs="mergedConfigs" :options="options" />
   </div>
 </template>
 <script>

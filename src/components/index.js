@@ -7,12 +7,14 @@ import CommentEditor from './CommentEditor'
 import CommentNode from './CommentNode'
 import CommentLoading from './CommentLoading'
 import Pagination from './Pagination'
+import BulletScreen from './BulletScreen'
 
 const _components = {
   CommentEditor,
   CommentNode,
   CommentLoading,
-  Pagination
+  Pagination,
+  BulletScreen
 }
 
 const components = {}
