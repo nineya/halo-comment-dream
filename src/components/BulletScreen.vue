@@ -140,7 +140,12 @@ export default {
       function step() {
         let time = new Date().getTime()
         let width = window.innerWidth
-        let height = window.innerHeight
+        let height = window.innerHeight - 350
+        if (height < 50) {
+          _this.comments.splice(0, _this.comments.length)
+          window.cancelAnimationFrame(requestId)
+          return
+        }
         for (let i = _this.comments.length - 1; i >= 0; i--) {
           let comment = _this.comments[i]
           if (comment.stop) continue
@@ -148,7 +153,7 @@ export default {
             comment.left = comment.left ? comment.left - comment.speed : width
             _this.$set(comment.style, 'left', comment.left + 'px')
             if (comment.top > height) {
-              comment.top = buildRandomNum(100, height - 100)
+              comment.top = buildRandomNum(50, height)
               _this.$set(comment.style, 'top', comment.top + 'px')
             }
           }

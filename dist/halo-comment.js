@@ -14395,9 +14395,9 @@ var Pagination_component = normalizeComponent(
 )
 
 /* harmony default export */ var Pagination = (Pagination_component.exports);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=template&id=2c9ec41c&
-var BulletScreenvue_type_template_id_2c9ec41c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.comments),function(comment){return [(comment.style.left)?_c('div',{key:comment.id,staticClass:"bullet-screen",class:[comment.stop ? 'stagnation' + (comment.click ? ' click' : '') : ''],style:(comment.style),on:{"click":function () { return (comment.click = true); },"mouseenter":function () { return (comment.stop = true); },"mouseleave":function () { return _vm.handleMouseleave(comment); }}},[(comment.click)?[_c('div',{staticClass:"comment-meta"},[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('div',{staticClass:"comment-author"},[_c('div',{staticClass:"author-meta"},[(comment.authorUrl && comment.authorUrl !== '')?_c('a',{staticClass:"author-name",attrs:{"href":comment.authorUrl,"rel":"noopener noreferrer nofollow","target":"_blank"}},[_vm._v(_vm._s(comment.author))]):_c('a',{staticClass:"author-name"},[_vm._v(_vm._s(comment.author))]),(comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_vm._v("博主")]):_vm._e()]),_c('time',{staticClass:"comment-time",attrs:{"datetime":comment.createTime,"itemprop":"datePublished"}},[_vm._v(_vm._s(_vm.createTimeAgo(comment.createTime)))])])],1),_c('span',{staticClass:"markdown-content",domProps:{"innerHTML":_vm._s(comment.content)}})]:[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('p',{staticClass:"comment-content",domProps:{"innerHTML":_vm._s(comment.summary)}})]],2):_vm._e()]})],2)}
-var BulletScreenvue_type_template_id_2c9ec41c_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=template&id=2b8e4716&
+var BulletScreenvue_type_template_id_2b8e4716_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_vm._l((_vm.comments),function(comment){return [(comment.style.left)?_c('div',{key:comment.id,staticClass:"bullet-screen",class:[comment.stop ? 'stagnation' + (comment.click ? ' click' : '') : ''],style:(comment.style),on:{"click":function () { return (comment.click = true); },"mouseenter":function () { return (comment.stop = true); },"mouseleave":function () { return _vm.handleMouseleave(comment); }}},[(comment.click)?[_c('div',{staticClass:"comment-meta"},[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('div',{staticClass:"comment-author"},[_c('div',{staticClass:"author-meta"},[(comment.authorUrl && comment.authorUrl !== '')?_c('a',{staticClass:"author-name",attrs:{"href":comment.authorUrl,"rel":"noopener noreferrer nofollow","target":"_blank"}},[_vm._v(_vm._s(comment.author))]):_c('a',{staticClass:"author-name"},[_vm._v(_vm._s(comment.author))]),(comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_vm._v("博主")]):_vm._e()]),_c('time',{staticClass:"comment-time",attrs:{"datetime":comment.createTime,"itemprop":"datePublished"}},[_vm._v(_vm._s(_vm.createTimeAgo(comment.createTime)))])])],1),_c('span',{staticClass:"markdown-content",domProps:{"innerHTML":_vm._s(comment.content)}})]:[_c('avatar',{key:comment.id,attrs:{"src":_vm.avatar(comment),"author":comment.author,"configs":_vm.configs}}),_c('p',{staticClass:"comment-content",domProps:{"innerHTML":_vm._s(comment.summary)}})]],2):_vm._e()]})],2)}
+var BulletScreenvue_type_template_id_2b8e4716_staticRenderFns = []
 
 
 ;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/BulletScreen.vue?vue&type=script&lang=js&
@@ -14564,7 +14564,14 @@ var BulletScreenvue_type_template_id_2c9ec41c_staticRenderFns = []
       function step() {
         let time = new Date().getTime();
         let width = window.innerWidth;
-        let height = window.innerHeight;
+        let height = window.innerHeight - 350;
+
+        if (height < 50) {
+          _this.comments.splice(0, _this.comments.length);
+
+          window.cancelAnimationFrame(requestId);
+          return;
+        }
 
         for (let i = _this.comments.length - 1; i >= 0; i--) {
           let comment = _this.comments[i];
@@ -14576,7 +14583,7 @@ var BulletScreenvue_type_template_id_2c9ec41c_staticRenderFns = []
             _this.$set(comment.style, 'left', comment.left + 'px');
 
             if (comment.top > height) {
-              comment.top = buildRandomNum(100, height - 100);
+              comment.top = buildRandomNum(50, height);
 
               _this.$set(comment.style, 'top', comment.top + 'px');
             }
@@ -14616,8 +14623,8 @@ if (style0.__inject__) style0.__inject__(context)
 
 var BulletScreen_component = normalizeComponent(
   components_BulletScreenvue_type_script_lang_js_,
-  BulletScreenvue_type_template_id_2c9ec41c_render,
-  BulletScreenvue_type_template_id_2c9ec41c_staticRenderFns,
+  BulletScreenvue_type_template_id_2b8e4716_render,
+  BulletScreenvue_type_template_id_2b8e4716_staticRenderFns,
   false,
   BulletScreen_injectStyles,
   null,
