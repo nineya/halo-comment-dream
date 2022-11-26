@@ -9799,7 +9799,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"/themes/dream/source/lib/halo-comment@1.0.6/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.0.7/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -13153,7 +13153,7 @@ var DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns = []
     url: {
       type: String,
       required: false,
-      default: `${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.0.7/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -13400,7 +13400,7 @@ function renderedEmojiHtml(html) {
 
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.0.7/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replace(new RegExp(`\\[/${name}\\]`, 'gm'), img);
   }
 
@@ -14744,8 +14744,8 @@ const defaultConfig = {
   enableImageUpload: false,
   enableBulletScreen: false,
   imageToken: undefined,
-  avatarLoading: `${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/img/loading.svg`,
-  defaultAvatar: `${"/themes/dream/source/lib/halo-comment@1.0.6/"}assets/img/avatar.svg`
+  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.0.7/dist/"}assets/img/loading.svg`,
+  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.0.7/dist/"}assets/img/avatar.svg`
 };
 /* harmony default export */ var Commentvue_type_script_lang_js_shadow = ({
   name: 'Comment',
