@@ -100,7 +100,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -140,7 +140,7 @@ sheet.ftl：
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js'}"></script>
         <halo-comment id="${target.id?c}" type="${type}" configs='{"autoLoad": true,"showUserAgent": true}'/>
     </#if>
 </#macro>
