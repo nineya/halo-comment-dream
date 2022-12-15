@@ -26,7 +26,7 @@
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
-2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js`
+2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js`
 
 
 
