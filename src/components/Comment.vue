@@ -1,5 +1,5 @@
 <template>
-  <div id="halo-comment" class="halo-comment" :class="mergedConfigs.night ? 'night' : ''">
+  <div v-if="options !== undefined" id="halo-comment" class="halo-comment" :class="mergedConfigs.night ? 'night' : ''">
     <keep-alive>
       <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
     </keep-alive>
@@ -110,9 +110,7 @@ export default {
         total: 0,
         size: 10
       },
-      options: {
-        comment_gravatar_default: ''
-      },
+      options: undefined,
       globalData: globals
     }
   },
