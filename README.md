@@ -34,22 +34,22 @@
 
 如果你需要自定义该评论组件，下面提供了一些属性：
 
-| 属性             | 说明                                                         | 默认值                         | 可选                       |
-| ---------------- | ------------------------------------------------------------ | ------------------------------ | -------------------------- |
-| autoLoad         | 是否自动加载评论列表                                         | true                           | `true` `false`             |
-| showUserAgent    | 是否显示评论者的 UA 信息                                     | true                           | `true` `false`             |
-| priorityQQAvatar | 是否优先展示QQ头像 | false | `true` `false` |
+| 属性               | 说明                                                         | 默认值                         | 可选                       |
+| ------------------ | ------------------------------------------------------------ | ------------------------------ | -------------------------- |
+| autoLoad           | 是否自动加载评论列表                                         | true                           | `true` `false`             |
+| showUserAgent      | 是否显示评论者的 UA 信息                                     | true                           | `true` `false`             |
+| priorityQQAvatar   | 是否优先展示QQ头像                                           | false                          | `true` `false`             |
 | getQQInfo          | 昵称输入框输入QQ号自动获取QQ昵称和邮箱                       | false                          | `true` `false`             |
 | commentHtml        | 开启html内容，启用后有被 `XSS` 恶意代码注入的风险，建议同时开启评论审核。 | false                          | `true` `false`             |
 | loadingStyle       | 评论加载样式                                                 | `default`                      | `default` `circle` `balls` |
-| unfoldReplyNum   | 评论的回复列表默认展开的回复数量                             | 10                             | 大于 0 的正整数            |
-| night            | 评论模块以黑暗模式初始化样式                                 | `localStorage` 中 `night` 的值 | `true` `false`             |
+| unfoldReplyNum     | 评论的回复列表默认展开的回复数量                             | 10                             | 大于 0 的正整数            |
+| night              | 评论模块以黑暗模式初始化样式                                 | `localStorage` 中 `night` 的值 | `true` `false`             |
 | replyDescSoft      | 评论的二级回复是否采用按时间从晚到早排序                     | false                          | `true` `false`             |
 | enableImageUpload  | 开启评论区图片上传功能                                       | false                          | `true` `false`             |
-| enableBulletScreen | 开启评论弹幕 | false | `true` `false` |
-| imageToken | 自定义 [极兔图床](https://pic.jitudisk.com/) 的用户token。 | | token 字符串 |
-| avatarLoading | 头像加载动画 | `assets/img/loading.svg` | 图片路径 |
-| defaultAvatar | 默认头像，当头像加载失败时显示 | `assets/img/avatar.svg` | 图片路径 |
+| enableBulletScreen | 开启评论弹幕                                                 | false                          | `true` `false`             |
+| imageToken         | 自定义 [极兔图床](https://pic.jitudisk.com/) 的用户token。   |                                | token 字符串               |
+| avatarLoading      | 头像加载动画                                                 | `assets/img/loading.svg`       | 图片路径                   |
+| defaultAvatar      | 默认头像，当头像加载失败时显示                               | `assets/img/avatar.svg`        | 图片路径                   |
 
 
 
@@ -231,6 +231,27 @@ $("halo-comment").each(function () {
 // 存储模式配置，用于打开网页时评论区的初始化
 localStorage.setItem('night', isNight);
 ```
+
+
+
+#### 实现图片上传
+
+本插件支持文件上传功能，后端文件上传接口需要基于以下报文格式实现。
+
+- 请求类型：`POST`
+
+- 请求报文（`multipart/form-data`）：
+
+| 参数  | 说明                 |
+| :---: | -------------------- |
+| image | 上传图片文件的文件流 |
+
+- 响应报文（`application/json`）：
+
+| 参数 | 说明          |
+| :--: | ------------- |
+| name | 文件名        |
+| url  | 访问图片的url |
 
 
 

@@ -288,7 +288,7 @@ export default {
       this.emojiDialogVisible = !this.emojiDialogVisible
     },
     handleImageUpload() {
-      if (this.imageDialogVisible) return
+      if (this.imageDialogVisible || !this.configs.imageUploadApi) return
       const fileElem = document.createElement('input')
       fileElem.setAttribute('type', 'file')
       fileElem.style.display = 'none'
@@ -300,23 +300,19 @@ export default {
         this.infoes.push('图片上传中，请稍后……')
         const formData = new FormData()
         formData.append('image', file)
-        fetch('https://pic.jitudisk.com/api/upload', {
+        fetch(this.configs.imageUploadApi, {
           method: 'POST',
-          body: formData,
-          headers: {
-            token: this.configs.imageToken
-          }
+          body: formData
         })
           .then(response => response.json())
           .then(data => {
+            this.clearAlertClose()
             if (data.code !== 200) {
-              this.clearAlertClose()
               this.warnings.push(`图片上传失败：${data.msg}`)
               return
             }
             const image = data.data
             this.comment.content += `\n![${image.name}](${image.url})\n`
-            this.clearAlertClose()
             this.successes.push('图片上传成功！')
           })
           .catch(e => {

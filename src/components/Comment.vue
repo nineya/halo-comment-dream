@@ -70,7 +70,7 @@ const defaultConfig = {
   replyDescSoft: false,
   enableImageUpload: false,
   enableBulletScreen: false,
-  imageToken: undefined,
+  imageUploadApi: undefined,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`
 }
