@@ -26,7 +26,7 @@
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
-2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js`
+2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js`
 
 
 
@@ -47,7 +47,7 @@
 | replyDescSoft      | 评论的二级回复是否采用按时间从晚到早排序                     | false                          | `true` `false`             |
 | enableImageUpload  | 开启评论区图片上传功能                                       | false                          | `true` `false`             |
 | enableBulletScreen | 开启评论弹幕                                                 | false                          | `true` `false`             |
-| imageToken         | 自定义 [极兔图床](https://pic.jitudisk.com/) 的用户token。   |                                | token 字符串               |
+| imageUploadApi     | 接受图片上传的后端 `api` 地址。                              |                                | `url` 路径               |
 | avatarLoading      | 头像加载动画                                                 | `assets/img/loading.svg`       | 图片路径                   |
 | defaultAvatar      | 默认头像，当头像加载失败时显示                               | `assets/img/avatar.svg`        | 图片路径                   |
 
@@ -100,7 +100,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -140,7 +140,7 @@ sheet.ftl：
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@1.0.6/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js'}"></script>
         <halo-comment id="${target.id?c}" type="${type}" configs='{"autoLoad": true,"showUserAgent": true}'/>
     </#if>
 </#macro>
