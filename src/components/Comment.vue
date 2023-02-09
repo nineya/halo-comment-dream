@@ -71,6 +71,7 @@ const defaultConfig = {
   enableImageUpload: false,
   enableBulletScreen: false,
   imageUploadApi: undefined,
+  anonymousUserName: undefined,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`
 }

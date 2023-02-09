@@ -9,7 +9,9 @@
           id="author"
           v-model="comment.author"
           aria-required="true"
-          :placeholder="configs.getQQInfo ? '* 昵称（输入QQ自动获取）' : '* 昵称'"
+          :placeholder="
+            (this.configs.anonymousUserName ? '' : '* ') + (this.configs.getQQInfo ? '昵称（输入QQ自动获取）' : '昵称')
+          "
           required="required"
           type="text"
           @blur="configs.getQQInfo && handleQQInfo()"
@@ -227,13 +229,17 @@ export default {
         })
     },
     handleSubmitClick() {
-      if (isEmpty(this.comment.author)) {
-        this.warnings.push('评论者昵称不能为空')
-        return
-      }
       if (isEmpty(this.comment.content)) {
         this.warnings.push('评论内容不能为空')
         return
+      }
+      if (isEmpty(this.comment.author)) {
+        if (this.configs.anonymousUserName) {
+          this.comment.author = this.configs.anonymousUserName
+        } else {
+          this.warnings.push('评论者昵称不能为空')
+          return
+        }
       }
       // Submit the comment
       this.comment.postId = this.targetId
