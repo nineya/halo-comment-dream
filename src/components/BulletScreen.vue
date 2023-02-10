@@ -118,13 +118,13 @@ export default {
       // eslint-disable-next-line no-constant-condition
       while (true) {
         const { data } = await apiClient.comment.listTopComments(this.target, this.id, { page: page++ })
-        let time = data.content.length * 1200
+        let time = data.content.length * 100
         for (let comment of data.content) {
           let content = marked.parse(decodeHtml(comment.content, this.configs.commentHtml))
           comment.summary = renderedEmojiHtml(buildSummary(content))
           comment.content = renderedEmojiHtml(content)
           comment.top = buildRandomNum(50, window.innerHeight - 350)
-          comment.startTime = new Date().getTime() + buildRandomNum(0, time)
+          comment.startTime = buildRandomNum(0, time)
           comment.speed = buildRandomNum(0.5, 3)
           this.$set(comment, 'style', { top: comment.top + 'px' })
           this.$set(comment, 'stop', false)
@@ -143,7 +143,6 @@ export default {
       let requestId
       let _this = this
       function draw() {
-        let time = new Date().getTime()
         let width = window.innerWidth
         let height = window.innerHeight - 350
         if (height < 50) {
@@ -154,13 +153,16 @@ export default {
         for (let i = _this.comments.length - 1; i >= 0; i--) {
           let comment = _this.comments[i]
           if (comment.stop) continue
-          if (comment.startTime <= time) {
+          if (comment.startTime <= 0) {
             comment.left = comment.left ? comment.left - comment.speed : width
             _this.$set(comment.style, 'left', comment.left + 'px')
             if (comment.top > height) {
               comment.top = buildRandomNum(50, height)
               _this.$set(comment.style, 'top', comment.top + 'px')
             }
+          } else {
+            console.log(comment.startTime)
+            comment.startTime -= 1
           }
           if (comment.left < -420) {
             _this.comments.splice(i, 1)
