@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-show="!stopBulletScreen">
     <template v-for="comment of comments">
       <div
         class="bullet-screen"
@@ -81,6 +81,10 @@ export default {
     configs: {
       type: Object,
       required: true
+    },
+    stopBulletScreen: {
+      type: Boolean,
+      required: true
     }
   },
   created() {
@@ -135,9 +139,10 @@ export default {
     },
     /* 弹幕位置处理与滚动动画 */
     bulletScreenAnimate() {
+      const shadowRoot = document.getElementById(this.id + '').shadowRoot
       let requestId
       let _this = this
-      function step() {
+      function draw() {
         let time = new Date().getTime()
         let width = window.innerWidth
         let height = window.innerHeight - 350
@@ -160,6 +165,18 @@ export default {
           if (comment.left < -420) {
             _this.comments.splice(i, 1)
           }
+        }
+      }
+      function step() {
+        if (
+          !shadowRoot ||
+          !shadowRoot.getElementById('halo-comment') ||
+          !shadowRoot.getElementById('halo-comment').getAttribute('stop-bullet-screen')
+        ) {
+          _this.stopBulletScreen = false
+          draw()
+        } else {
+          _this.stopBulletScreen = true
         }
         if (_this.loaded && _this.comments.length === 0) {
           window.cancelAnimationFrame(requestId)
