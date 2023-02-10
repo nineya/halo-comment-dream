@@ -161,7 +161,6 @@ export default {
               _this.$set(comment.style, 'top', comment.top + 'px')
             }
           } else {
-            console.log(comment.startTime)
             comment.startTime -= 1
           }
           if (comment.left < -420) {
