@@ -1,5 +1,5 @@
 <template>
-  <div v-show="!stopBulletScreen">
+  <div v-show="!stopBulletScreen" class="bullet-screen-container">
     <template v-for="comment of comments">
       <div
         class="bullet-screen"

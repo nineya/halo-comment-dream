@@ -564,6 +564,12 @@ ul {
   }
 }
 
+@media (max-width: $mobile-max-width) , (max-height: 500px) {
+  .bullet-screen-container, .comment-bullet-screen {
+    display: none;
+  }
+}
+
 @keyframes top20 {
   0% {
     opacity: 0;
