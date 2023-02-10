@@ -65,7 +65,7 @@
       :id="id"
       :configs="mergedConfigs"
       :options="options"
-      :stop-bullet-screen="stopBulletScreen"
+      :stop-bullet-screen.sync="stopBulletScreen"
     />
   </div>
 </template>

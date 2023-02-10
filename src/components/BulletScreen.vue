@@ -174,10 +174,14 @@ export default {
           !shadowRoot.getElementById('halo-comment') ||
           !shadowRoot.getElementById('halo-comment').getAttribute('stop-bullet-screen')
         ) {
-          _this.stopBulletScreen = false
+          if (_this.stopBulletScreen) {
+            _this.stopBulletScreen = false
+            _this.$emit('update:stopBulletScreen', false)
+          }
           draw()
-        } else {
+        } else if (!_this.stopBulletScreen) {
           _this.stopBulletScreen = true
+          _this.$emit('update:stopBulletScreen', true)
         }
         if (_this.loaded && _this.comments.length === 0) {
           window.cancelAnimationFrame(requestId)
