@@ -9799,7 +9799,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"/themes/dream/source/lib/halo-comment@1.0.8/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.0.9/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -10815,7 +10815,7 @@ class Tokenizer {
         l = item.header.length;
         for (j = 0; j < l; j++) {
           item.header[j].tokens = [];
-          this.lexer.inline(item.header[j].text, item.header[j].tokens);
+          this.lexer.inlineTokens(item.header[j].text, item.header[j].tokens);
         }
 
         // cell child tokens
@@ -10824,7 +10824,7 @@ class Tokenizer {
           row = item.rows[j];
           for (k = 0; k < row.length; k++) {
             row[k].tokens = [];
-            this.lexer.inline(row[k].text, row[k].tokens);
+            this.lexer.inlineTokens(row[k].text, row[k].tokens);
           }
         }
 
@@ -13153,7 +13153,7 @@ var DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns = []
     url: {
       type: String,
       required: false,
-      default: `${"/themes/dream/source/lib/halo-comment@1.0.8/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.0.9/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -13400,7 +13400,7 @@ function renderedEmojiHtml(html) {
 
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"/themes/dream/source/lib/halo-comment@1.0.8/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.0.9/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replace(new RegExp(`\\[/${name}\\]`, 'gm'), img);
   }
 
@@ -14786,8 +14786,8 @@ const defaultConfig = {
   enableBulletScreen: false,
   imageUploadApi: undefined,
   anonymousUserName: undefined,
-  avatarLoading: `${"/themes/dream/source/lib/halo-comment@1.0.8/"}assets/img/loading.svg`,
-  defaultAvatar: `${"/themes/dream/source/lib/halo-comment@1.0.8/"}assets/img/avatar.svg`
+  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.0.9/dist/"}assets/img/loading.svg`,
+  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.0.9/dist/"}assets/img/avatar.svg`
 };
 /* harmony default export */ var Commentvue_type_script_lang_js_shadow = ({
   name: 'Comment',
