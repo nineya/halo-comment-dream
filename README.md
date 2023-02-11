@@ -253,7 +253,9 @@ localStorage.setItem('night', isNight);
 | name | 文件名        |
 | url  | 访问图片的url |
 
+#### 暂停弹幕
 
+允许主题通过 `stop-bullet-screen` 属性暂停弹幕，添加该属性后弹幕将被暂停，删除属性后可继续进行属性轮播。
 
 #### 关于主题色
 
