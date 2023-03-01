@@ -227,6 +227,10 @@ export default {
           this.comment.author = data.nickname
           this.comment.email = data.email
         })
+        .catch(error => {
+          this.clearAlertClose()
+          this.warnings.push('使用QQ获取昵称失败: ' + error)
+        })
     },
     handleSubmitClick() {
       if (isEmpty(this.comment.content)) {
