@@ -259,9 +259,19 @@ export default {
           // clear comment
           this.comment.content = ''
           this.handleCommentCreated(response.data)
+          try {
+            window.onCommentSuccessEvent && window.onCommentSuccessEvent(this.comment, this.target)
+          } catch (e) {
+            console.error('onCommentSuccessEvent执行异常', e)
+          }
         })
         .catch(error => {
           this.handleFailedToCreateComment(error)
+          try {
+            window.onCommentErrorEvent && window.onCommentErrorEvent(this.comment, error)
+          } catch (e) {
+            console.error('onCommentErrorEvent执行异常', e)
+          }
         })
     },
     handleCommentCreated(createdComment) {
