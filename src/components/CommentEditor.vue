@@ -336,7 +336,8 @@ export default {
               this.warnings.push(`图片上传失败：${data.msg ? data.msg : data}`)
               return
             }
-            this.comment.content += `\n![${data.name}](${data.url})\n`
+            let image = data.data
+            this.comment.content += `\n![${image.name}](${image.url})\n`
             this.successes.push('图片上传成功！')
           })
           .catch(e => {
