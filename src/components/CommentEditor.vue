@@ -324,15 +324,19 @@ export default {
           method: 'POST',
           body: formData
         })
-          .then(response => response.json())
-          .then(data => {
+          .then(response => {
             this.clearAlertClose()
-            if (data.code !== 200) {
-              this.warnings.push(`图片上传失败：${data.msg}`)
+            if (response.status !== 200) {
+              throw new Error(`错误状态码：${response.status}, ${response.text()}`)
+            }
+            return response.json()
+          })
+          .then(data => {
+            if ((data.code && String(data.code) !== '200') || (data.status && String(data.status) !== '200')) {
+              this.warnings.push(`图片上传失败：${data.msg ? data.msg : data}`)
               return
             }
-            const image = data.data
-            this.comment.content += `\n![${image.name}](${image.url})\n`
+            this.comment.content += `\n![${data.name}](${data.url})\n`
             this.successes.push('图片上传成功！')
           })
           .catch(e => {
