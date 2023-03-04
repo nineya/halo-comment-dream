@@ -14,7 +14,7 @@
 
 
 
-## 预览
+## 一、预览
 
 ![玖涯博客](https://cdn.jsdelivr.net/gh/nineya/halo-comment-dream@master/preview.png)
 
@@ -22,15 +22,14 @@
 
 
 
-
-### 使用指南
+## 二、使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
 2. 将 `评论模块 JS` 修改为：`https://unpkg.com/halo-comment-dream@latest/dist/halo-comment.min.js`
 
 
 
-### 自定义配置
+## 三、自定义配置
 
 如果你需要自定义该评论组件，下面提供了一些属性：
 
@@ -47,7 +46,8 @@
 | replyDescSoft      | 评论的二级回复是否采用按时间从晚到早排序                     | false                          | `true` `false`             |
 | enableImageUpload  | 开启评论区图片上传功能                                       | false                          | `true` `false`             |
 | enableBulletScreen | 开启评论弹幕                                                 | false                          | `true` `false`             |
-| imageUploadApi     | 接受图片上传的后端 `api` 地址。                              |                                | `url` 路径               |
+| imageUploadApi     | 接受图片上传的后端 `api` 地址                              | undefined | `url` 路径               |
+| anonymousUserName | 匿名评论的用户昵称，配置后允许用户匿名评论 | undefined | 用户名 |
 | avatarLoading      | 头像加载动画                                                 | `assets/img/loading.svg`       | 图片路径                   |
 | defaultAvatar      | 默认头像，当头像加载失败时显示                               | `assets/img/avatar.svg`        | 图片路径                   |
 
@@ -88,9 +88,9 @@ var configs = {
 
 
 
-### 主题开发引用指南
+## 四、使用指南
 
-#### Vue 方式
+### 4.1 Vue 方式
 
 > 适用于基于 `Vue` 开发的主题，否则不能通过 `:configs` 的方式指定配置
 
@@ -130,7 +130,7 @@ sheet.ftl：
 
 
 
-#### 普通方式
+### 4.2普通方式
 
 > 非 `Vue` 则需要直接将 `JSON` 格式的配置写入到 `configs` 属性。
 
@@ -164,7 +164,9 @@ sheet.ftl：
 
 
 
-#### 进阶
+## 五、进阶配置
+
+### 5.1 通过主题进行配置
 
 可以将 `configs` 中的属性通过 `settings.yaml` 保存数据库中，以供用户自行选择，如：
 
@@ -215,7 +217,7 @@ var configs = {
 
 
 
-#### 关于明亮/黑暗模式
+### 5.2 使用明亮/黑暗模式
 
 评论模块支持明亮和黑暗两种模式，默认通过 `localStorage` 中 `night` 的值来初始化评论模块的模式。
 
@@ -234,7 +236,7 @@ localStorage.setItem('night', isNight);
 
 
 
-#### 实现图片上传
+### 5.3 实现图片上传
 
 本插件支持文件上传功能，后端文件上传接口需要基于以下报文格式实现。
 
@@ -248,16 +250,42 @@ localStorage.setItem('night', isNight);
 
 - 响应报文（`application/json`）：
 
-| 参数 | 说明          |
-| :--: | ------------- |
-| name | 文件名        |
-| url  | 访问图片的url |
+|    参数     | 说明                               |
+| :---------: | ---------------------------------- |
+| code/status | 错误状态码，响应成功的码值为 `200` |
+|   message   | 错误信息                           |
+|  data.name  | 文件名                             |
+|  data.url   | 访问图片的url                      |
 
-#### 暂停弹幕
+
+
+### 5.4 暂停弹幕
 
 允许主题通过 `stop-bullet-screen` 属性暂停弹幕，添加该属性后弹幕将被暂停，删除属性后可继续进行属性轮播。
 
-#### 关于主题色
+实现示例如下：
+
+```javascript
+const applyStopBulletScreen = (stopBulletScreenValue) => {
+    $('halo-comment[bullet-screen]').each(function () {
+    const shadowDom = this.shadowRoot.getElementById("halo-comment");
+    if (stopBulletScreenValue) {
+      $(shadowDom).attr('stop-bullet-screen', 'true');
+    } else {
+      $(shadowDom).removeAttr('stop-bullet-screen');
+    }
+  })
+  localStorage.setItem('stop-bullet-screen', stopBulletScreenValue);
+}
+$bulletScreen.on('click', () => {
+  let stopBulletScreen = localStorage.getItem('stop-bullet-screen') || false;
+  applyStopBulletScreen(stopBulletScreen.toString() !== 'true')
+});
+```
+
+
+
+### 5.5 设置主题色
 
 评论模块支持为明亮/黑暗模式分别指定一个主题色，默认明亮模式的主题色为 `#50bfff`，黑暗模式的主题色为 `#5d93db`，你可以通过 `--theme` 属性在你的主题指定一个主题色。
 
@@ -269,13 +297,14 @@ html {
 
 
 
-#### 说明
+## 六、说明
 
 1. configs 可以不用配置。
 2. 具体主题开发文档请参考：<https://halo.run/develop/theme/ready.html>。
 
 
-## 打赏项目
+
+## 七、打赏项目
 
 感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！本项目所有打赏收益将全部投入到支付宝公益项目，捐赠记录在[关于我的](https://blog.nineya.com/about)中可见，一起为公益事业加油。
 
