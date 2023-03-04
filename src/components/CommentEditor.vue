@@ -333,7 +333,7 @@ export default {
           })
           .then(data => {
             if ((data.code && String(data.code) !== '200') || (data.status && String(data.status) !== '200')) {
-              this.warnings.push(`图片上传失败：${data.msg ? data.msg : data}`)
+              this.warnings.push(`图片上传失败：${data.message ? data.message : data}`)
               return
             }
             let image = data.data
