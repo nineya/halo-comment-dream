@@ -37,9 +37,9 @@
     </div>
     <comment-loading v-show="list.loading" :configs="mergedConfigs" />
     <ul v-if="list.data.length >= 1" class="comment-nodes">
-      <template v-for="(comment, index) in list.data">
+      <template v-for="comment in list.data">
         <CommentNode
-          :key="index"
+          :key="comment.id"
           :comment="comment"
           :replyNum="mergedConfigs.unfoldReplyNum"
           :configs="mergedConfigs"

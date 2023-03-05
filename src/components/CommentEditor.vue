@@ -3,7 +3,7 @@
     <div class="avatar-body">
       <div v-if="configs.enableBloggerOperation && bloggerComment" class="blogger-avatar" title="博主登录">
         <avatar :src="avatar" :configs="configs" @click="randomAuthor" style="cursor: pointer" title="点击头像试试" />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" xml:space="preserve">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170">
           <path
             fill="var(--comment-theme)"
             d="M114.7,34.7c-19.4-41-38.7-41-58.1,0C11.4,31,1.8,47.7,27.6,85c-25.8,37.3-16.2,54,29,50.3c19.4,41,38.7,41,58.1,0

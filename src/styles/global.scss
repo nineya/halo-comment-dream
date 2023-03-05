@@ -35,6 +35,9 @@ $table-max-width: 1023px;
   --bg-e: rgb(243 244 245 / 25%);
   --bg-f: rgb(214 239 255 / 60%);
   --bg-g: rgb(245 245 245 / 80%);
+  --bg-h: #FFF;
+  --bg-i: rgb(255 236 207 / 80%);
+  --bg-j: rgb(255 207 207 / 80%);
   --radius-inner: 4px;
 
   &.night {
@@ -55,6 +58,9 @@ $table-max-width: 1023px;
     --bg-e: rgb(36 36 36 / 15%);
     --bg-f: rgb(65 68 74 / 60%);
     --bg-g: rgb(40 39 39 / 60%);
+    --bg-h: rgb(40 39 39 / 95%);
+    --bg-i: rgb(102 78 53 / 50%);
+    --bg-j: rgb(102 53 53 / 50%);
 
     iframe, img, video, svg {
       filter: brightness(.8);
@@ -361,6 +367,17 @@ ul {
   .comment {
     margin-top: 10px;
     list-style-type: none;
+
+    &.recycle > .comment-body .markdown-body {
+      color: #ff9800;
+      background: var(--bg-i);
+    }
+
+    &.delete .comment-main .markdown-body {
+      color: #ff0000;
+      background: var(--bg-j);
+      text-decoration: line-through;
+    }
   }
 
   .unfold-reply {
@@ -397,7 +414,7 @@ ul {
     display: flex;
     transition: all 0.4s;
 
-    &:hover .comment-reply {
+    &:hover .author-operation {
       opacity: 1;
       pointer-events: auto;
     }
@@ -482,11 +499,58 @@ ul {
       background: rgb(255 136 169 / 30%);
     }
 
-    .comment-reply {
+    .author-operation {
+      display: flex;
       opacity: 0;
       pointer-events: none;
       transition: all 0.2s;
+    }
+
+    .comment-reply {
       padding: 2px 8px;
+      margin-right: 6px;
+    }
+
+    .comment-operation {
+      width: 14px;
+      padding: 2px 2px;
+      position: relative;
+
+      svg {
+        fill: var(--color-f);
+      }
+
+      &-list {
+        display: none;
+        position: absolute;
+        top: 16px;
+        right: 0;
+        overflow: hidden;
+        color: var(--main) !important;
+        background: var(--bg-h);
+        border-radius: var(--radius-inner);
+        box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+
+        li {
+          padding: 4px 8px;
+          text-align: center;
+          white-space: nowrap;
+
+          &:hover {
+            background: rgb(194 194 194 / 15%);
+          }
+        }
+      }
+
+      &:hover {
+        svg {
+          fill: var(--comment-theme);
+        }
+
+        .comment-operation-list {
+          display: block;
+        }
+      }
     }
 
     .comment-info {
@@ -562,7 +626,7 @@ ul {
       grid-template-columns: auto !important;
     }
 
-    .comment-meta .comment-reply {
+    .comment-meta .author-operation {
       opacity: 1;
       pointer-events: auto;
     }

@@ -34,9 +34,27 @@
               <a v-else class="author-name">{{ comment.author }}</a>
               <span v-if="comment.isAdmin" class="is-admin">博主</span>
             </div>
-            <span class="btn btn-primary comment-reply" @click="handleCreateComment">{{
-              globalData.replyId === comment.id ? '取消回复' : '回复'
-            }}</span>
+            <div class="author-operation">
+              <span class="btn btn-primary comment-reply" @click="handleCreateComment">{{
+                globalData.replyId === comment.id ? '取消回复' : '回复'
+              }}</span>
+              <div class="btn comment-operation">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200">
+                  <g>
+                    <circle cx="60" cy="31.1" r="18.4" />
+                    <circle cx="60" cy="100" r="18.4" />
+                    <circle cx="60" cy="168.9" r="18.4" />
+                  </g>
+                </svg>
+                <ol class="comment-operation-list">
+                  <li v-if="commentStatus === 'published'" @click="() => handleUpdateCommentStatus('RECYCLE')">
+                    回收站
+                  </li>
+                  <li v-if="commentStatus === 'recycle'" @click="() => handleUpdateCommentStatus('PUBLISHED')">恢复</li>
+                  <li v-if="commentStatus === 'recycle'" @click="handleDeleteComment">永久删除</li>
+                </ol>
+              </div>
+            </div>
           </div>
           <div class="comment-info">
             <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{
@@ -73,9 +91,9 @@
     </keep-alive>
     <ul v-if="comment.children" class="children-nodes">
       <!-- :parent="comment" 修改为 children.parent，因为原先的树结构被破坏 -->
-      <template v-for="(children, index) in comment.children">
+      <template v-for="children in comment.children">
         <CommentNode
-          :key="index"
+          :key="children.id"
           :comment="children"
           :configs="configs"
           :replyNum="replyNum"
@@ -102,6 +120,7 @@ import { marked } from 'marked'
 import globals from '@/utils/globals.js'
 import { renderedEmojiHtml } from './dreamEmoji/renderedEmoji.js'
 import Avatar from './Avatar'
+import adminClient from '@/plugins/admin-client'
 
 export default {
   name: 'CommentNode',
@@ -151,7 +170,9 @@ export default {
   },
   data() {
     return {
-      globalData: globals
+      globalData: globals,
+      // published表示正常，recycle表示回收，delete表示删除
+      commentStatus: 'published'
     }
   },
   computed: {
@@ -177,7 +198,7 @@ export default {
     },
     commentClass() {
       let isChild = this.isChild ? ' ' : ' index-1'
-      return ' li-comment-' + this.comment.id + isChild
+      return ' li-comment-' + this.comment.id + isChild + ' ' + this.commentStatus
     }
   },
   methods: {
@@ -216,6 +237,37 @@ export default {
       if (commentRef) {
         const classList = commentRef.classList
         highlight ? classList.add('comment-ref') : classList.remove('comment-ref')
+      }
+    },
+    handleUpdateCommentStatus(status) {
+      adminClient.comment
+        .updateStatusById(this.target, this.comment.id, status)
+        .then(() => {
+          this.commentStatus = status.toLowerCase()
+          window.alert('操作成功！')
+        })
+        .catch(error => {
+          this.handleFailedToOperationComment(error)
+        })
+    },
+    handleDeleteComment() {
+      adminClient.comment
+        .delete(this.target, this.comment.id)
+        .then(() => {
+          this.commentStatus = 'delete'
+          window.alert('已删除该评论！')
+        })
+        .catch(error => {
+          this.handleFailedToOperationComment(error)
+        })
+    },
+    handleFailedToOperationComment(response) {
+      if (response.status === 400) {
+        window.alert(response.data.message)
+      } else if (response.status === 401) {
+        window.alert('操作失败，博主登录状态已失效！')
+      } else {
+        window.alert(`操作失败：${response.data}`)
       }
     }
   }
