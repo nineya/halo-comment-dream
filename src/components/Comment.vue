@@ -72,6 +72,7 @@
 <script>
 import './index'
 import apiClient from '../plugins/api-client'
+import adminClient from '../plugins/admin-client'
 import globals from '@/utils/globals.js'
 
 const defaultConfig = {
@@ -88,6 +89,7 @@ const defaultConfig = {
   enableBulletScreen: false,
   imageUploadApi: undefined,
   anonymousUserName: undefined,
+  enableBloggerOperation: true,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`
 }
@@ -171,6 +173,14 @@ export default {
     },
 
     async handleGetOptions() {
+      if (this.mergedConfigs.enableBloggerOperation) {
+        try {
+          const { data } = await adminClient.user.getProfile()
+          this.globalData.blogger = data
+        } catch (e) {
+          this.mergedConfigs.enableBloggerOperation = false
+        }
+      }
       const { data } = await apiClient.option.comment()
       this.options = data
       if (this.mergedConfigs.priorityQQAvatar) {

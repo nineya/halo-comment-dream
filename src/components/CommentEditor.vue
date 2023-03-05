@@ -1,10 +1,39 @@
 <template>
   <section class="comment-editor" role="form">
     <div class="avatar-body">
-      <avatar :src="avatar" :configs="configs" @click="randomAuthor" style="cursor: pointer" title="点击头像试试" />
+      <div v-if="configs.enableBloggerOperation && bloggerComment" class="blogger-avatar" title="博主登录">
+        <avatar :src="avatar" :configs="configs" @click="randomAuthor" style="cursor: pointer" title="点击头像试试" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" xml:space="preserve">
+          <path
+            fill="var(--comment-theme)"
+            d="M114.7,34.7c-19.4-41-38.7-41-58.1,0C11.4,31,1.8,47.7,27.6,85c-25.8,37.3-16.2,54,29,50.3c19.4,41,38.7,41,58.1,0
+	c45.2,3.7,54.9-13,29.1-50.3C169.6,47.7,159.9,31,114.7,34.7z M82.4,110.9"
+          />
+          <path
+            fill="rgba(255, 255, 255, 0.8)"
+            d="M117.4,75.9l-35,35c-2.6,2.6-6.9,2.6-9.6,0L50.5,88.6c-2.6-2.6-2.6-6.9,0-9.6s6.9-2.6,9.6,0l17.5,17.5
+	l30.2-30.2c2.6-2.6,6.9-2.6,9.6,0C120,68.9,120,73.2,117.4,75.9L117.4,75.9z"
+          />
+        </svg>
+      </div>
+      <avatar
+        v-else
+        :src="avatar"
+        :configs="configs"
+        @click="randomAuthor"
+        style="cursor: pointer"
+        title="点击头像试试"
+      />
     </div>
     <form class="comment-form">
-      <div class="author-info">
+      <div class="blogger-info" v-if="configs.enableBloggerOperation && bloggerComment">
+        <div>
+          <p class="blogger-name">{{ this.globalData.blogger.nickname }}</p>
+          <p class="blogger-email">{{ this.globalData.blogger.email }}</p>
+        </div>
+        <button class="btn" type="button" @click="bloggerComment = false">切换访客</button>
+      </div>
+      <div v-else class="author-info">
         <input
           id="author"
           v-model="comment.author"
@@ -111,6 +140,7 @@ import { marked } from 'marked'
 import md5 from 'md5'
 import { buildNickName, isEmpty, isObject, isQQ, validEmail } from '@/utils/util'
 import apiClient from '@/plugins/api-client'
+import adminClient from '@/plugins/admin-client'
 import autosize from 'autosize'
 import globals from '@/utils/globals.js'
 import { encodeHtml } from '@/utils/util'
@@ -166,6 +196,7 @@ export default {
       },
       previewMode: false,
       globalData: globals,
+      bloggerComment: true,
       infoes: [],
       warnings: [],
       successes: []
@@ -181,11 +212,12 @@ export default {
       const gravatarDefault = this.options.comment_gravatar_default
       const gravatarSource = this.options.gravatar_source || '//cn.gravatar.com/avatar/'
 
-      if (!this.comment.email || !validEmail(this.comment.email)) {
+      let email = this.configs.enableBloggerOperation ? this.globalData.blogger.email : this.comment.email
+      if (!email || !validEmail(email)) {
         return `${gravatarSource}?d=${gravatarDefault}`
       }
 
-      const gravatarMd5 = md5(this.comment.email)
+      const gravatarMd5 = md5(email)
       return `${gravatarSource}${gravatarMd5}?s=256&d=${gravatarDefault}`
     },
     infoAlertVisible() {
@@ -237,12 +269,16 @@ export default {
         this.warnings.push('评论内容不能为空')
         return
       }
-      if (isEmpty(this.comment.author)) {
-        if (this.configs.anonymousUserName) {
-          this.comment.author = this.configs.anonymousUserName
-        } else {
-          this.warnings.push('评论者昵称不能为空')
-          return
+      let apiComment = adminClient.comment
+      if (!this.configs.enableBloggerOperation || !this.bloggerComment) {
+        apiComment = apiClient.comment
+        if (isEmpty(this.comment.author)) {
+          if (this.configs.anonymousUserName) {
+            this.comment.author = this.configs.anonymousUserName
+          } else {
+            this.warnings.push('评论者昵称不能为空')
+            return
+          }
         }
       }
       // Submit the comment
@@ -252,13 +288,15 @@ export default {
         this.comment.parentId = this.replyComment.id
       }
 
-      apiClient.comment
+      apiComment
         .create(this.target, this.comment)
         .then(response => {
           // Store comment author, email, authorUrl
-          localStorage.setItem('comment-author', this.comment.author)
-          localStorage.setItem('comment-email', this.comment.email)
-          localStorage.setItem('comment-authorUrl', this.comment.authorUrl)
+          if (!this.configs.enableBloggerOperation || !this.bloggerComment) {
+            localStorage.setItem('comment-author', this.comment.author)
+            localStorage.setItem('comment-email', this.comment.email)
+            localStorage.setItem('comment-authorUrl', this.comment.authorUrl)
+          }
 
           // clear comment
           this.comment.content = ''

@@ -143,6 +143,19 @@ ul {
     }
   }
 
+  .blogger-avatar {
+    position: relative;
+    border-color: var(--comment-theme);
+
+    svg {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+    }
+  }
+
   .comment-editor {
     display: flex;
     margin-top: 1.25rem;
@@ -225,7 +238,25 @@ ul {
       gap: 0.5rem;
     }
 
-    input, textarea, .comment-preview {
+    .blogger-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .blogger-name {
+      font-size: 1.2em;
+      font-weight: 700;
+      color: var(--main);
+    }
+
+    .blogger-email {
+      font-size: .9em;
+      color: var(--color-c);
+    }
+
+    input, textarea, .comment-preview, .blogger-info {
       box-shadow: none;
       border: 1px solid var(--color-a);
       border-radius: var(--radius-inner);
@@ -508,6 +539,11 @@ ul {
       height: 38px;
     }
 
+    .blogger-avatar svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .children-nodes .avatar {
       width: 30px;
       height: 30px;
@@ -543,6 +579,11 @@ ul {
     .avatar {
       width: 30px;
       height: 30px;
+    }
+
+    .blogger-avatar svg {
+      width: 16px;
+      height: 16px;
     }
 
     .children-nodes .avatar {

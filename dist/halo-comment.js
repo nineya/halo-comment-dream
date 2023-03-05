@@ -1,6 +1,2928 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 6587:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AdminApiClient = void 0;
+const url_1 = __webpack_require__(6998);
+const clients_1 = __webpack_require__(6904);
+class AdminApiClient {
+    constructor(client) {
+        this.client = client.buildHttpClient();
+        this._attachment = new clients_1.AttachmentClient(this.client);
+        this._backup = new clients_1.BackupClient(this.client);
+        this._category = new clients_1.CategoryClient(this.client);
+        this._installation = new clients_1.InstallationClient(this.client);
+        this._journalComment = new clients_1.JournalCommentClient(this.client);
+        this._journal = new clients_1.JournalClient(this.client);
+        this._link = new clients_1.LinkClient(this.client);
+        this._log = new clients_1.LogClient(this.client);
+        this._mail = new clients_1.MailClient(this.client);
+        this._menu = new clients_1.MenuClient(this.client);
+        this._migration = new clients_1.MigrationClient(this.client);
+        this._option = new clients_1.OptionClient(this.client);
+        this._photo = new clients_1.PhotoClient(this.client);
+        this._postComment = new clients_1.PostCommentClient(this.client);
+        this._post = new clients_1.PostClient(this.client);
+        this._sheetComment = new clients_1.SheetCommentClient(this.client);
+        this._sheet = new clients_1.SheetClient(this.client);
+        this._statistic = new clients_1.StatisticClient(this.client);
+        this._tag = new clients_1.TagClient(this.client);
+        this._theme = new clients_1.ThemeClient(this.client);
+        this._user = new clients_1.UserClient(this.client);
+        this._staticStorage = new clients_1.StaticStorageClient(this.client);
+        this._comment = new clients_1.CommentClient(this.client);
+        this._actuator = new clients_1.ActuatorClient(this.client);
+    }
+    get attachment() {
+        return this._attachment;
+    }
+    get backup() {
+        return this._backup;
+    }
+    get category() {
+        return this._category;
+    }
+    get installation() {
+        return this._installation;
+    }
+    get journalComment() {
+        return this._journalComment;
+    }
+    get journal() {
+        return this._journal;
+    }
+    get link() {
+        return this._link;
+    }
+    get log() {
+        return this._log;
+    }
+    get mail() {
+        return this._mail;
+    }
+    get menu() {
+        return this._menu;
+    }
+    get migration() {
+        return this._migration;
+    }
+    get option() {
+        return this._option;
+    }
+    get photo() {
+        return this._photo;
+    }
+    get postComment() {
+        return this._postComment;
+    }
+    get post() {
+        return this._post;
+    }
+    get sheetComment() {
+        return this._sheetComment;
+    }
+    get sheet() {
+        return this._sheet;
+    }
+    get statistic() {
+        return this._statistic;
+    }
+    get tag() {
+        return this._tag;
+    }
+    get theme() {
+        return this._theme;
+    }
+    get user() {
+        return this._user;
+    }
+    get staticStorage() {
+        return this._staticStorage;
+    }
+    get comment() {
+        return this._comment;
+    }
+    get actuator() {
+        return this._actuator;
+    }
+    getEnvironment() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'environments',
+        });
+        return this.client.get(path, {});
+    }
+    getLogFile(lines) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'halo/logfile',
+        });
+        return this.client.get(path, { lines });
+    }
+    isInstalled() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'is_installed',
+        });
+        return this.client.get(path, {});
+    }
+    logout() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'logout',
+        });
+        return this.client.post(path, {});
+    }
+    sendResetPasswordCode(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'password/code',
+        });
+        return this.client.post(path, params);
+    }
+    resetPassword(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'password/reset',
+        });
+        return this.client.put(path, params);
+    }
+    refreshToken(refreshToken) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `refresh/${refreshToken}`,
+        });
+        return this.client.post(path, {});
+    }
+    needMFACode(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'login/precheck',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    login(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'login',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+}
+exports.AdminApiClient = AdminApiClient;
+//# sourceMappingURL=AdminApiClient.js.map
+
+/***/ }),
+
+/***/ 6710:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthorizedClient = void 0;
+const url_1 = __webpack_require__(6998);
+const rest_api_client_1 = __webpack_require__(5040);
+class AuthorizedClient {
+    constructor(baseUrl) {
+        const requestConfigBuilder = new rest_api_client_1.HaloRequestConfigBuilder({
+            baseUrl: baseUrl,
+        });
+        const responseHandler = new rest_api_client_1.HaloResponseHandler();
+        this.client = new rest_api_client_1.DefaultHttpClient({
+            responseHandler,
+            requestConfigBuilder,
+        });
+    }
+    isInstalled() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'is_installed',
+        });
+        return this.client.get(path, {});
+    }
+    sendResetPasswordCode(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'password/code',
+        });
+        return this.client.post(path, params);
+    }
+    resetPassword(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'password/reset',
+        });
+        return this.client.post(path, params);
+    }
+    refreshToken(refreshToken) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `refresh/${refreshToken}`,
+        });
+        return this.client.post(path, {});
+    }
+    login(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'login',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    needMFACode(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'login/precheck',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+}
+exports.AuthorizedClient = AuthorizedClient;
+//# sourceMappingURL=AuthorizedClient.js.map
+
+/***/ }),
+
+/***/ 6618:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActuatorClient = void 0;
+const url_1 = __webpack_require__(6998);
+class ActuatorClient {
+    constructor(client) {
+        this.client = client;
+    }
+    getLogfile() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/logfile',
+        });
+        return this.client.get(path, {});
+    }
+    getEnv() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/env',
+        });
+        return this.client.get(path, {});
+    }
+    getSystemCpuCount() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/system.cpu.count',
+        });
+        return this.client.get(path, {});
+    }
+    getSystemCpuUsage() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/system.cpu.usage',
+        });
+        return this.client.get(path, {});
+    }
+    getProcessUptime() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/process.uptime',
+        });
+        return this.client.get(path, {});
+    }
+    getProcessStartTime() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/process.start.time',
+        });
+        return this.client.get(path, {});
+    }
+    getProcessCpuUsage() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/process.cpu.usage',
+        });
+        return this.client.get(path, {});
+    }
+    getJvmMemoryMax() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/jvm.memory.max',
+        });
+        return this.client.get(path, {});
+    }
+    getJvmMemoryCommitted() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/jvm.memory.committed',
+        });
+        return this.client.get(path, {});
+    }
+    getJvmMemoryUsed() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/jvm.memory.used',
+        });
+        return this.client.get(path, {});
+    }
+    getJvmGcPause() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'actuator/metrics/jvm.gc.pause',
+        });
+        return this.client.get(path, {});
+    }
+}
+exports.ActuatorClient = ActuatorClient;
+//# sourceMappingURL=ActuatorClient.js.map
+
+/***/ }),
+
+/***/ 399:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AttachmentClient = void 0;
+const rest_api_client_1 = __webpack_require__(5040);
+const url_1 = __webpack_require__(6998);
+class AttachmentClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Gets attachment detail by id.
+     *
+     * @param attachmentId attachment id
+     * @returns Returns attachment detail response.
+     */
+    get(attachmentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `attachments/${attachmentId}`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Page query attachment list.
+     *
+     * @param params attachment query parameter
+     * @returns Returns attachment page response.
+     */
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * Batch delete attachment permanently by attachment ids.
+     *
+     * @param attachmentIds a collection of attachment id
+     * @returns Returns attachments of deleted
+     */
+    deleteInBatch(attachmentIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments',
+        });
+        return this.client.delete(path, attachmentIds);
+    }
+    /**
+     * Delete attachment permanently by attachment id.
+     *
+     * @param attachmentId attachment id
+     * @returns Returns attachment detail of deleted
+     */
+    delete(attachmentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `attachments/${attachmentId}`,
+        });
+        return this.client.delete(path, {});
+    }
+    /**
+     * Update attachment name by id.
+     *
+     * @param attachmentId attachment id
+     * @param name a new attachment name
+     * @returns Returns an updated attachment response.
+     */
+    update(attachmentId, name) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `attachments/${attachmentId}`,
+        });
+        return this.client.put(path, { name });
+    }
+    /**
+     * List all of attachment media types.
+     *
+     * @returns Returns attachment media types response.
+     */
+    listMediaTypes() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments/media_types',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List all of attachment types.
+     *
+     * @returns Returns a response of attachment types.
+     */
+    listTypes() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments/types',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Upload a single attachment file.
+     *
+     * @param data attachment file object.
+     * @param options other upload options.
+     * @returns Returns a response of uploaded attachment
+     */
+    upload(data, options) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments/upload',
+        });
+        const formData = new rest_api_client_1.FormData();
+        formData.append('file', data);
+        return this.client.post(path, formData, Object.assign({}, options));
+    }
+    /**
+     * Batch upload attachments.
+     *
+     * @param data attachment file object.
+     * @param options other upload options.
+     * @returns Returns a response of uploaded attachments.
+     */
+    uploadInBatch(data, options) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'attachments/uploads',
+        });
+        const formData = new rest_api_client_1.FormData();
+        data.forEach((fileStream) => {
+            formData.append('files', fileStream);
+        });
+        return this.client.post(path, formData, Object.assign({}, options));
+    }
+}
+exports.AttachmentClient = AttachmentClient;
+//# sourceMappingURL=AttachmentClient.js.map
+
+/***/ }),
+
+/***/ 5260:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.BackupClient = void 0;
+const url_1 = __webpack_require__(6998);
+class BackupClient {
+    constructor(client) {
+        this.client = client;
+    }
+    getWorkdirBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/work-dir/fetch?filename=${filename}`,
+        });
+        return this.client.get(path, {});
+    }
+    getDataBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/data/fetch?filename=${filename}`,
+        });
+        return this.client.get(path, {});
+    }
+    getMarkdownBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/markdown/fetch?filename=${filename}`,
+        });
+        return this.client.get(path, {});
+    }
+    backupWorkdir(options) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/work-dir',
+        });
+        return this.client.post(path, options);
+    }
+    getWorkdirBackupOptions() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/work-dir/options',
+        });
+        return this.client.get(path, {});
+    }
+    listWorkdirBackups() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/work-dir',
+        });
+        return this.client.get(path, {});
+    }
+    deleteWorkdirBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/work-dir`,
+        });
+        return this.client.delete(path, { filename });
+    }
+    backupData() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/data',
+        });
+        return this.client.post(path, {});
+    }
+    listDataBackups() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/data',
+        });
+        return this.client.get(path, {});
+    }
+    deleteDataBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/data`,
+        });
+        return this.client.delete(path, { filename });
+    }
+    backupMarkdown(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/markdown/export',
+        });
+        return this.client.post(path, params);
+    }
+    listMarkdownBackups() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/markdown/export',
+        });
+        return this.client.get(path, {});
+    }
+    deleteMarkdownBackup(filename) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `backups/markdown/export`,
+        });
+        return this.client.delete(path, { filename });
+    }
+    importMarkdown(data, options) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'backups/markdown/import',
+        });
+        const formData = new FormData();
+        formData.append('file', data);
+        return this.client.post(path, formData, Object.assign({}, options));
+    }
+}
+exports.BackupClient = BackupClient;
+//# sourceMappingURL=BackupClient.js.map
+
+/***/ }),
+
+/***/ 6774:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CategoryClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class CategoryClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Lists all categories.
+     *
+     * @param params parameter for queries
+     * @returns A response of all categories.
+     */
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'categories',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * List all categories as tree.
+     *
+     * @param sort sort option for queries, value is category field
+     * @returns A response of all categories.
+     */
+    listAsTree(sort) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'categories/tree_view',
+        });
+        return this.client.get(path, { sort });
+    }
+    /**
+     * Gets category detail by id.
+     *
+     * @param categoryId category id
+     * @returns A response of category detail.
+     */
+    get(categoryId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `categories/${categoryId}`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Creates a category.
+     *
+     * @param params category parameter to create
+     * @returns A response of created category.
+     */
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'categories',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    /**
+     * Updates category by id
+     *
+     * @param categoryId category id
+     * @param params category update parameter
+     * @returns A response of updated category.
+     */
+    update(categoryId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `categories/${categoryId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    /**
+     * Updates category in batch
+     *
+     * @param params
+     */
+    updateInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'categories/batch',
+        });
+        return this.client.put(path, [...params]);
+    }
+    /**
+     * Deletes a category by id.
+     *
+     * @param categoryId category id
+     */
+    delete(categoryId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `categories/${categoryId}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+}
+exports.CategoryClient = CategoryClient;
+//# sourceMappingURL=CategoryClient.js.map
+
+/***/ }),
+
+/***/ 8666:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CommentClient = void 0;
+const url_1 = __webpack_require__(6998);
+class CommentClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(target, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments`,
+        });
+        return this.client.get(path, params);
+    }
+    latest(target, top, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/latest`,
+        });
+        return this.client.get(path, { top, status });
+    }
+    listAsView(target, targetId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${targetId}/list_view`,
+        });
+        return this.client.get(path, params);
+    }
+    listAsTreeView(target, targetId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${targetId}/tree_view`,
+        });
+        return this.client.get(path, params);
+    }
+    get(target, commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${commentId}`,
+        });
+        return this.client.get(path, {});
+    }
+    create(target, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments`,
+        });
+        return this.client.post(path, params);
+    }
+    update(target, commentId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${commentId}`,
+        });
+        return this.client.get(path, params);
+    }
+    updateStatusById(target, commentId, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${commentId}/status/${status}`,
+        });
+        return this.client.put(path, {});
+    }
+    updateStatusInBatch(target, commentIds, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/status/${status}`,
+        });
+        return this.client.put(path, commentIds);
+    }
+    delete(target, commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments/${commentId}`,
+        });
+        return this.client.delete(path, {});
+    }
+    deleteInBatch(target, postCommentIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `${target}/comments`,
+        });
+        return this.client.delete(path, postCommentIds);
+    }
+}
+exports.CommentClient = CommentClient;
+//# sourceMappingURL=CommentClient.js.map
+
+/***/ }),
+
+/***/ 8400:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InstallationClient = void 0;
+const url_1 = __webpack_require__(6998);
+class InstallationClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Initializes the blog.
+     *
+     * @param params installation parameter
+     * @returns A response of installation status message.
+     */
+    install(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'installations',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+}
+exports.InstallationClient = InstallationClient;
+//# sourceMappingURL=InstallationClient.js.map
+
+/***/ }),
+
+/***/ 173:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JournalClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class JournalClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Lists journals.
+     *
+     * @param params parameter for queries
+     * @returns A page response of journals.
+     */
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'journals',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * Gets latest journals.
+     *
+     * @param top top option for queries
+     * @returns A response of lastes journals.
+     */
+    latest(top) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'journals/latest',
+        });
+        return this.client.get(path, { top });
+    }
+    /**
+     * Creates a journal.
+     *
+     * @param params parameter for creates
+     * @returns A response of created journal.
+     */
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'journals',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    /**
+     * Updates a journal by id.
+     *
+     * @param journalId journal id
+     * @param params parameter for updates
+     * @returns A response of updated journal.
+     */
+    update(journalId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `journals/${journalId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    /**
+     * Deletes a journal by id.
+     * @param journalId journal id
+     */
+    delete(journalId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `journals/${journalId}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+}
+exports.JournalClient = JournalClient;
+//# sourceMappingURL=JournalClient.js.map
+
+/***/ }),
+
+/***/ 5503:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.JournalCommentClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class JournalCommentClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Lists journal comments.
+     *
+     * @param params parameter for queries
+     * @returns A page response of journals.
+     */
+    list(params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'journals/comments',
+            });
+            return this.client.get(path, Object.assign({}, params));
+        });
+    }
+    /**
+     * Creates a journal comment.
+     *
+     * @param params comment parameter for creates
+     * @returns A response of created journal comment.
+     */
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'journals/comments',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    /**
+     * Deletes a journal comment by id.
+     *
+     * @param commentId journal comment id.
+     * @returns A response of deleted journal comment.
+     */
+    delete(commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `journals/comments/${commentId}`,
+        });
+        return this.client.delete(path, {});
+    }
+    /**
+     * Updates journal comment status by id.
+     *
+     * @param commentId journal comment id
+     * @param status comment status
+     * @returns A response of updated journal comment.
+     */
+    update(commentId, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `journals/comments/${commentId}/status/${status}`,
+        });
+        return this.client.put(path, {});
+    }
+    /**
+     * Lists comment with list view.
+     *
+     * @param params parameter for queries
+     * @returns A page response of journal comments.
+     */
+    listAsView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `journals/comments/${params.journalId}/list_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * Lists comment with tree view.
+     *
+     * @param params parameter for queries
+     * @returns A page response of journal comments tree.
+     */
+    listAsTree(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `journals/comments/${params.journalId}/tree_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * Lists latest journal comments.
+     *
+     * @param params parameter for queries
+     * @returns A response of latest journal comments.
+     */
+    latest(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'journals/comments/latest',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+}
+exports.JournalCommentClient = JournalCommentClient;
+//# sourceMappingURL=JournalCommentClient.js.map
+
+/***/ }),
+
+/***/ 9207:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LinkClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class LinkClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(sort) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'links',
+        });
+        return this.client.get(path, { sort });
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'links',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    get(id) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `links/${id}`,
+        });
+        return this.client.get(path, {});
+    }
+    update(linkId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `links/${linkId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'links/batch',
+        });
+        return this.client.put(path, [...params]);
+    }
+    delete(id) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `links/${id}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+    listTeams() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'links/teams',
+        });
+        return this.client.get(path, {});
+    }
+}
+exports.LinkClient = LinkClient;
+//# sourceMappingURL=LinkClient.js.map
+
+/***/ }),
+
+/***/ 9842:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LogClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class LogClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * List action logs by params.
+     *
+     * @param params
+     */
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'logs',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    /**
+     * Clear action logs
+     */
+    clear() {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'logs/clear',
+            });
+            yield this.client.get(path, {});
+        });
+    }
+    /**
+     * Get latest action logs
+     *
+     * @param top the number of logs to get
+     */
+    latest(top) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'logs/latest',
+        });
+        return this.client.get(path, { top });
+    }
+}
+exports.LogClient = LogClient;
+//# sourceMappingURL=LogClient.js.map
+
+/***/ }),
+
+/***/ 7206:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MailClient = void 0;
+const url_1 = __webpack_require__(6998);
+class MailClient {
+    constructor(client) {
+        this.client = client;
+    }
+    testSmtpService(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'mails/test',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    testConnect() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'mails/test/connection',
+        });
+        return this.client.post(path, {});
+    }
+}
+exports.MailClient = MailClient;
+//# sourceMappingURL=MailClient.js.map
+
+/***/ }),
+
+/***/ 7530:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MenuClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class MenuClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus',
+        });
+        return this.client.get(path, {});
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    createInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus/batch',
+        });
+        return this.client.post(path, [...params]);
+    }
+    get(menuId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `menus/${menuId}`,
+        });
+        return this.client.post(path, {});
+    }
+    update(menuId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `menus/${menuId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus/batch',
+        });
+        return this.client.put(path, [...params]);
+    }
+    delete(menuId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `menus/${menuId}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+    deleteInBatch(menuIds) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'menus/batch',
+            });
+            yield this.client.delete(path, [...menuIds]);
+        });
+    }
+    listTreeViewByTeam(team, sort) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus/team/tree_view',
+        });
+        return this.client.get(path, { team, sort });
+    }
+    listTeams() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus/teams',
+        });
+        return this.client.get(path, {});
+    }
+    listTreeView(sort) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'menus/tree_view',
+        });
+        return this.client.get(path, { sort });
+    }
+}
+exports.MenuClient = MenuClient;
+//# sourceMappingURL=MenuClient.js.map
+
+/***/ }),
+
+/***/ 9644:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MigrationClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const rest_api_client_1 = __webpack_require__(5040);
+const url_1 = __webpack_require__(6998);
+class MigrationClient {
+    constructor(client) {
+        this.client = client;
+    }
+    migrate(data, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'migrations/halo',
+            });
+            const formData = new rest_api_client_1.FormData();
+            formData.append('file', data);
+            yield this.client.post(path, formData, Object.assign({}, options));
+        });
+    }
+}
+exports.MigrationClient = MigrationClient;
+//# sourceMappingURL=MigrationClient.js.map
+
+/***/ }),
+
+/***/ 3913:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OptionClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class OptionClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'options',
+        });
+        return this.client.get(path, {});
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'options',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    get(id) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `options/${id}`,
+        });
+        return this.client.get(path, {});
+    }
+    update(optionId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `options/${optionId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    delete(optionId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `options/${optionId}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+    listAsView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'options/list_view',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    listAsMapView() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'options/map_view',
+        });
+        return this.client.get(path, {});
+    }
+    listAsMapViewByKeys(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'options/map_view/keys',
+        });
+        return this.client.post(path, params);
+    }
+    saveMapView(params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'options/map_view/saving',
+            });
+            yield this.client.post(path, Object.assign({}, params));
+        });
+    }
+    save(params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'options/saving',
+            });
+            yield this.client.post(path, [...params]);
+        });
+    }
+}
+exports.OptionClient = OptionClient;
+//# sourceMappingURL=OptionClient.js.map
+
+/***/ }),
+
+/***/ 402:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PhotoClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class PhotoClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    createInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos/batch',
+        });
+        return this.client.post(path, [...params]);
+    }
+    get(photoId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `photos/${photoId}`,
+        });
+        return this.client.get(path, {});
+    }
+    update(photoId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `photos/${photoId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateInBatch(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos/batch',
+        });
+        return this.client.put(path, [...params]);
+    }
+    delete(photoId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `photos/${photoId}`,
+            });
+            yield this.client.delete(path, {});
+        });
+    }
+    deleteInBatch(photoIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos/batch',
+        });
+        return this.client.delete(path, photoIds);
+    }
+    latest(sort) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos/latest',
+        });
+        return this.client.get(path, { sort });
+    }
+    listTeams() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'photos/teams',
+        });
+        return this.client.get(path, {});
+    }
+}
+exports.PhotoClient = PhotoClient;
+//# sourceMappingURL=PhotoClient.js.map
+
+/***/ }),
+
+/***/ 4682:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PostClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class PostClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    get(postId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}`,
+        });
+        return this.client.get(path, {});
+    }
+    getPreviewLinkById(postId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}/preview`,
+        });
+        return this.client.get(path, {});
+    }
+    latest(top) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts/latest',
+        });
+        return this.client.get(path, { top });
+    }
+    listByStatus(status, query) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/status/${status}`,
+        });
+        return this.client.get(path, Object.assign({}, query));
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    update(postId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateStatusById(postId, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}/status/${status}`,
+        });
+        return this.client.put(path, {});
+    }
+    updateStatusInBatch(postIds, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/status/${status}`,
+        });
+        return this.client.put(path, postIds);
+    }
+    updateDraftById(postId, originalContent, content, keepRaw) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}/status/draft/content`,
+        });
+        return this.client.put(path, { originalContent, content, keepRaw });
+    }
+    like(postId) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `posts/${postId}/likes`,
+            });
+            yield this.client.put(path, {});
+        });
+    }
+    delete(postId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/${postId}`,
+        });
+        return this.client.delete(path, {});
+    }
+    deleteInBatch(postIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts',
+        });
+        return this.client.delete(path, postIds);
+    }
+}
+exports.PostClient = PostClient;
+//# sourceMappingURL=PostClient.js.map
+
+/***/ }),
+
+/***/ 6494:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PostCommentClient = void 0;
+const url_1 = __webpack_require__(6998);
+class PostCommentClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts/comments',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    listAsView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/${params.postId}/list_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    listAsTreeView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/${params.postId}/tree_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    latest(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts/comments/latest',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts/comments',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    update(commentId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/${commentId}`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    updateStatusById(commentId, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/${commentId}/status/${status}`,
+        });
+        return this.client.put(path, {});
+    }
+    updateStatusInBatch(commentIds, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/status/${status}`,
+        });
+        return this.client.put(path, commentIds);
+    }
+    delete(commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `posts/comments/${commentId}`,
+        });
+        return this.client.delete(path, {});
+    }
+    deleteInBatch(postCommentIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'posts/comments',
+        });
+        return this.client.delete(path, postCommentIds);
+    }
+}
+exports.PostCommentClient = PostCommentClient;
+//# sourceMappingURL=PostCommentClient.js.map
+
+/***/ }),
+
+/***/ 771:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SheetClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const url_1 = __webpack_require__(6998);
+class SheetClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    listIndependents() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets/independent',
+        });
+        return this.client.get(path, {});
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    get(sheetId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/${sheetId}`,
+        });
+        return this.client.get(path, {});
+    }
+    getPreviewLinkById(sheetId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/preview/${sheetId}`,
+        });
+        return this.client.get(path, {});
+    }
+    update(sheetId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/${sheetId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateStatusById(sheetId, status) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `sheets/${sheetId}/${status}`,
+            });
+            yield this.client.put(path, {});
+        });
+    }
+    updateDraftById(sheetId, originalContent, content, keepRaw) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/${sheetId}/status/draft/content`,
+        });
+        return this.client.put(path, { originalContent, content, keepRaw });
+    }
+    delete(sheetId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/${sheetId}`,
+        });
+        return this.client.delete(path, {});
+    }
+}
+exports.SheetClient = SheetClient;
+//# sourceMappingURL=SheetClient.js.map
+
+/***/ }),
+
+/***/ 6094:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SheetCommentClient = void 0;
+const url_1 = __webpack_require__(6998);
+class SheetCommentClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets/comments',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    get(commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${commentId}`,
+        });
+        return this.client.get(path, {});
+    }
+    listAsView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${params.sheetId}/list_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    listAsTreeView(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${params.sheetId}/tree_view`,
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    latest(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets/comments/latest',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets/comments',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    update(commentId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${commentId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateStatusById(commentId, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${commentId}/status/${status}`,
+        });
+        return this.client.put(path, {});
+    }
+    updateStatusInBatch(commentIds, status) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/status/${status}`,
+        });
+        return this.client.put(path, commentIds);
+    }
+    deleteInBatch(commentIds) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'sheets/comments',
+        });
+        return this.client.delete(path, commentIds);
+    }
+    delete(commentId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `sheets/comments/${commentId}`,
+        });
+        return this.client.delete(path, {});
+    }
+}
+exports.SheetCommentClient = SheetCommentClient;
+//# sourceMappingURL=SheetCommentClient.js.map
+
+/***/ }),
+
+/***/ 7742:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StaticStorageClient = void 0;
+const rest_api_client_1 = __webpack_require__(5040);
+const url_1 = __webpack_require__(6998);
+class StaticStorageClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list() {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics`,
+        });
+        return this.client.get(path, {});
+    }
+    delete(filePath) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics`,
+        });
+        return this.client.delete(path, {
+            path: filePath,
+        });
+    }
+    createFolder(basePath, folderName) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics?basePath=${basePath}&folderName=${folderName}`,
+        });
+        return this.client.post(path, {});
+    }
+    upload(file, options, basePath) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics/upload?basePath=${basePath}`,
+        });
+        const formData = new rest_api_client_1.FormData();
+        formData.append('file', file);
+        return this.client.post(path, formData, Object.assign({}, options));
+    }
+    rename(basePath, newName) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics/rename?basePath=${basePath}&newName=${newName}`,
+        });
+        return this.client.post(path, {});
+    }
+    saveContent(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `statics/files`,
+        });
+        return this.client.put(path, params);
+    }
+}
+exports.StaticStorageClient = StaticStorageClient;
+//# sourceMappingURL=StaticStorageClient.js.map
+
+/***/ }),
+
+/***/ 7922:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.StatisticClient = void 0;
+const url_1 = __webpack_require__(6998);
+class StatisticClient {
+    constructor(client) {
+        this.client = client;
+    }
+    statistics() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'statistics',
+        });
+        return this.client.get(path, {});
+    }
+    statisticsWithUser() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'statistics/user',
+        });
+        return this.client.get(path, {});
+    }
+}
+exports.StatisticClient = StatisticClient;
+//# sourceMappingURL=StatisticClient.js.map
+
+/***/ }),
+
+/***/ 4898:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TagClient = void 0;
+const url_1 = __webpack_require__(6998);
+class TagClient {
+    constructor(client) {
+        this.client = client;
+    }
+    list(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'tags',
+        });
+        return this.client.get(path, Object.assign({}, params));
+    }
+    create(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'tags',
+        });
+        return this.client.post(path, Object.assign({}, params));
+    }
+    get(tagId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `tags/${tagId}`,
+        });
+        return this.client.get(path, {});
+    }
+    update(tagId, params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `tags/${tagId}`,
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    delete(tagId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `tags/${tagId}`,
+        });
+        return this.client.delete(path, {});
+    }
+}
+exports.TagClient = TagClient;
+//# sourceMappingURL=TagClient.js.map
+
+/***/ }),
+
+/***/ 8842:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ThemeClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const rest_api_client_1 = __webpack_require__(5040);
+const url_1 = __webpack_require__(6998);
+class ThemeClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * List all themes.
+     *
+     * @returns array of ThemeProperty
+     */
+    list() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Get theme property by themeId.
+     *
+     * @param themeId themeId
+     * @returns ThemeProperty
+     */
+    get(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Delete theme by themeId.
+     *
+     * @param themeId themeId
+     * @param deleteSettings whether to delete the theme settings at the same time.
+     * @returns ThemeProperty
+     */
+    delete(themeId, deleteSettings) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}`,
+        });
+        return this.client.delete(path, { deleteSettings });
+    }
+    /**
+     * Active a theme.
+     *
+     * @param themeId themeId
+     * @returns ThemeProperty
+     */
+    active(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/activation`,
+        });
+        return this.client.post(path, {});
+    }
+    /**
+     * Fetches theme configuration group names by theme id
+     *
+     * @param themeId theme id
+     */
+    listConfigurationGroups(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/configurations/groups`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Fetches theme configuration group by theme id and group name
+     *
+     * @param themeId theme id
+     * @param group group name
+     */
+    listConfigurationsByGroup(themeId, group) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/configurations/groups/${group}`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List activated theme configurations.
+     *
+     * @returns array of configuration group.
+     */
+    listActivatedConfigurations() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/configurations',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List theme configurations by themeId.
+     *
+     * @param themeId themeId
+     * @returns array of configuration group.
+     */
+    listConfigurations(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/configurations`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List theme files by themeId.
+     *
+     * @param themeId themeId
+     * @returns array of ThemeFile
+     */
+    listFiles(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/files`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List activated theme files.
+     *
+     * @returns array of ThemeFile
+     */
+    listActivatedFiles() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/files',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Get activated template content by filepath.
+     *
+     * @param filepath filepath
+     * @returns template content
+     */
+    getActivatedTemplateContent(filepath) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/files/content',
+        });
+        return this.client.get(path, { path: filepath });
+    }
+    /**
+     * Get template content by themeId and filepath.
+     *
+     * @param themeId themeId
+     * @param filepath filepath
+     * @returns template content
+     */
+    getTemplateContent(themeId, filepath) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/files/content`,
+        });
+        return this.client.get(path, { path: filepath });
+    }
+    /**
+     * Update theme template content by themeId.
+     *
+     * @param themeId themeId
+     * @param params path, content
+     */
+    updateTemplateContent(themeId, params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `themes/${themeId}/files/content`,
+            });
+            yield this.client.put(path, Object.assign({}, params));
+        });
+    }
+    /**
+     * List theme settings by themeId.
+     *
+     * @param themeId themeId
+     * @returns Record<string, unknown>
+     */
+    listSettings(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/settings`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List activated theme settings.
+     *
+     * @returns Record<string, unknown>
+     */
+    listActivatedSettings() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/settings',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Lists theme settings by theme id and group name
+     *
+     * @param themeId theme id
+     * @param group group name
+     */
+    listSettingsByGroup(themeId, group) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/${themeId}/groups/${group}/settings`,
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Save settings by themeId.
+     *
+     * @param themeId themeId
+     * @param settings settings
+     */
+    saveSettings(themeId, settings) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: `themes/${themeId}/settings`,
+            });
+            yield this.client.post(path, settings);
+        });
+    }
+    /**
+     * Save activated theme settings.
+     *
+     * @param settings settings
+     */
+    saveActivatedSettings(settings) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const path = (0, url_1.buildPath)({
+                endpointName: 'themes/activation/settings',
+            });
+            yield this.client.post(path, settings);
+        });
+    }
+    /**
+     * Get activated theme property.
+     *
+     * @returns ThemeProperty
+     */
+    getActivatedTheme() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List activated theme custom post templates.
+     *
+     * @returns array of template name.
+     */
+    listCustomPostTemplates() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/template/custom/post',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * List activated theme custom sheet templates.
+     *
+     * @returns array of template name.
+     */
+    listCustomSheetTemplates() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/template/custom/sheet',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Check template exists
+     *
+     * @param template template name
+     * @returns boolean
+     */
+    exists(template) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/activation/template/exists',
+        });
+        return this.client.get(path, { template });
+    }
+    /**
+     * Fetch theme by uri
+     *
+     * @param uri uri
+     * @returns void
+     */
+    fetchTheme(uri) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/fetching?uri=${uri}`,
+        });
+        return this.client.post(path, {});
+    }
+    /**
+     * update theme by fetch.
+     *
+     * @param themeId themeId
+     * @returns void
+     */
+    updateThemeByFetching(themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/fetching/${themeId}`,
+        });
+        return this.client.put(path, {});
+    }
+    /**
+     * Update activated theme template content.
+     *
+     * @param params path, content
+     * @returns void
+     */
+    updateActivatedTemplateContent(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/files/content',
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    /**
+     * Refresh theme list cache.
+     *
+     * @returns void
+     */
+    reload() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/reload',
+        });
+        return this.client.post(path, {});
+    }
+    /**
+     * Upload a theme.
+     *
+     * @param data data
+     * @param options Upload options
+     * @returns ThemeProperty
+     */
+    upload(data, options) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'themes/upload',
+        });
+        const formData = new rest_api_client_1.FormData();
+        formData.append('file', data);
+        return this.client.post(path, formData, Object.assign({}, options));
+    }
+    /**
+     * Update theme by upload.
+     *
+     * @param options upload options
+     * @param themeId themeId
+     * @param data data
+     * @returns ThemeProperty
+     */
+    updateByUpload(data, options, themeId) {
+        const path = (0, url_1.buildPath)({
+            endpointName: `themes/upload/${themeId}`,
+        });
+        const formData = new rest_api_client_1.FormData();
+        formData.append('file', data);
+        return this.client.put(path, formData, Object.assign({}, options));
+    }
+}
+exports.ThemeClient = ThemeClient;
+//# sourceMappingURL=ThemeClient.js.map
+
+/***/ }),
+
+/***/ 5412:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UserClient = void 0;
+const url_1 = __webpack_require__(6998);
+class UserClient {
+    constructor(client) {
+        this.client = client;
+    }
+    /**
+     * Get user profile
+     */
+    getProfile() {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'users/profiles',
+        });
+        return this.client.get(path, {});
+    }
+    /**
+     * Update user profile
+     *
+     * @param user {@link User}
+     */
+    updateProfile(user) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'users/profiles',
+        });
+        return this.client.put(path, user);
+    }
+    updatePassword(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'users/profiles/password',
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    generateMFAQrImage(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'users/mfa/generate',
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+    updateMFAuth(params) {
+        const path = (0, url_1.buildPath)({
+            endpointName: 'users/mfa/update',
+        });
+        return this.client.put(path, Object.assign({}, params));
+    }
+}
+exports.UserClient = UserClient;
+//# sourceMappingURL=UserClient.js.map
+
+/***/ }),
+
+/***/ 6904:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActuatorClient = exports.CommentClient = exports.StaticStorageClient = exports.UserClient = exports.ThemeClient = exports.TagClient = exports.StatisticClient = exports.SheetClient = exports.SheetCommentClient = exports.PostClient = exports.PostCommentClient = exports.PhotoClient = exports.OptionClient = exports.MigrationClient = exports.MenuClient = exports.MailClient = exports.LogClient = exports.LinkClient = exports.JournalClient = exports.JournalCommentClient = exports.InstallationClient = exports.CategoryClient = exports.BackupClient = exports.AttachmentClient = void 0;
+var AttachmentClient_1 = __webpack_require__(399);
+Object.defineProperty(exports, "AttachmentClient", ({ enumerable: true, get: function () { return AttachmentClient_1.AttachmentClient; } }));
+var BackupClient_1 = __webpack_require__(5260);
+Object.defineProperty(exports, "BackupClient", ({ enumerable: true, get: function () { return BackupClient_1.BackupClient; } }));
+var CategoryClient_1 = __webpack_require__(6774);
+Object.defineProperty(exports, "CategoryClient", ({ enumerable: true, get: function () { return CategoryClient_1.CategoryClient; } }));
+var InstallationClient_1 = __webpack_require__(8400);
+Object.defineProperty(exports, "InstallationClient", ({ enumerable: true, get: function () { return InstallationClient_1.InstallationClient; } }));
+var JournalCommentClient_1 = __webpack_require__(5503);
+Object.defineProperty(exports, "JournalCommentClient", ({ enumerable: true, get: function () { return JournalCommentClient_1.JournalCommentClient; } }));
+var JournalClient_1 = __webpack_require__(173);
+Object.defineProperty(exports, "JournalClient", ({ enumerable: true, get: function () { return JournalClient_1.JournalClient; } }));
+var LinkClient_1 = __webpack_require__(9207);
+Object.defineProperty(exports, "LinkClient", ({ enumerable: true, get: function () { return LinkClient_1.LinkClient; } }));
+var LogClient_1 = __webpack_require__(9842);
+Object.defineProperty(exports, "LogClient", ({ enumerable: true, get: function () { return LogClient_1.LogClient; } }));
+var MailClient_1 = __webpack_require__(7206);
+Object.defineProperty(exports, "MailClient", ({ enumerable: true, get: function () { return MailClient_1.MailClient; } }));
+var MenuClient_1 = __webpack_require__(7530);
+Object.defineProperty(exports, "MenuClient", ({ enumerable: true, get: function () { return MenuClient_1.MenuClient; } }));
+var MigrationClient_1 = __webpack_require__(9644);
+Object.defineProperty(exports, "MigrationClient", ({ enumerable: true, get: function () { return MigrationClient_1.MigrationClient; } }));
+var OptionClient_1 = __webpack_require__(3913);
+Object.defineProperty(exports, "OptionClient", ({ enumerable: true, get: function () { return OptionClient_1.OptionClient; } }));
+var PhotoClient_1 = __webpack_require__(402);
+Object.defineProperty(exports, "PhotoClient", ({ enumerable: true, get: function () { return PhotoClient_1.PhotoClient; } }));
+var PostCommentClient_1 = __webpack_require__(6494);
+Object.defineProperty(exports, "PostCommentClient", ({ enumerable: true, get: function () { return PostCommentClient_1.PostCommentClient; } }));
+var PostClient_1 = __webpack_require__(4682);
+Object.defineProperty(exports, "PostClient", ({ enumerable: true, get: function () { return PostClient_1.PostClient; } }));
+var SheetCommentClient_1 = __webpack_require__(6094);
+Object.defineProperty(exports, "SheetCommentClient", ({ enumerable: true, get: function () { return SheetCommentClient_1.SheetCommentClient; } }));
+var SheetClient_1 = __webpack_require__(771);
+Object.defineProperty(exports, "SheetClient", ({ enumerable: true, get: function () { return SheetClient_1.SheetClient; } }));
+var StatisticClient_1 = __webpack_require__(7922);
+Object.defineProperty(exports, "StatisticClient", ({ enumerable: true, get: function () { return StatisticClient_1.StatisticClient; } }));
+var TagClient_1 = __webpack_require__(4898);
+Object.defineProperty(exports, "TagClient", ({ enumerable: true, get: function () { return TagClient_1.TagClient; } }));
+var ThemeClient_1 = __webpack_require__(8842);
+Object.defineProperty(exports, "ThemeClient", ({ enumerable: true, get: function () { return ThemeClient_1.ThemeClient; } }));
+var UserClient_1 = __webpack_require__(5412);
+Object.defineProperty(exports, "UserClient", ({ enumerable: true, get: function () { return UserClient_1.UserClient; } }));
+var StaticStorageClient_1 = __webpack_require__(7742);
+Object.defineProperty(exports, "StaticStorageClient", ({ enumerable: true, get: function () { return StaticStorageClient_1.StaticStorageClient; } }));
+var CommentClient_1 = __webpack_require__(8666);
+Object.defineProperty(exports, "CommentClient", ({ enumerable: true, get: function () { return CommentClient_1.CommentClient; } }));
+var ActuatorClient_1 = __webpack_require__(6618);
+Object.defineProperty(exports, "ActuatorClient", ({ enumerable: true, get: function () { return ActuatorClient_1.ActuatorClient; } }));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 5597:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AuthorizedClient = exports.AdminApiClient = void 0;
+const tslib_1 = __webpack_require__(655);
+var AdminApiClient_1 = __webpack_require__(6587);
+Object.defineProperty(exports, "AdminApiClient", ({ enumerable: true, get: function () { return AdminApiClient_1.AdminApiClient; } }));
+var AuthorizedClient_1 = __webpack_require__(6710);
+Object.defineProperty(exports, "AuthorizedClient", ({ enumerable: true, get: function () { return AuthorizedClient_1.AuthorizedClient; } }));
+tslib_1.__exportStar(__webpack_require__(5040), exports);
+tslib_1.__exportStar(__webpack_require__(6904), exports);
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 6998:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.buildPath = void 0;
+const buildPath = (params) => {
+    const { endpointName, scope } = params;
+    const scopePath = scope !== undefined ? `${scope}` : 'admin';
+    return `/api/${scopePath}/${endpointName}`;
+};
+exports.buildPath = buildPath;
+//# sourceMappingURL=url.js.map
+
+/***/ }),
+
+/***/ 9290:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HaloRequestConfigBuilder = void 0;
+const tslib_1 = __webpack_require__(655);
+const form_data_1 = tslib_1.__importDefault(__webpack_require__(6230));
+const qs_1 = tslib_1.__importDefault(__webpack_require__(129));
+const js_base64_1 = __webpack_require__(9575);
+const auth_1 = __webpack_require__(3622);
+const platform_1 = __webpack_require__(8384);
+const THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE = 4096;
+class HaloRequestConfigBuilder {
+    constructor({ baseUrl, auth, basicAuth, clientCertAuth, proxy, userAgent, }) {
+        this.baseUrl = baseUrl;
+        this.auth = auth;
+        this.headers = this.buildHeaders({ basicAuth, userAgent });
+        this.clientCertAuth = clientCertAuth;
+        this.proxy = proxy;
+        this.requestToken = null;
+    }
+    build(method, path, params, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = Object.assign(Object.assign(Object.assign({ method, headers: this.headers, url: `${this.baseUrl}${path}` }, (options ? options : {})), platform_1.platformDeps.buildPlatformDependentConfig({
+                clientCertAuth: this.clientCertAuth,
+            })), { proxy: this.proxy });
+            switch (method) {
+                case 'get': {
+                    const requestUrl = this.buildRequestUrl(path, params);
+                    if (requestUrl.length > THRESHOLD_AVOID_REQUEST_URL_TOO_LARGE) {
+                        return Object.assign(Object.assign({}, requestConfig), { method: 'post', headers: Object.assign(Object.assign({}, this.headers), { 'X-HTTP-Method-Override': 'GET' }), data: yield this.buildData(params) });
+                    }
+                    return Object.assign(Object.assign({}, requestConfig), { url: requestUrl });
+                }
+                case 'post': {
+                    if (params instanceof form_data_1.default) {
+                        const formData = yield this.buildData(params);
+                        return Object.assign(Object.assign({}, requestConfig), { headers: 
+                            // NOTE: formData.getHeaders does not exist in a browser environment.
+                            typeof formData.getHeaders === 'function' ? Object.assign(Object.assign({}, this.headers), formData.getHeaders()) : this.headers, data: formData });
+                    }
+                    return Object.assign(Object.assign({}, requestConfig), { data: yield this.buildData(params) });
+                }
+                case 'put': {
+                    return Object.assign(Object.assign({}, requestConfig), { data: yield this.buildData(params) });
+                }
+                case 'delete': {
+                    if (params instanceof Array) {
+                        return Object.assign(Object.assign({}, requestConfig), { headers: this.headers, data: params });
+                    }
+                    const requestUrl = this.buildRequestUrl(path, yield this.buildData(params));
+                    return Object.assign(Object.assign({}, requestConfig), { url: requestUrl });
+                }
+                default: {
+                    throw new Error(`${method} method is not supported`);
+                }
+            }
+        });
+    }
+    buildRequestUrl(path, params) {
+        const requestUrl = `${this.baseUrl}${path}`;
+        const query = qs_1.default.stringify(params, { indices: false });
+        return query ? `${requestUrl}?${query}` : requestUrl;
+    }
+    buildData(params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            if (this.auth && this.auth.type === 'session') {
+                const requestToken = yield this.getRequestToken();
+                if (params instanceof form_data_1.default) {
+                    params.append(auth_1.SESSION_TOKEN_KEY, requestToken);
+                    return params;
+                }
+                return Object.assign({ [auth_1.SESSION_TOKEN_KEY]: requestToken }, params);
+            }
+            return params;
+        });
+    }
+    buildHeaders(params) {
+        const { basicAuth, userAgent } = params;
+        const basicAuthHeaders = basicAuth
+            ? {
+                Authorization: `Basic ${js_base64_1.Base64.encode(`${basicAuth.username}:${basicAuth.password}`)}`,
+            }
+            : {};
+        const platformDepsHeaders = platform_1.platformDeps.buildHeaders({ userAgent });
+        const commonHeaders = Object.assign(Object.assign({}, platformDepsHeaders), basicAuthHeaders);
+        if (!this.auth) {
+            return {};
+        }
+        switch (this.auth.type) {
+            case 'password': {
+                return Object.assign(Object.assign({}, commonHeaders), { Authorization: js_base64_1.Base64.encode(`${this.auth.username}:${this.auth.password}`) });
+            }
+            case 'adminToken': {
+                const adminToken = this.auth.adminToken;
+                return Object.assign(Object.assign({}, commonHeaders), { 'Admin-Authorization': adminToken });
+            }
+            case 'apiToken': {
+                const apiToken = this.auth.apiToken;
+                if (Array.isArray(apiToken)) {
+                    return Object.assign(Object.assign({}, commonHeaders), { 'API-Authorization': apiToken.join(',') });
+                }
+                return Object.assign(Object.assign({}, commonHeaders), { 'API-Authorization': apiToken });
+            }
+            case 'oAuthToken': {
+                return Object.assign(Object.assign({}, commonHeaders), { Authorization: `Bearer ${this.auth.oAuthToken}` });
+            }
+            case 'customizeAuth': {
+                return Object.assign(Object.assign({}, commonHeaders), { [this.auth.authHeader]: this.auth.getToken() });
+            }
+            default: {
+                // https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
+                return Object.assign(Object.assign({}, commonHeaders), { 'X-Requested-With': 'XMLHttpRequest' });
+            }
+        }
+    }
+    getRequestToken() {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            if (this.requestToken === null) {
+                this.requestToken = yield platform_1.platformDeps.getRequestToken();
+            }
+            return this.requestToken;
+        });
+    }
+}
+exports.HaloRequestConfigBuilder = HaloRequestConfigBuilder;
+//# sourceMappingURL=HaloRequestConfigBuilder.js.map
+
+/***/ }),
+
+/***/ 2862:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HaloResponseHandler = void 0;
+const tslib_1 = __webpack_require__(655);
+const HaloRestAPIError_1 = __webpack_require__(2284);
+class HaloResponseHandler {
+    handle(response) {
+        return response.then((res) => this.handleSuccessResponse(res), (error) => this.handleErrorResponse(error));
+    }
+    handleSuccessResponse(response) {
+        return response.data;
+    }
+    handleErrorResponse(error) {
+        if (!error.response) {
+            // FIXME: find a better way to handle this error
+            if (/MAC address verify failure/.test(error.toString())) {
+                throw new Error('invalid clientCertAuth setting');
+            }
+            throw error;
+        }
+        const errorResponse = error.response;
+        const { data } = errorResponse, rest = tslib_1.__rest(errorResponse, ["data"]);
+        if (typeof data === 'string') {
+            throw new Error(`${rest.status}: ${rest.statusText}`);
+        }
+        throw new HaloRestAPIError_1.HaloRestAPIError(Object.assign({ data }, rest));
+    }
+}
+exports.HaloResponseHandler = HaloResponseHandler;
+//# sourceMappingURL=HaloResponseHandler.js.map
+
+/***/ }),
+
+/***/ 3388:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HaloRestAPIClient = void 0;
+const http_1 = __webpack_require__(2992);
+const HaloRequestConfigBuilder_1 = __webpack_require__(9290);
+const HaloResponseHandler_1 = __webpack_require__(2862);
+const platform_1 = __webpack_require__(8384);
+const buildDiscriminatedAuth = (auth) => {
+    if ('username' in auth) {
+        return Object.assign({ type: 'password' }, auth);
+    }
+    if ('apiToken' in auth) {
+        return Object.assign({ type: 'apiToken' }, auth);
+    }
+    if ('adminToken' in auth) {
+        return Object.assign({ type: 'adminToken' }, auth);
+    }
+    if ('oAuthToken' in auth) {
+        return Object.assign({ type: 'oAuthToken' }, auth);
+    }
+    if ('type' in auth && auth['type'] == 'customizeAuth') {
+        return auth;
+    }
+    return undefined;
+};
+class HaloRestAPIClient {
+    constructor(options = {}) {
+        var _a;
+        this.baseUrl = platform_1.platformDeps.buildBaseUrl(options.baseUrl);
+        const auth = buildDiscriminatedAuth((_a = options.auth) !== null && _a !== void 0 ? _a : {});
+        const requestConfigBuilder = new HaloRequestConfigBuilder_1.HaloRequestConfigBuilder(Object.assign(Object.assign({}, options), { baseUrl: this.baseUrl, auth }));
+        const responseHandler = new HaloResponseHandler_1.HaloResponseHandler();
+        this.httpClient = new http_1.DefaultHttpClient({
+            responseHandler,
+            requestConfigBuilder,
+        });
+        this._interceptors = this.httpClient.interceptors;
+    }
+    static get version() {
+        return platform_1.platformDeps.getVersion();
+    }
+    get interceptors() {
+        return this._interceptors;
+    }
+    getBaseUrl() {
+        return this.baseUrl;
+    }
+    buildHttpClient() {
+        return this.httpClient;
+    }
+}
+exports.HaloRestAPIClient = HaloRestAPIClient;
+//# sourceMappingURL=HaloRestAPIClient.js.map
+
+/***/ }),
+
+/***/ 2284:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HaloRestAPIError = void 0;
+class HaloRestAPIError extends Error {
+    constructor(error) {
+        const { data } = HaloRestAPIError.buildErrorResponseDate(error);
+        super(data.message);
+        this.name = 'HaloRestAPIError';
+        this.data = data;
+        this.status = data.status;
+        this.headers = error.headers;
+        this.message = `[${this.status}] ${this.message}`;
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
+        // Maintains proper stack trace for where our error was thrown (only available on V8)
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, HaloRestAPIError);
+        }
+        // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, HaloRestAPIError.prototype);
+    }
+    static buildErrorResponseDate(error) {
+        // improvable
+        return { data: error.data };
+    }
+}
+exports.HaloRestAPIError = HaloRestAPIError;
+//# sourceMappingURL=HaloRestAPIError.js.map
+
+/***/ }),
+
+/***/ 1638:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AxiosClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const axios_1 = tslib_1.__importDefault(__webpack_require__(9669));
+const InterceptorManager_1 = __webpack_require__(6008);
+class AxiosClient {
+    constructor({ responseHandler, requestConfigBuilder, }) {
+        this.responseHandler = responseHandler;
+        this.requestConfigBuilder = requestConfigBuilder;
+        this.interceptors = {
+            request: new InterceptorManager_1.RequestInterceptor(),
+            response: new InterceptorManager_1.ResponseInterceptor(),
+        };
+    }
+    get(path, params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('get', path, params);
+            return this.sendRequest(requestConfig);
+        });
+    }
+    getData(path, params) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('get', path, params, {
+                responseType: 'arraybuffer',
+            });
+            return this.sendRequest(requestConfig);
+        });
+    }
+    post(path, params, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('post', path, params, options);
+            return this.sendRequest(requestConfig);
+        });
+    }
+    postData(path, formData) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('post', path, formData);
+            return this.sendRequest(requestConfig);
+        });
+    }
+    put(path, params, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('put', path, params, options);
+            return this.sendRequest(requestConfig);
+        });
+    }
+    delete(path, params, options) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const requestConfig = yield this.requestConfigBuilder.build('delete', path, params, options);
+            return this.sendRequest(requestConfig);
+        });
+    }
+    sendRequest(requestConfig) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            return this.responseHandler.handle(
+            // eslint-disable-next-line new-cap
+            (0, axios_1.default)(Object.assign(Object.assign({}, requestConfig), { 
+                // NOTE: For defining the max size of the http request content, `maxBodyLength` will be used after version 0.20.0.
+                // `maxContentLength` will be still needed for defining the max size of the http response content.
+                // ref: https://github.com/axios/axios/pull/2781/files
+                // maxBodyLength: Infinity,
+                maxContentLength: Infinity })));
+        });
+    }
+}
+exports.AxiosClient = AxiosClient;
+//# sourceMappingURL=AxiosClient.js.map
+
+/***/ }),
+
+/***/ 6008:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ResponseInterceptor = exports.RequestInterceptor = void 0;
+const tslib_1 = __webpack_require__(655);
+const axios_1 = tslib_1.__importDefault(__webpack_require__(9669));
+class RequestInterceptor {
+    use(resolved, rejected) {
+        return axios_1.default.interceptors.request.use(resolved, rejected);
+    }
+    eject(id) {
+        axios_1.default.interceptors.request.eject(id);
+    }
+}
+exports.RequestInterceptor = RequestInterceptor;
+class ResponseInterceptor {
+    use(resolved, rejected) {
+        return axios_1.default.interceptors.response.use(resolved, rejected);
+    }
+    eject(id) {
+        axios_1.default.interceptors.response.eject(id);
+    }
+}
+exports.ResponseInterceptor = ResponseInterceptor;
+//# sourceMappingURL=InterceptorManager.js.map
+
+/***/ }),
+
+/***/ 2992:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DefaultHttpClient = void 0;
+var AxiosClient_1 = __webpack_require__(1638);
+Object.defineProperty(exports, "DefaultHttpClient", ({ enumerable: true, get: function () { return AxiosClient_1.AxiosClient; } }));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 5040:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Axios = exports.FormData = exports.DefaultHttpClient = exports.HaloRequestConfigBuilder = exports.HaloResponseHandler = exports.HaloRestAPIClient = void 0;
+const tslib_1 = __webpack_require__(655);
+const platform_1 = __webpack_require__(8384);
+const browserDeps = tslib_1.__importStar(__webpack_require__(5792));
+const form_data_1 = tslib_1.__importDefault(__webpack_require__(6230));
+exports.FormData = form_data_1.default;
+const axios_1 = tslib_1.__importDefault(__webpack_require__(9669));
+exports.Axios = axios_1.default;
+(0, platform_1.injectPlatformDeps)(browserDeps);
+var HaloRestAPIClient_1 = __webpack_require__(3388);
+Object.defineProperty(exports, "HaloRestAPIClient", ({ enumerable: true, get: function () { return HaloRestAPIClient_1.HaloRestAPIClient; } }));
+var HaloResponseHandler_1 = __webpack_require__(2862);
+Object.defineProperty(exports, "HaloResponseHandler", ({ enumerable: true, get: function () { return HaloResponseHandler_1.HaloResponseHandler; } }));
+var HaloRequestConfigBuilder_1 = __webpack_require__(9290);
+Object.defineProperty(exports, "HaloRequestConfigBuilder", ({ enumerable: true, get: function () { return HaloRequestConfigBuilder_1.HaloRequestConfigBuilder; } }));
+var http_1 = __webpack_require__(2992);
+Object.defineProperty(exports, "DefaultHttpClient", ({ enumerable: true, get: function () { return http_1.DefaultHttpClient; } }));
+//# sourceMappingURL=index.browser.js.map
+
+/***/ }),
+
+/***/ 6703:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.UnsupportedPlatformError = void 0;
+class UnsupportedPlatformError extends Error {
+    constructor(platform) {
+        const message = `This function is not supported in ${platform} environment`;
+        super(message);
+        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#Custom_Error_Types
+        // Maintains proper stack trace for where our error was thrown (only available on V8)
+        if (Error.captureStackTrace) {
+            Error.captureStackTrace(this, UnsupportedPlatformError);
+        }
+        this.name = 'UnsupportedPlatformError';
+        this.platform = platform;
+        // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, UnsupportedPlatformError.prototype);
+    }
+}
+exports.UnsupportedPlatformError = UnsupportedPlatformError;
+//# sourceMappingURL=UnsupportedPlatformError.js.map
+
+/***/ }),
+
+/***/ 5792:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getVersion = exports.buildBaseUrl = exports.buildFormDataValue = exports.buildHeaders = exports.buildPlatformDependentConfig = exports.getDefaultAuth = exports.getRequestToken = exports.readFileFromPath = void 0;
+const tslib_1 = __webpack_require__(655);
+const UnsupportedPlatformError_1 = __webpack_require__(6703);
+const readFileFromPath = () => {
+    throw new UnsupportedPlatformError_1.UnsupportedPlatformError('Browser');
+};
+exports.readFileFromPath = readFileFromPath;
+const getRequestToken = () => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
+    if (typeof halo === 'object' && halo !== null && typeof halo.getRequestToken === 'function') {
+        return halo.getRequestToken();
+    }
+    throw new Error('session authentication must specify a request token');
+});
+exports.getRequestToken = getRequestToken;
+const getDefaultAuth = () => {
+    return {
+        type: 'session',
+    };
+};
+exports.getDefaultAuth = getDefaultAuth;
+const buildPlatformDependentConfig = () => {
+    return {};
+};
+exports.buildPlatformDependentConfig = buildPlatformDependentConfig;
+const buildHeaders = () => {
+    return {};
+};
+exports.buildHeaders = buildHeaders;
+const buildFormDataValue = (data) => {
+    return new Blob([data]);
+};
+exports.buildFormDataValue = buildFormDataValue;
+const buildBaseUrl = (baseUrl) => {
+    if (typeof baseUrl === 'undefined') {
+        throw new Error('in browser environment, baseUrl is required');
+    }
+    return baseUrl;
+};
+exports.buildBaseUrl = buildBaseUrl;
+const getVersion = () => {
+    return PACKAGE_VERSION;
+};
+exports.getVersion = getVersion;
+//# sourceMappingURL=browser.js.map
+
+/***/ }),
+
+/***/ 8384:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.injectPlatformDeps = exports.platformDeps = void 0;
+exports.platformDeps = {
+    readFileFromPath: () => {
+        throw new Error('not implemented');
+    },
+    getRequestToken: () => {
+        throw new Error('not implemented');
+    },
+    getDefaultAuth: () => {
+        throw new Error('not implemented');
+    },
+    buildPlatformDependentConfig: () => {
+        throw new Error('not implemented');
+    },
+    buildHeaders: () => {
+        throw new Error('not implemented');
+    },
+    buildFormDataValue: () => {
+        throw new Error('not implemented');
+    },
+    buildBaseUrl: () => {
+        throw new Error('not implemented');
+    },
+    getVersion: () => {
+        throw new Error('not implemented');
+    },
+};
+const injectPlatformDeps = (deps) => {
+    exports.platformDeps.readFileFromPath = deps.readFileFromPath;
+    exports.platformDeps.getRequestToken = deps.getRequestToken;
+    exports.platformDeps.getDefaultAuth = deps.getDefaultAuth;
+    exports.platformDeps.buildPlatformDependentConfig = deps.buildPlatformDependentConfig;
+    exports.platformDeps.buildHeaders = deps.buildHeaders;
+    exports.platformDeps.buildFormDataValue = deps.buildFormDataValue;
+    exports.platformDeps.buildBaseUrl = deps.buildBaseUrl;
+    exports.platformDeps.getVersion = deps.getVersion;
+};
+exports.injectPlatformDeps = injectPlatformDeps;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ 3622:
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SESSION_TOKEN_KEY = void 0;
+exports.SESSION_TOKEN_KEY = '__REQUEST_TOKEN__';
+//# sourceMappingURL=auth.js.map
+
+/***/ }),
+
 /***/ 6838:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
@@ -5928,7 +8850,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "::-webkit-scrollbar{height:8px;width:8px}::-webkit-scrollbar-thumb{background:hsla(0,0%,63%,.2);border-radius:2em}::-webkit-scrollbar-track{background:0 0;border-radius:2em}.halo-comment{--comment-theme:var(--theme,#50bfff);--main:#24292f;--color-a:#e1e8ed;--color-b:#ebeef5;--color-c:#4a4a4a;--color-d:#bfbfbf;--color-e:#333;--color-f:#909399;--color-g:#50bfff;--color-h:#deecff;--bg-a:hsla(0,0%,100%,.8);--bg-b:rgba(243,248,255,.8);--bg-c:rgba(237,244,253,.75);--bg-d:hsla(0,0%,100%,.8);--bg-e:hsla(210,9%,96%,.25);--bg-f:rgba(214,239,255,.6);--bg-g:hsla(0,0%,96%,.8);--radius-inner:4px}.halo-comment.night{--comment-theme:var(--theme,#5d93db);--main:#999;--color-a:#414243;--color-b:#414243;--color-c:silver;--color-d:#848484;--color-e:silver;--color-f:#777;--color-g:#276b92;--color-h:#3a3b3f;--bg-a:rgba(40,39,39,.6);--bg-b:rgba(58,59,63,.5);--bg-c:rgba(65,68,74,.6);--bg-d:rgba(40,44,52,.8);--bg-e:rgba(36,36,36,.15);--bg-f:rgba(65,68,74,.6);--bg-g:rgba(40,39,39,.6)}.halo-comment.night iframe,.halo-comment.night img,.halo-comment.night svg,.halo-comment.night video{-webkit-filter:brightness(.8);filter:brightness(.8)}blockquote,body,dd,dl,dt,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,html,iframe,legend,li,ol,p,pre,textarea,ul{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}a{color:var(--comment-theme);cursor:pointer;text-decoration:none}a:hover{color:var(--color-e)}ul{list-style:disc}.btn{cursor:pointer;font-size:.9rem;padding:6px 14px;-webkit-box-sizing:border-box;box-sizing:border-box;color:var(--main);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid var(--color-a);border-radius:var(--radius-inner);background:hsla(0,0%,100%,.06)}.btn:hover{-webkit-filter:opacity(.8);filter:opacity(.8);color:var(--comment-theme)}.btn-primary,.btn:hover{border-color:var(--comment-theme)}.btn-primary{color:#fff;background:var(--comment-theme)}.btn-primary:hover{color:#fff}.halo-comment{font-size:1rem;color:var(--main)}.halo-comment::-moz-selection{color:#fff;background:var(--comment-theme)}.halo-comment::selection{color:#fff;background:var(--comment-theme)}.halo-comment .avatar-body{margin-right:6px}.halo-comment .avatar{display:block;-o-object-fit:cover;object-fit:cover;border-radius:100%;width:48px;height:48px;-webkit-transition:all .8s;transition:all .8s;border:1px solid var(--color-a);padding:3px}.halo-comment .avatar:hover{border-color:var(--comment-theme);-webkit-transform:rotate(1turn);transform:rotate(1turn)}.halo-comment .comment-editor{display:-webkit-box;display:-ms-flexbox;display:flex;margin-top:1.25rem;margin-bottom:1.25rem;-webkit-animation:top20 .5s;animation:top20 .5s}.halo-comment .comment-textarea{width:100%;margin-bottom:.5rem}.halo-comment .comment-textarea textarea{width:100%;min-height:90px}.halo-comment .edit-picker{float:left;margin-top:.3em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.halo-comment .edit-picker .edit-btn{cursor:pointer;color:#aeaeae}.halo-comment .edit-picker .edit-btn:not(:first-child){margin-left:6px}.halo-comment .edit-picker .edit-btn.edit-open,.halo-comment .edit-picker .edit-btn:hover{color:var(--comment-theme)}.halo-comment .edit-picker .edit-btn.edit-open svg,.halo-comment .edit-picker .edit-btn:hover svg{fill:var(--comment-theme)}.halo-comment .edit-picker .edit-btn svg{fill:#aeaeae;vertical-align:bottom}.halo-comment .emoji-fade-enter-active,.halo-comment .emoji-fade-leave-active{-webkit-transition:all .3s ease;transition:all .3s ease}.halo-comment .emoji-fade-enter,.halo-comment .emoji-fade-leave-to{opacity:0;max-height:0;-webkit-transform:translateY(-10px);transform:translateY(-10px)}.halo-comment .comment-form{-webkit-box-flex:1;-ms-flex:1 1 0px;flex:1 1 0}.halo-comment .comment-form>ul{list-style:none;float:right;margin:0;padding:0}.halo-comment .comment-form>ul li{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}.halo-comment .comment-form>ul li:not(:last-child){margin-right:.5rem}.halo-comment .comment-form .author-info{margin-bottom:.5rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}.halo-comment .comment-form .comment-preview,.halo-comment .comment-form input,.halo-comment .comment-form textarea{-webkit-box-shadow:none;box-shadow:none;border:1px solid var(--color-a);border-radius:var(--radius-inner);background:var(--bg-a);-webkit-box-sizing:border-box;box-sizing:border-box;padding:6px 10px;resize:vertical;-webkit-transition:border-color .2s;transition:border-color .2s;color:var(--main)}.halo-comment .comment-form .comment-preview:focus,.halo-comment .comment-form input:focus,.halo-comment .comment-form textarea:focus{outline:0;border-color:var(--comment-theme)}.halo-comment .comment-form .comment-preview.error,.halo-comment .comment-form input.error,.halo-comment .comment-form textarea.error{border-color:#f56c6c}.halo-comment .comment-form .comment-preview::-webkit-scrollbar,.halo-comment .comment-form input::-webkit-scrollbar,.halo-comment .comment-form textarea::-webkit-scrollbar{height:8px;width:8px}.halo-comment .comment-form .comment-preview::-webkit-scrollbar-thumb,.halo-comment .comment-form input::-webkit-scrollbar-thumb,.halo-comment .comment-form textarea::-webkit-scrollbar-thumb{background:hsla(0,0%,56%,.3);border-radius:2em}.halo-comment .comment-form .comment-preview{min-height:90px;margin-bottom:.5rem;overflow-wrap:break-word}.halo-comment .load-comment{text-align:center;padding-bottom:16px}.halo-comment .comment-alert{margin-top:10px;float:right;width:100%}.halo-comment .alert{color:#fff;padding:8px 16px;-webkit-animation:top20 .5s;animation:top20 .5s;-webkit-transition:opacity .6s;transition:opacity .6s;background-color:rgba(244,67,54,.8);border-radius:var(--radius-inner);margin-bottom:15px}.halo-comment .alert.warning{background-color:rgba(255,152,0,.8)}.halo-comment .alert.success{background-color:rgba(76,175,80,.8)}.halo-comment .alert.info{background-color:rgba(63,184,254,.8)}.halo-comment .alert .closebtn{float:right;margin-left:15px;color:#fff;font-weight:700;font-size:22px;line-height:16px;cursor:pointer;-webkit-transition:.3s;transition:.3s}.halo-comment .alert .closebtn:hover{color:var(--comment-theme)}.halo-comment .comment-empty{margin:30px 0;text-align:center;color:var(--color-f)}.halo-comment .children-nodes,.halo-comment .comment-nodes{padding:0;margin:0}.halo-comment .children-nodes .avatar{width:40px;height:40px}.halo-comment .comment{margin-top:10px;list-style-type:none}.halo-comment .unfold-reply{display:-webkit-box;display:-ms-flexbox;display:flex}.halo-comment .unfold-reply span{margin:10px 0 0 auto;color:var(--theme);font-size:.9em;cursor:pointer}.halo-comment .unfold-reply span:after{content:\">\";margin-left:2px;font-size:1.3em}.halo-comment .index-1{margin-top:20px;padding-bottom:20px}.halo-comment .index-1>.children-nodes{margin-left:56px}.halo-comment .index-1:not(:last-child){border-bottom:1px solid var(--color-b)}.halo-comment .comment-body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transition:all .4s;transition:all .4s}.halo-comment .comment-body:hover .comment-reply{opacity:1;pointer-events:auto}.halo-comment .comment-action{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.halo-comment .comment-title{font-size:1.3em}.halo-comment .comment-operation{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.halo-comment .comment-bullet-screen{font-size:1.1em;line-height:1.1;height:1em;font-weight:600;font-family:ui-serif,serif!important;cursor:pointer;position:relative;margin-right:6px;color:#aeaeae;background-image:linear-gradient(45deg,transparent 46%,#aeaeae 0,#aeaeae 54%,transparent 0)}.halo-comment .comment-bullet-screen.operation-open{color:var(--comment-theme);background:none}.halo-comment .comment-refresh{width:1.2em;height:1.2em;fill:var(--comment-theme);cursor:pointer}.halo-comment .comment-meta .comment-author{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.halo-comment .comment-meta .author-meta{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.halo-comment .comment-meta .author-name{font-size:1.2em;font-weight:700;color:var(--main);text-decoration:none;margin-right:5px}.halo-comment .comment-meta .author-name:hover{color:var(--comment-theme)}.halo-comment .comment-meta .is-admin{padding:0 4px;height:1.6em;line-height:1.6em;font-size:.7em;color:#fb7299;border-radius:3px;border:1px solid #fb7299;background:rgba(255,136,169,.3)}.halo-comment .comment-meta .comment-reply{opacity:0;pointer-events:none;-webkit-transition:all .2s;transition:all .2s;padding:2px 8px}.halo-comment .comment-meta .comment-info{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;font-size:.9em}.halo-comment .comment-meta .comment-time{color:var(--color-c)}.halo-comment .comment-meta .useragent-info{color:var(--color-d)}.halo-comment .comment-main{-webkit-box-flex:1;-ms-flex:1 1 0px;flex:1 1 0;width:0}.halo-comment .comment-main .markdown-body{padding:10px;margin-top:5px;background:var(--bg-b);border-radius:0 8px 8px 8px}.halo-comment .comment-active,.halo-comment .comment-ref{-webkit-transform:translateY(-3px);transform:translateY(-3px)}.halo-comment .comment-active .author-name,.halo-comment .comment-active .comment-time,.halo-comment .comment-active .useragent-info,.halo-comment .comment-ref .author-name,.halo-comment .comment-ref .comment-time,.halo-comment .comment-ref .useragent-info{color:var(--comment-theme)}.halo-comment .comment-active .markdown-body,.halo-comment .comment-ref .markdown-body{background:var(--color-h);-webkit-box-shadow:0 24px 20px -14px rgba(63,83,122,.3);box-shadow:0 24px 20px -14px rgba(63,83,122,.3)}@media(max-width:1023px){.halo-comment .avatar{width:38px;height:38px}.halo-comment .children-nodes .avatar{width:30px;height:30px}.halo-comment .index-1>.children-nodes{margin-left:46px}}@media(max-width:768px){.halo-comment .author-info{grid-template-columns:auto!important}.halo-comment .comment-meta .comment-reply{opacity:1;pointer-events:auto}}@media(max-width:511px){.halo-comment .useragent-info{display:none!important}.halo-comment .avatar{width:30px;height:30px}.halo-comment .children-nodes .avatar{width:24px;height:24px}.halo-comment .markdown-body{margin-left:-25px}.halo-comment .index-1>.children-nodes{margin-left:19px}.halo-comment .children-nodes .markdown-body{margin-left:-22px}}@media(max-height:500px),(max-width:768px){.bullet-screen-container,.comment-bullet-screen{display:none}}@-webkit-keyframes top20{0%{opacity:0;-webkit-transform:translateY(-20px);transform:translateY(-20px)}to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes top20{0%{opacity:0;-webkit-transform:translateY(-20px);transform:translateY(-20px)}to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}.markdown-body>.comment-reference{margin-right:6px;float:left}.markdown-body>.comment-reference+.markdown-content>:first-child:not(p):not(a):not(.dream-emoji){margin-top:1.6rem}.markdown-content>:first-child{margin-top:0}.markdown-content>:last-child{margin-bottom:0}.markdown-content p{line-height:1.5em;margin-bottom:8px}.markdown-content h1,.markdown-content h2,.markdown-content h3,.markdown-content h4,.markdown-content h5,.markdown-content h6{color:var(--color-e);margin-bottom:12px}.markdown-content h1,.markdown-content h2{padding-bottom:.2em;border-bottom:1px solid var(--color-b)}.markdown-content h1{margin:28px 0 18px 0;font-size:1.45em}.markdown-content h2{margin:24px 0 16px 0;font-size:1.25em}.markdown-content h3{margin:20px 0 15px 0;font-size:1.2em}.markdown-content h4{font-size:1.15em}.markdown-content h5,.markdown-content h6{font-size:1em}.markdown-content img:not([class]){max-width:100%;max-height:500px;-webkit-transition:all .35s;transition:all .35s;margin:5px 0;border-radius:5px;cursor:pointer}.markdown-content img:not([class]):hover{-webkit-box-shadow:0 34px 20px -24px rgba(136,161,206,.3);box-shadow:0 34px 20px -24px rgba(136,161,206,.3)}.markdown-content a:not([class]){line-height:1.5em;color:var(--comment-theme);background-image:linear-gradient(transparent calc(100% - 1px),var(--comment-theme) 1px);background-repeat:no-repeat;background-size:0 100%;-webkit-transition:all .35s ease-in-out;transition:all .35s ease-in-out}.markdown-content a:not([class]):hover{color:var(--comment-theme);background-size:100% 100%}.markdown-content ol,.markdown-content ul{margin-bottom:8px;padding-left:30px}.markdown-content ol li,.markdown-content ul li{line-height:1.5em}.markdown-content ol li.task-list-item,.markdown-content ul li.task-list-item{list-style:none;margin-left:-26px}.markdown-content table{width:100%;max-width:100%;table-layout:fixed;border-collapse:unset;color:var(--main);background:var(--bg-d);margin-bottom:8px;overflow:hidden;font-size:.95em;border:1px solid var(--color-b);border-radius:var(--radius-inner)}.markdown-content table td,.markdown-content table th{padding:8px;border-right:1px solid var(--color-b);border-bottom:1px solid var(--color-b)}.markdown-content table thead th{font-weight:500;background:var(--bg-c)}.markdown-content table thead th:last-child{border-right:none}.markdown-content table tbody tr{-webkit-transition:background .35s;transition:background .35s}.markdown-content table tbody tr:nth-child(2n){background:var(--bg-e)}.markdown-content table tbody tr:last-child td{border-bottom:none}.markdown-content table tbody tr:hover{background:hsla(0,0%,70%,.15)}.markdown-content table tbody tr td:last-child{border-right:none}.markdown-content pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;margin-bottom:8px;background-color:var(--bg-a);border-radius:6px}.markdown-content :not(pre)>code{font-size:.9em;color:var(--color-c);margin:0 2px;padding:3px 6px;white-space:normal;vertical-align:baseline;word-break:break-word;background:rgba(175,184,193,.2);border-radius:var(--radius-inner)}.markdown-content blockquote{line-height:1.5em;margin-bottom:8px;padding:6px 10px;color:var(--color-f);background:var(--bg-f);border-left:5px solid var(--color-g);border-radius:var(--radius-inner)}.markdown-content blockquote *{margin:0!important}.markdown-content .dream-emoji{width:1.6em;height:1.6em;margin:auto 2px;vertical-align:middle}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "::-webkit-scrollbar{height:8px;width:8px}::-webkit-scrollbar-thumb{background:hsla(0,0%,63%,.2);border-radius:2em}::-webkit-scrollbar-track{background:0 0;border-radius:2em}.halo-comment{--comment-theme:var(--theme,#50bfff);--main:#24292f;--color-a:#e1e8ed;--color-b:#ebeef5;--color-c:#4a4a4a;--color-d:#bfbfbf;--color-e:#333;--color-f:#909399;--color-g:#50bfff;--color-h:#deecff;--bg-a:hsla(0,0%,100%,.8);--bg-b:rgba(243,248,255,.8);--bg-c:rgba(237,244,253,.75);--bg-d:hsla(0,0%,100%,.8);--bg-e:hsla(210,9%,96%,.25);--bg-f:rgba(214,239,255,.6);--bg-g:hsla(0,0%,96%,.8);--radius-inner:4px}.halo-comment.night{--comment-theme:var(--theme,#5d93db);--main:#999;--color-a:#414243;--color-b:#414243;--color-c:silver;--color-d:#848484;--color-e:silver;--color-f:#777;--color-g:#276b92;--color-h:#3a3b3f;--bg-a:rgba(40,39,39,.6);--bg-b:rgba(58,59,63,.5);--bg-c:rgba(65,68,74,.6);--bg-d:rgba(40,44,52,.8);--bg-e:rgba(36,36,36,.15);--bg-f:rgba(65,68,74,.6);--bg-g:rgba(40,39,39,.6)}.halo-comment.night iframe,.halo-comment.night img,.halo-comment.night svg,.halo-comment.night video{-webkit-filter:brightness(.8);filter:brightness(.8)}blockquote,body,dd,dl,dt,fieldset,figure,h1,h2,h3,h4,h5,h6,hr,html,iframe,legend,li,ol,p,pre,textarea,ul{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}a{color:var(--comment-theme);cursor:pointer;text-decoration:none}a:hover{color:var(--color-e)}ul{list-style:disc}.btn{cursor:pointer;font-size:.9rem;padding:6px 14px;-webkit-box-sizing:border-box;box-sizing:border-box;color:var(--main);-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;border:1px solid var(--color-a);border-radius:var(--radius-inner);background:hsla(0,0%,100%,.06)}.btn:hover{-webkit-filter:opacity(.8);filter:opacity(.8);color:var(--comment-theme)}.btn-primary,.btn:hover{border-color:var(--comment-theme)}.btn-primary{color:#fff;background:var(--comment-theme)}.btn-primary:hover{color:#fff}.halo-comment{font-size:1rem;color:var(--main)}.halo-comment::-moz-selection{color:#fff;background:var(--comment-theme)}.halo-comment::selection{color:#fff;background:var(--comment-theme)}.halo-comment .avatar-body{margin-right:6px}.halo-comment .avatar{display:block;-o-object-fit:cover;object-fit:cover;border-radius:100%;width:48px;height:48px;-webkit-transition:all .8s;transition:all .8s;border:1px solid var(--color-a);padding:3px}.halo-comment .avatar:hover{border-color:var(--comment-theme);-webkit-transform:rotate(1turn);transform:rotate(1turn)}.halo-comment .blogger-avatar{position:relative;border-color:var(--comment-theme)}.halo-comment .blogger-avatar svg{width:20px;height:20px;position:absolute;bottom:-1px;right:-1px}.halo-comment .comment-editor{display:-webkit-box;display:-ms-flexbox;display:flex;margin-top:1.25rem;margin-bottom:1.25rem;-webkit-animation:top20 .5s;animation:top20 .5s}.halo-comment .comment-textarea{width:100%;margin-bottom:.5rem}.halo-comment .comment-textarea textarea{width:100%;min-height:90px}.halo-comment .edit-picker{float:left;margin-top:.3em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.halo-comment .edit-picker .edit-btn{cursor:pointer;color:#aeaeae}.halo-comment .edit-picker .edit-btn:not(:first-child){margin-left:6px}.halo-comment .edit-picker .edit-btn.edit-open,.halo-comment .edit-picker .edit-btn:hover{color:var(--comment-theme)}.halo-comment .edit-picker .edit-btn.edit-open svg,.halo-comment .edit-picker .edit-btn:hover svg{fill:var(--comment-theme)}.halo-comment .edit-picker .edit-btn svg{fill:#aeaeae;vertical-align:bottom}.halo-comment .emoji-fade-enter-active,.halo-comment .emoji-fade-leave-active{-webkit-transition:all .3s ease;transition:all .3s ease}.halo-comment .emoji-fade-enter,.halo-comment .emoji-fade-leave-to{opacity:0;max-height:0;-webkit-transform:translateY(-10px);transform:translateY(-10px)}.halo-comment .comment-form{-webkit-box-flex:1;-ms-flex:1 1 0px;flex:1 1 0}.halo-comment .comment-form>ul{list-style:none;float:right;margin:0;padding:0}.halo-comment .comment-form>ul li{display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex}.halo-comment .comment-form>ul li:not(:last-child){margin-right:.5rem}.halo-comment .comment-form .author-info{margin-bottom:.5rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}.halo-comment .comment-form .blogger-info{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;margin-bottom:.5rem}.halo-comment .comment-form .blogger-name{font-size:1.2em;font-weight:700;color:var(--main)}.halo-comment .comment-form .blogger-email{font-size:.9em;color:var(--color-c)}.halo-comment .comment-form .blogger-info,.halo-comment .comment-form .comment-preview,.halo-comment .comment-form input,.halo-comment .comment-form textarea{-webkit-box-shadow:none;box-shadow:none;border:1px solid var(--color-a);border-radius:var(--radius-inner);background:var(--bg-a);-webkit-box-sizing:border-box;box-sizing:border-box;padding:6px 10px;resize:vertical;-webkit-transition:border-color .2s;transition:border-color .2s;color:var(--main)}.halo-comment .comment-form .blogger-info:focus,.halo-comment .comment-form .comment-preview:focus,.halo-comment .comment-form input:focus,.halo-comment .comment-form textarea:focus{outline:0;border-color:var(--comment-theme)}.halo-comment .comment-form .blogger-info.error,.halo-comment .comment-form .comment-preview.error,.halo-comment .comment-form input.error,.halo-comment .comment-form textarea.error{border-color:#f56c6c}.halo-comment .comment-form .blogger-info::-webkit-scrollbar,.halo-comment .comment-form .comment-preview::-webkit-scrollbar,.halo-comment .comment-form input::-webkit-scrollbar,.halo-comment .comment-form textarea::-webkit-scrollbar{height:8px;width:8px}.halo-comment .comment-form .blogger-info::-webkit-scrollbar-thumb,.halo-comment .comment-form .comment-preview::-webkit-scrollbar-thumb,.halo-comment .comment-form input::-webkit-scrollbar-thumb,.halo-comment .comment-form textarea::-webkit-scrollbar-thumb{background:hsla(0,0%,56%,.3);border-radius:2em}.halo-comment .comment-form .comment-preview{min-height:90px;margin-bottom:.5rem;overflow-wrap:break-word}.halo-comment .load-comment{text-align:center;padding-bottom:16px}.halo-comment .comment-alert{margin-top:10px;float:right;width:100%}.halo-comment .alert{color:#fff;padding:8px 16px;-webkit-animation:top20 .5s;animation:top20 .5s;-webkit-transition:opacity .6s;transition:opacity .6s;background-color:rgba(244,67,54,.8);border-radius:var(--radius-inner);margin-bottom:15px}.halo-comment .alert.warning{background-color:rgba(255,152,0,.8)}.halo-comment .alert.success{background-color:rgba(76,175,80,.8)}.halo-comment .alert.info{background-color:rgba(63,184,254,.8)}.halo-comment .alert .closebtn{float:right;margin-left:15px;color:#fff;font-weight:700;font-size:22px;line-height:16px;cursor:pointer;-webkit-transition:.3s;transition:.3s}.halo-comment .alert .closebtn:hover{color:var(--comment-theme)}.halo-comment .comment-empty{margin:30px 0;text-align:center;color:var(--color-f)}.halo-comment .children-nodes,.halo-comment .comment-nodes{padding:0;margin:0}.halo-comment .children-nodes .avatar{width:40px;height:40px}.halo-comment .comment{margin-top:10px;list-style-type:none}.halo-comment .unfold-reply{display:-webkit-box;display:-ms-flexbox;display:flex}.halo-comment .unfold-reply span{margin:10px 0 0 auto;color:var(--theme);font-size:.9em;cursor:pointer}.halo-comment .unfold-reply span:after{content:\">\";margin-left:2px;font-size:1.3em}.halo-comment .index-1{margin-top:20px;padding-bottom:20px}.halo-comment .index-1>.children-nodes{margin-left:56px}.halo-comment .index-1:not(:last-child){border-bottom:1px solid var(--color-b)}.halo-comment .comment-body{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-transition:all .4s;transition:all .4s}.halo-comment .comment-body:hover .comment-reply{opacity:1;pointer-events:auto}.halo-comment .comment-action{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.halo-comment .comment-title{font-size:1.3em}.halo-comment .comment-operation{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.halo-comment .comment-bullet-screen{font-size:1.1em;line-height:1.1;height:1em;font-weight:600;font-family:ui-serif,serif!important;cursor:pointer;position:relative;margin-right:6px;color:#aeaeae;background-image:linear-gradient(45deg,transparent 46%,#aeaeae 0,#aeaeae 54%,transparent 0)}.halo-comment .comment-bullet-screen.operation-open{color:var(--comment-theme);background:none}.halo-comment .comment-refresh{width:1.2em;height:1.2em;fill:var(--comment-theme);cursor:pointer}.halo-comment .comment-meta .comment-author{-webkit-box-flex:1;-ms-flex:1;flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}.halo-comment .comment-meta .author-meta{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.halo-comment .comment-meta .author-name{font-size:1.2em;font-weight:700;color:var(--main);text-decoration:none;margin-right:5px}.halo-comment .comment-meta .author-name:hover{color:var(--comment-theme)}.halo-comment .comment-meta .is-admin{padding:0 4px;height:1.6em;line-height:1.6em;font-size:.7em;color:#fb7299;border-radius:3px;border:1px solid #fb7299;background:rgba(255,136,169,.3)}.halo-comment .comment-meta .comment-reply{opacity:0;pointer-events:none;-webkit-transition:all .2s;transition:all .2s;padding:2px 8px}.halo-comment .comment-meta .comment-info{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;font-size:.9em}.halo-comment .comment-meta .comment-time{color:var(--color-c)}.halo-comment .comment-meta .useragent-info{color:var(--color-d)}.halo-comment .comment-main{-webkit-box-flex:1;-ms-flex:1 1 0px;flex:1 1 0;width:0}.halo-comment .comment-main .markdown-body{padding:10px;margin-top:5px;background:var(--bg-b);border-radius:0 8px 8px 8px}.halo-comment .comment-active,.halo-comment .comment-ref{-webkit-transform:translateY(-3px);transform:translateY(-3px)}.halo-comment .comment-active .author-name,.halo-comment .comment-active .comment-time,.halo-comment .comment-active .useragent-info,.halo-comment .comment-ref .author-name,.halo-comment .comment-ref .comment-time,.halo-comment .comment-ref .useragent-info{color:var(--comment-theme)}.halo-comment .comment-active .markdown-body,.halo-comment .comment-ref .markdown-body{background:var(--color-h);-webkit-box-shadow:0 24px 20px -14px rgba(63,83,122,.3);box-shadow:0 24px 20px -14px rgba(63,83,122,.3)}@media(max-width:1023px){.halo-comment .avatar{width:38px;height:38px}.halo-comment .blogger-avatar svg{width:18px;height:18px}.halo-comment .children-nodes .avatar{width:30px;height:30px}.halo-comment .index-1>.children-nodes{margin-left:46px}}@media(max-width:768px){.halo-comment .author-info{grid-template-columns:auto!important}.halo-comment .comment-meta .comment-reply{opacity:1;pointer-events:auto}}@media(max-width:511px){.halo-comment .useragent-info{display:none!important}.halo-comment .avatar{width:30px;height:30px}.halo-comment .blogger-avatar svg{width:16px;height:16px}.halo-comment .children-nodes .avatar{width:24px;height:24px}.halo-comment .markdown-body{margin-left:-25px}.halo-comment .index-1>.children-nodes{margin-left:19px}.halo-comment .children-nodes .markdown-body{margin-left:-22px}}@media(max-height:500px),(max-width:768px){.bullet-screen-container,.comment-bullet-screen{display:none}}@-webkit-keyframes top20{0%{opacity:0;-webkit-transform:translateY(-20px);transform:translateY(-20px)}to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}@keyframes top20{0%{opacity:0;-webkit-transform:translateY(-20px);transform:translateY(-20px)}to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}.markdown-body>.comment-reference{margin-right:6px;float:left}.markdown-body>.comment-reference+.markdown-content>:first-child:not(p):not(a):not(.dream-emoji){margin-top:1.6rem}.markdown-content>:first-child{margin-top:0}.markdown-content>:last-child{margin-bottom:0}.markdown-content p{line-height:1.5em;margin-bottom:8px}.markdown-content h1,.markdown-content h2,.markdown-content h3,.markdown-content h4,.markdown-content h5,.markdown-content h6{color:var(--color-e);margin-bottom:12px}.markdown-content h1,.markdown-content h2{padding-bottom:.2em;border-bottom:1px solid var(--color-b)}.markdown-content h1{margin:28px 0 18px 0;font-size:1.45em}.markdown-content h2{margin:24px 0 16px 0;font-size:1.25em}.markdown-content h3{margin:20px 0 15px 0;font-size:1.2em}.markdown-content h4{font-size:1.15em}.markdown-content h5,.markdown-content h6{font-size:1em}.markdown-content img:not([class]){max-width:100%;max-height:500px;-webkit-transition:all .35s;transition:all .35s;margin:5px 0;border-radius:5px;cursor:pointer}.markdown-content img:not([class]):hover{-webkit-box-shadow:0 34px 20px -24px rgba(136,161,206,.3);box-shadow:0 34px 20px -24px rgba(136,161,206,.3)}.markdown-content a:not([class]){line-height:1.5em;color:var(--comment-theme);background-image:linear-gradient(transparent calc(100% - 1px),var(--comment-theme) 1px);background-repeat:no-repeat;background-size:0 100%;-webkit-transition:all .35s ease-in-out;transition:all .35s ease-in-out}.markdown-content a:not([class]):hover{color:var(--comment-theme);background-size:100% 100%}.markdown-content ol,.markdown-content ul{margin-bottom:8px;padding-left:30px}.markdown-content ol li,.markdown-content ul li{line-height:1.5em}.markdown-content ol li.task-list-item,.markdown-content ul li.task-list-item{list-style:none;margin-left:-26px}.markdown-content table{width:100%;max-width:100%;table-layout:fixed;border-collapse:unset;color:var(--main);background:var(--bg-d);margin-bottom:8px;overflow:hidden;font-size:.95em;border:1px solid var(--color-b);border-radius:var(--radius-inner)}.markdown-content table td,.markdown-content table th{padding:8px;border-right:1px solid var(--color-b);border-bottom:1px solid var(--color-b)}.markdown-content table thead th{font-weight:500;background:var(--bg-c)}.markdown-content table thead th:last-child{border-right:none}.markdown-content table tbody tr{-webkit-transition:background .35s;transition:background .35s}.markdown-content table tbody tr:nth-child(2n){background:var(--bg-e)}.markdown-content table tbody tr:last-child td{border-bottom:none}.markdown-content table tbody tr:hover{background:hsla(0,0%,70%,.15)}.markdown-content table tbody tr td:last-child{border-right:none}.markdown-content pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;margin-bottom:8px;background-color:var(--bg-a);border-radius:6px}.markdown-content :not(pre)>code{font-size:.9em;color:var(--color-c);margin:0 2px;padding:3px 6px;white-space:normal;vertical-align:baseline;word-break:break-word;background:rgba(175,184,193,.2);border-radius:var(--radius-inner)}.markdown-content blockquote{line-height:1.5em;margin-bottom:8px;padding:6px 10px;color:var(--color-f);background:var(--bg-f);border-left:5px solid var(--color-g);border-radius:var(--radius-inner)}.markdown-content blockquote *{margin:0!important}.markdown-content .dream-emoji{width:1.6em;height:1.6em;margin:auto 2px;vertical-align:middle}", ""]);
 // Exports
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -10473,7 +13395,7 @@ function wrap (Vue, Component) {
 
 // EXTERNAL MODULE: ./node_modules/css-loader/dist/runtime/api.js
 var api = __webpack_require__(3645);
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=494099ad&shadow
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=7607c6ac&shadow
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.options !== undefined)?_c('div',{staticClass:"halo-comment",class:_vm.mergedConfigs.night ? 'night' : '',attrs:{"id":"halo-comment","stop-bullet-screen":_vm.stopBulletScreen}},[_c('keep-alive',[_c('comment-editor',{attrs:{"configs":_vm.mergedConfigs,"options":_vm.options,"target":_vm.target,"targetId":_vm.id}})],1),(!_vm.mergedConfigs.autoLoad && !_vm.list.loaded)?_c('div',{staticClass:"load-comment"},[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleGetComments}},[_vm._v("加载评论")])]):_vm._e(),(_vm.list.loaded)?_c('div',{staticClass:"comment-action"},[_c('h3',{staticClass:"comment-title"},[_vm._v(_vm._s(_vm.list.total)+" 条评论")]),_c('div',{staticClass:"comment-operation"},[(_vm.mergedConfigs.enableBulletScreen)?_c('span',{staticClass:"comment-bullet-screen",class:_vm.stopBulletScreen ? '' : 'operation-open',on:{"click":function($event){_vm.stopBulletScreen = !_vm.stopBulletScreen}}},[_vm._v("弹")]):_vm._e(),_c('svg',{staticClass:"comment-refresh",attrs:{"viewBox":"0 0 1024 1024","xmlns":"http://www.w3.org/2000/svg"},on:{"click":function($event){return _vm.handlePaginationChange(0)}}},[_c('path',{attrs:{"d":"M55.935033 264.48948c0 0 85.897017-132.548409 221.81443-203.673173 135.916406-71.121743 303.368504-50.646859 413.187968 18.319527 109.819465 68.970415 146.791894 127.160016 146.791894 127.160016l94.59499-53.879895c0 0 19.576483-9.697092 19.576483 12.932142l0 338.379961c0 0 0 30.17399-22.837719 19.395191-19.210878-9.062571-226.959086-127.198289-292.424528-164.466828-35.950145-16.035251-4.365101-29.062068-4.365101-29.062068l91.284402-52.173738c0 0-52.068992-65.209619-128.278989-99.744682-81.576231-42.501826-157.948384-47.541735-251.497925-12.224097-61.002644 23.025054-132.823368 81.988166-184.553949 169.082716L55.935033 264.48948 55.935033 264.48948 55.935033 264.48948zM904.056909 711.697844c0 0-85.897017 132.550423-221.816444 203.671159-135.917413 71.12275-303.366489 50.651895-413.186961-18.315498-109.825508-68.972429-146.790886-127.165052-146.790886-127.165052L27.662591 823.768348c0 0-19.572454 9.703135-19.572454-12.932142L8.090137 472.459267c0 0 0-30.170968 22.831676-19.397205 19.211885 9.067607 226.965129 127.198289 292.430571 164.470856 35.950145 16.035251 4.366109 29.058039 4.366109 29.058039l-91.285409 52.175753c0 0 52.071006 65.206598 128.279996 99.744682 81.57321 42.498804 157.942341 47.540728 251.496918 12.222082 60.998616-23.026061 132.820346-81.983131 184.546898-169.082716L904.056909 711.697844 904.056909 711.697844 904.056909 711.697844zM904.056909 711.697844"}})])])]):_vm._e(),_c('comment-loading',{directives:[{name:"show",rawName:"v-show",value:(_vm.list.loading),expression:"list.loading"}],attrs:{"configs":_vm.mergedConfigs}}),(_vm.list.data.length >= 1)?_c('ul',{staticClass:"comment-nodes"},[_vm._l((_vm.list.data),function(comment,index){return [_c('CommentNode',{key:index,attrs:{"comment":comment,"replyNum":_vm.mergedConfigs.unfoldReplyNum,"configs":_vm.mergedConfigs,"options":_vm.options,"target":_vm.target,"targetId":_vm.id}})]})],2):(_vm.list.loaded && !_vm.list.loading)?_c('div',{staticClass:"comment-empty"},[_vm._v("暂无评论")]):_vm._e(),(_vm.list.pages > 1)?_c('pagination',{attrs:{"page":_vm.list.params.page,"size":_vm.list.size,"total":_vm.list.total},on:{"change":_vm.handlePaginationChange}}):_vm._e(),(_vm.mergedConfigs.enableBulletScreen)?_c('bullet-screen',{attrs:{"target":_vm.target,"id":_vm.id,"configs":_vm.mergedConfigs,"options":_vm.options,"stop-bullet-screen":_vm.stopBulletScreen},on:{"update:stopBulletScreen":function($event){_vm.stopBulletScreen=$event},"update:stop-bullet-screen":function($event){_vm.stopBulletScreen=$event}}}):_vm._e()],1):_vm._e()}
 var staticRenderFns = []
 
@@ -13263,9 +16185,9 @@ const lexer = Lexer.lex;
 
 
 
-;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=a9a47d74&
-var CommentEditorvue_type_template_id_a9a47d74_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"avatar-body"},[_c('avatar',{staticStyle:{"cursor":"pointer"},attrs:{"src":_vm.avatar,"configs":_vm.configs,"title":"点击头像试试"},on:{"click":_vm.randomAuthor}})],1),_c('form',{staticClass:"comment-form"},[_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"id":"author","aria-required":"true","placeholder":(this.configs.anonymousUserName ? '' : '* ') + (this.configs.getQQInfo ? '昵称（输入QQ自动获取）' : '昵称'),"required":"required","type":"text"},domProps:{"value":(_vm.comment.author)},on:{"blur":function($event){_vm.configs.getQQInfo && _vm.handleQQInfo()},"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],class:!this.comment.email || _vm.isEmail() ? '' : 'error',attrs:{"id":"email","placeholder":"邮箱","type":"text"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"id":"authorUrl","placeholder":"网址","type":"text"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.previewMode),expression:"!previewMode"}],staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",class:!_vm.comment.content || _vm.comment.content.length < 1023 ? '' : 'error',attrs:{"placeholder":_vm.options.comment_content_placeholder || '撰写评论...',"aria-required":"true","required":"required"},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}}),_c('span',{staticClass:"edit-picker"},[_c('span',{staticClass:"edit-btn",class:_vm.emojiDialogVisible ? 'edit-open' : '',on:{"click":_vm.handleToggleDialogEmoji}},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","width":"18","height":"18"}},[_vm._v(" > "),_c('path',{attrs:{"d":"M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"}})])]),(_vm.configs.enableImageUpload)?_c('span',{staticClass:"edit-btn",class:_vm.imageDialogVisible ? 'edit-open' : '',on:{"click":_vm.handleImageUpload}},[_c('svg',{attrs:{"viewBox":"0 0 1024 1024","xmlns":"http://www.w3.org/2000/svg","width":"18","height":"18"}},[_c('path',{attrs:{"d":"M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64h768zM288 409.6L128 569.536V832h768v-83.2l-204.8-204.8-134.4 134.4-268.8-268.8zM896 192H128v288L288 320l268.8 268.8 134.4-134.4 204.8 204.8V192z"}}),_c('path',{attrs:{"d":"M774.08 356.736a44.8 44.8 0 1 0 0-89.6 44.8 44.8 0 0 0 0 89.6z"}})])]):_vm._e(),_c('transition',{attrs:{"name":"emoji-fade"}},[_c('keep-alive',[(_vm.emojiDialogVisible)?_c('EmojiPicker',{attrs:{"pack":_vm.emojiPack},on:{"select":_vm.handleSelectEmoji}}):_vm._e()],1)],1)],1)]),(_vm.previewMode)?_c('div',{staticClass:"comment-preview markdown-content",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}):_vm._e(),_c('ul',[(this.replyComment)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.globalData.replyId = 0}}},[_vm._v("取消")])]):_vm._e(),(_vm.comment.content)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.previewMode = !_vm.previewMode}}},[_vm._v(" "+_vm._s(_vm.previewMode ? '编辑' : '预览')+" ")])]):_vm._e(),_c('li',[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisible)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisible)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisible)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])}
-var CommentEditorvue_type_template_id_a9a47d74_staticRenderFns = []
+;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=144397f2&
+var CommentEditorvue_type_template_id_144397f2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"avatar-body"},[(_vm.configs.enableBloggerOperation && _vm.bloggerComment)?_c('div',{staticClass:"blogger-avatar",attrs:{"title":"博主登录"}},[_c('avatar',{staticStyle:{"cursor":"pointer"},attrs:{"src":_vm.avatar,"configs":_vm.configs,"title":"点击头像试试"},on:{"click":_vm.randomAuthor}}),_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 170 170","xml:space":"preserve"}},[_c('path',{attrs:{"fill":"var(--comment-theme)","d":"M114.7,34.7c-19.4-41-38.7-41-58.1,0C11.4,31,1.8,47.7,27.6,85c-25.8,37.3-16.2,54,29,50.3c19.4,41,38.7,41,58.1,0\n\tc45.2,3.7,54.9-13,29.1-50.3C169.6,47.7,159.9,31,114.7,34.7z M82.4,110.9"}}),_c('path',{attrs:{"fill":"rgba(255, 255, 255, 0.8)","d":"M117.4,75.9l-35,35c-2.6,2.6-6.9,2.6-9.6,0L50.5,88.6c-2.6-2.6-2.6-6.9,0-9.6s6.9-2.6,9.6,0l17.5,17.5\n\tl30.2-30.2c2.6-2.6,6.9-2.6,9.6,0C120,68.9,120,73.2,117.4,75.9L117.4,75.9z"}})])],1):_c('avatar',{staticStyle:{"cursor":"pointer"},attrs:{"src":_vm.avatar,"configs":_vm.configs,"title":"点击头像试试"},on:{"click":_vm.randomAuthor}})],1),_c('form',{staticClass:"comment-form"},[(_vm.configs.enableBloggerOperation && _vm.bloggerComment)?_c('div',{staticClass:"blogger-info"},[_c('div',[_c('p',{staticClass:"blogger-name"},[_vm._v(_vm._s(this.globalData.blogger.nickname))]),_c('p',{staticClass:"blogger-email"},[_vm._v(_vm._s(this.globalData.blogger.email))])]),_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.bloggerComment = false}}},[_vm._v("切换访客")])]):_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"id":"author","aria-required":"true","placeholder":(this.configs.anonymousUserName ? '' : '* ') + (this.configs.getQQInfo ? '昵称（输入QQ自动获取）' : '昵称'),"required":"required","type":"text"},domProps:{"value":(_vm.comment.author)},on:{"blur":function($event){_vm.configs.getQQInfo && _vm.handleQQInfo()},"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],class:!this.comment.email || _vm.isEmail() ? '' : 'error',attrs:{"id":"email","placeholder":"邮箱","type":"text"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"id":"authorUrl","placeholder":"网址","type":"text"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.previewMode),expression:"!previewMode"}],staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",class:!_vm.comment.content || _vm.comment.content.length < 1023 ? '' : 'error',attrs:{"placeholder":_vm.options.comment_content_placeholder || '撰写评论...',"aria-required":"true","required":"required"},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}}),_c('span',{staticClass:"edit-picker"},[_c('span',{staticClass:"edit-btn",class:_vm.emojiDialogVisible ? 'edit-open' : '',on:{"click":_vm.handleToggleDialogEmoji}},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","width":"18","height":"18"}},[_vm._v(" > "),_c('path',{attrs:{"d":"M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"}})])]),(_vm.configs.enableImageUpload)?_c('span',{staticClass:"edit-btn",class:_vm.imageDialogVisible ? 'edit-open' : '',on:{"click":_vm.handleImageUpload}},[_c('svg',{attrs:{"viewBox":"0 0 1024 1024","xmlns":"http://www.w3.org/2000/svg","width":"18","height":"18"}},[_c('path',{attrs:{"d":"M896 128a64 64 0 0 1 64 64v640a64 64 0 0 1-64 64H128a64 64 0 0 1-64-64V192a64 64 0 0 1 64-64h768zM288 409.6L128 569.536V832h768v-83.2l-204.8-204.8-134.4 134.4-268.8-268.8zM896 192H128v288L288 320l268.8 268.8 134.4-134.4 204.8 204.8V192z"}}),_c('path',{attrs:{"d":"M774.08 356.736a44.8 44.8 0 1 0 0-89.6 44.8 44.8 0 0 0 0 89.6z"}})])]):_vm._e(),_c('transition',{attrs:{"name":"emoji-fade"}},[_c('keep-alive',[(_vm.emojiDialogVisible)?_c('EmojiPicker',{attrs:{"pack":_vm.emojiPack},on:{"select":_vm.handleSelectEmoji}}):_vm._e()],1)],1)],1)]),(_vm.previewMode)?_c('div',{staticClass:"comment-preview markdown-content",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}):_vm._e(),_c('ul',[(this.replyComment)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.globalData.replyId = 0}}},[_vm._v("取消")])]):_vm._e(),(_vm.comment.content)?_c('li',[_c('button',{staticClass:"btn",attrs:{"type":"button"},on:{"click":function($event){_vm.previewMode = !_vm.previewMode}}},[_vm._v(" "+_vm._s(_vm.previewMode ? '编辑' : '预览')+" ")])]):_vm._e(),_c('li',[_c('button',{staticClass:"btn btn-primary",attrs:{"type":"button"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisible)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisible)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisible)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])}
+var CommentEditorvue_type_template_id_144397f2_staticRenderFns = []
 
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.error.cause.js
@@ -13492,13 +16414,37 @@ const haloRestApiClient = new lib.HaloRestAPIClient({
 });
 const apiClient = new lib.ContentApiClient(haloRestApiClient);
 /* harmony default export */ var api_client = (apiClient);
+// EXTERNAL MODULE: ./node_modules/@halo-dev/admin-api/lib/index.js
+var admin_api_lib = __webpack_require__(5597);
+;// CONCATENATED MODULE: ./src/plugins/admin-client.js
+
+let accessToken = localStorage && localStorage.getItem('HALO__Access-Token');
+accessToken = accessToken ? JSON.parse(accessToken) : undefined;
+
+if (accessToken && accessToken.expire > new Date().getTime()) {
+  accessToken = accessToken['value']['access_token'];
+} else {
+  accessToken = undefined;
+} //halo http 请求客户端.
+
+
+const admin_client_haloRestApiClient = new admin_api_lib.HaloRestAPIClient({
+  baseUrl:  true ? '' : 0,
+  auth: {
+    adminToken: accessToken
+  }
+}); // 通过 haloRestApiCLient 创建 adminApiClient。
+
+const adminClient = new admin_api_lib.AdminApiClient(admin_client_haloRestApiClient);
+/* harmony default export */ var admin_client = (adminClient);
 // EXTERNAL MODULE: ./node_modules/autosize/dist/autosize.js
 var autosize = __webpack_require__(9367);
 var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
 ;// CONCATENATED MODULE: ./src/utils/globals.js
 // 全局数据不多，因此不使用vuex
 const globalData = {
-  replyId: 0
+  replyId: 0,
+  blogger: undefined
 };
 /* harmony default export */ var globals = (globalData);
 ;// CONCATENATED MODULE: ./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/dreamEmoji/EmojiPicker.vue?vue&type=template&id=3bab4a7c&
@@ -13976,6 +16922,36 @@ var Avatar_component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -14035,6 +17011,7 @@ var Avatar_component = normalizeComponent(
       },
       previewMode: false,
       globalData: globals,
+      bloggerComment: true,
       infoes: [],
       warnings: [],
       successes: []
@@ -14049,12 +17026,13 @@ var Avatar_component = normalizeComponent(
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default;
       const gravatarSource = this.options.gravatar_source || '//cn.gravatar.com/avatar/';
+      let email = this.configs.enableBloggerOperation ? this.globalData.blogger.email : this.comment.email;
 
-      if (!this.comment.email || !validEmail(this.comment.email)) {
+      if (!email || !validEmail(email)) {
         return `${gravatarSource}?d=${gravatarDefault}`;
       }
 
-      const gravatarMd5 = md5_default()(this.comment.email);
+      const gravatarMd5 = md5_default()(email);
       return `${gravatarSource}${gravatarMd5}?s=256&d=${gravatarDefault}`;
     },
 
@@ -14115,12 +17093,18 @@ var Avatar_component = normalizeComponent(
         return;
       }
 
-      if (isEmpty(this.comment.author)) {
-        if (this.configs.anonymousUserName) {
-          this.comment.author = this.configs.anonymousUserName;
-        } else {
-          this.warnings.push('评论者昵称不能为空');
-          return;
+      let apiComment = admin_client.comment;
+
+      if (!this.configs.enableBloggerOperation || !this.bloggerComment) {
+        apiComment = api_client.comment;
+
+        if (isEmpty(this.comment.author)) {
+          if (this.configs.anonymousUserName) {
+            this.comment.author = this.configs.anonymousUserName;
+          } else {
+            this.warnings.push('评论者昵称不能为空');
+            return;
+          }
         }
       } // Submit the comment
 
@@ -14132,11 +17116,14 @@ var Avatar_component = normalizeComponent(
         this.comment.parentId = this.replyComment.id;
       }
 
-      api_client.comment.create(this.target, this.comment).then(response => {
+      apiComment.create(this.target, this.comment).then(response => {
         // Store comment author, email, authorUrl
-        localStorage.setItem('comment-author', this.comment.author);
-        localStorage.setItem('comment-email', this.comment.email);
-        localStorage.setItem('comment-authorUrl', this.comment.authorUrl); // clear comment
+        if (!this.configs.enableBloggerOperation || !this.bloggerComment) {
+          localStorage.setItem('comment-author', this.comment.author);
+          localStorage.setItem('comment-email', this.comment.email);
+          localStorage.setItem('comment-authorUrl', this.comment.authorUrl);
+        } // clear comment
+
 
         this.comment.content = '';
         this.handleCommentCreated(response.data);
@@ -14218,7 +17205,7 @@ var Avatar_component = normalizeComponent(
           return response.json();
         }).then(data => {
           if (data.code && String(data.code) !== '200' || data.status && String(data.status) !== '200') {
-            this.warnings.push(`图片上传失败：${data.msg ? data.msg : data}`);
+            this.warnings.push(`图片上传失败：${data.message ? data.message : data}`);
             return;
           }
 
@@ -14257,8 +17244,8 @@ var Avatar_component = normalizeComponent(
 ;
 var CommentEditor_component = normalizeComponent(
   components_CommentEditorvue_type_script_lang_js_,
-  CommentEditorvue_type_template_id_a9a47d74_render,
-  CommentEditorvue_type_template_id_a9a47d74_staticRenderFns,
+  CommentEditorvue_type_template_id_144397f2_render,
+  CommentEditorvue_type_template_id_144397f2_staticRenderFns,
   false,
   null,
   null,
@@ -15177,6 +18164,7 @@ marked.use({
 
 
 
+
 const defaultConfig = {
   autoLoad: true,
   showUserAgent: true,
@@ -15191,6 +18179,7 @@ const defaultConfig = {
   enableBulletScreen: false,
   imageUploadApi: undefined,
   anonymousUserName: undefined,
+  enableBloggerOperation: true,
   avatarLoading: `${"/themes/dream/source/lib/halo-comment@1.0.9/"}assets/img/loading.svg`,
   defaultAvatar: `${"/themes/dream/source/lib/halo-comment@1.0.9/"}assets/img/avatar.svg`
 };
@@ -15280,6 +18269,17 @@ const defaultConfig = {
     },
 
     async handleGetOptions() {
+      if (this.mergedConfigs.enableBloggerOperation) {
+        try {
+          const {
+            data
+          } = await admin_client.user.getProfile();
+          this.globalData.blogger = data;
+        } catch (e) {
+          this.mergedConfigs.enableBloggerOperation = false;
+        }
+      }
+
       const {
         data
       } = await api_client.option.comment();
