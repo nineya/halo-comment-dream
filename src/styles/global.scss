@@ -359,9 +359,16 @@ ul {
     margin: 0;
   }
 
-  .children-nodes .avatar {
-    width: 40px;
-    height: 40px;
+  .children-nodes {
+    .avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .blogger-avatar svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 
   .comment {
@@ -608,9 +615,16 @@ ul {
       height: 18px;
     }
 
-    .children-nodes .avatar {
-      width: 30px;
-      height: 30px;
+    .children-nodes {
+      .avatar {
+        width: 30px;
+        height: 30px;
+      }
+
+      .blogger-avatar svg {
+        width: 16px;
+        height: 16px;
+      }
     }
 
     .index-1 > .children-nodes {
@@ -650,9 +664,16 @@ ul {
       height: 16px;
     }
 
-    .children-nodes .avatar {
-      width: 24px;
-      height: 24px;
+    .children-nodes {
+      .avatar {
+        width: 24px;
+        height: 24px;
+      }
+
+      .blogger-avatar svg {
+        width: 14px;
+        height: 14px;
+      }
     }
 
     .markdown-body {

@@ -262,12 +262,14 @@ export default {
         })
     },
     handleFailedToOperationComment(response) {
-      if (response.status === 400) {
-        window.alert(response.data.message)
-      } else if (response.status === 401) {
+      if (response.status === 401) {
         window.alert('操作失败，博主登录状态已失效！')
       } else {
-        window.alert(`操作失败：${response.data}`)
+        try {
+          window.alert(response.data.message)
+        } catch (e) {
+          window.alert(`操作失败：${response.status}！`)
+        }
       }
     }
   }
