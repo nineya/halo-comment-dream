@@ -49,6 +49,7 @@
 | imageUploadApi     | 接受图片上传的后端 `api` 地址                              | undefined | `url` 路径               |
 | anonymousUserName | 匿名评论的用户昵称，配置后允许用户匿名评论 | undefined | 用户名 |
 | avatarLoading      | 头像加载动画                                                 | `assets/img/loading.svg`       | 图片路径                   |
+| enableBloggerOperation| 如果博主已登录，允许博主直接在评论区进行操作                  | false              | `true` `false`            |
 | defaultAvatar      | 默认头像，当头像加载失败时显示                               | `assets/img/avatar.svg`        | 图片路径                   |
 
 

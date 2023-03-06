@@ -89,7 +89,7 @@ const defaultConfig = {
   enableBulletScreen: false,
   imageUploadApi: undefined,
   anonymousUserName: undefined,
-  enableBloggerOperation: true,
+  enableBloggerOperation: false,
   avatarLoading: `${process.env.BASE_URL}assets/img/loading.svg`,
   defaultAvatar: `${process.env.BASE_URL}assets/img/avatar.svg`
 }
