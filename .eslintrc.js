@@ -16,6 +16,8 @@ module.exports = {
       'error',
       {
         printWidth: 120,
+        // 四个空格缩进
+        // tabWidth: 4,
         semi: false,
         singleQuote: true,
         trailingComma: 'none',
