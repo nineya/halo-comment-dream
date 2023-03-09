@@ -38,7 +38,7 @@
               <span class="btn btn-primary comment-reply" @click="handleCreateComment">{{
                 globalData.replyId === comment.id ? '取消回复' : '回复'
               }}</span>
-              <div class="btn comment-operation">
+              <div v-if="configs.enableBloggerOperation" class="btn comment-operation">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 200">
                   <g>
                     <circle cx="60" cy="31.1" r="18.4" />
