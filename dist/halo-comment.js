@@ -12235,7 +12235,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.1.0/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -15965,24 +15965,74 @@ const apiClient = new lib.ContentApiClient(haloRestApiClient);
 var admin_api_lib = __webpack_require__(5597);
 ;// CONCATENATED MODULE: ./src/plugins/admin-client.js
 
+
+
+// let accessToken = localStorage && localStorage.getItem('HALO__Access-Token')
+// accessToken = accessToken ? JSON.parse(accessToken) : undefined
+// if (accessToken && accessToken.expire > new Date().getTime()) {
+//   accessToken = accessToken['value']['access_token']
+// } else {
+//   accessToken = undefined
+// }
+//
+// //halo http 请求客户端.
+// const haloRestApiClient = new HaloRestAPIClient({
+//   baseUrl: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8090',
+//   auth: { adminToken: accessToken }
+// })
+//
+// // 通过 haloRestApiCLient 创建 adminApiClient。
+// const adminClient = new AdminApiClient(haloRestApiClient)
+
 let accessToken = localStorage && localStorage.getItem('HALO__Access-Token');
 accessToken = accessToken ? JSON.parse(accessToken) : undefined;
-if (accessToken && accessToken.expire > new Date().getTime()) {
-  accessToken = accessToken['value']['access_token'];
-} else {
-  accessToken = undefined;
+let adminClient;
+if (accessToken) {
+  //halo http 请求客户端.
+  const haloRestApiClient = new admin_api_lib.HaloRestAPIClient({
+    baseUrl:  true ? '' : 0
+  });
+  // 通过 haloRestApiCLient 创建 adminApiClient。
+  adminClient = new admin_api_lib.AdminApiClient(haloRestApiClient);
+  haloRestApiClient.interceptors.request.use(config => {
+    config.headers['Admin-Authorization'] = accessToken['value']['access_token'];
+    return config;
+  }, error => {
+    return Promise.reject(error);
+  });
+  let isRefreshingToken = false;
+  let pendingRequests = [];
+  haloRestApiClient.interceptors.response.use(response => {
+    return response;
+  }, async error => {
+    const response = error.response;
+    const data = response ? response.data : null;
+    if (admin_api_lib.Axios.isCancel(error) || /Network Error/.test(error.message) || !data || data.status !== 401) {
+      return Promise.reject(error);
+    }
+    const originalRequest = error.config;
+    if (isRefreshingToken) {
+      return new Promise(resolve => {
+        pendingRequests.push(() => {
+          resolve((0,admin_api_lib.Axios)(originalRequest));
+        });
+      });
+    }
+    isRefreshingToken = true;
+    try {
+      accessToken['value'] = await adminClient.refreshToken(accessToken['value']['refresh_token']).then(response => response.data);
+      accessToken.expire = new Date().getTime() + accessToken['value']['expired_in'] * 1000;
+      localStorage.setItem('HALO__Access-Token', JSON.stringify(accessToken));
+      pendingRequests.forEach(callback => callback());
+      pendingRequests = [];
+      return (0,admin_api_lib.Axios)(originalRequest);
+    } catch (e) {
+      return Promise.reject(e);
+    } finally {
+      isRefreshingToken = false;
+    }
+  });
 }
-
-//halo http 请求客户端.
-const admin_client_haloRestApiClient = new admin_api_lib.HaloRestAPIClient({
-  baseUrl:  true ? '' : 0,
-  auth: {
-    adminToken: accessToken
-  }
-});
-
-// 通过 haloRestApiCLient 创建 adminApiClient。
-const adminClient = new admin_api_lib.AdminApiClient(admin_client_haloRestApiClient);
 /* harmony default export */ var admin_client = (adminClient);
 // EXTERNAL MODULE: ./node_modules/autosize/dist/autosize.js
 var autosize = __webpack_require__(9367);
@@ -16060,7 +16110,7 @@ var DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns = [];
     url: {
       type: String,
       required: false,
-      default: `${"https://unpkg.com/halo-comment-dream@1.1.0/dist/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -16290,7 +16340,7 @@ function renderedEmojiHtml(html) {
   const emojiData = (__webpack_require__(5601)/* ["default"] */ .Z);
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.1.0/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replace(new RegExp(`\\[/${name}\\]`, 'gm'), img);
   }
   return html;
@@ -16639,8 +16689,8 @@ var CommentEditor_component = normalizeComponent(
 )
 
 /* harmony default export */ var CommentEditor = (CommentEditor_component.exports);
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=0bfa0bf7&
-var CommentNodevue_type_template_id_0bfa0bf7_render = function render() {
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40.use[1]!./node_modules/@vue/vue-loader-v15/lib/loaders/templateLoader.js??ruleSet[1].rules[3]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=0589b13a&
+var CommentNodevue_type_template_id_0589b13a_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _vm.comment.no <= _vm.replyNum ? _c('li', {
@@ -16706,7 +16756,7 @@ var CommentNodevue_type_template_id_0bfa0bf7_render = function render() {
     on: {
       "click": _vm.handleCreateComment
     }
-  }, [_vm._v(_vm._s(_vm.globalData.replyId === _vm.comment.id ? '取消回复' : '回复'))]), _c('div', {
+  }, [_vm._v(_vm._s(_vm.globalData.replyId === _vm.comment.id ? '取消回复' : '回复'))]), _vm.configs.enableBloggerOperation ? _c('div', {
     staticClass: "btn comment-operation"
   }, [_c('svg', {
     attrs: {
@@ -16745,7 +16795,7 @@ var CommentNodevue_type_template_id_0bfa0bf7_render = function render() {
     on: {
       "click": _vm.handleDeleteComment
     }
-  }, [_vm._v("永久删除")]) : _vm._e()])])])]), _c('div', {
+  }, [_vm._v("永久删除")]) : _vm._e()])]) : _vm._e()])]), _c('div', {
     staticClass: "comment-info"
   }, [_c('time', {
     staticClass: "comment-time",
@@ -16812,7 +16862,7 @@ var CommentNodevue_type_template_id_0bfa0bf7_render = function render() {
     }
   }, [_vm._v("展开" + _vm._s(_vm.comment.replyCount - _vm.replyNum) + "条回复")])]) : _vm._e()], 1) : _vm._e();
 };
-var CommentNodevue_type_template_id_0bfa0bf7_staticRenderFns = [];
+var CommentNodevue_type_template_id_0589b13a_staticRenderFns = [];
 
 // EXTERNAL MODULE: ./node_modules/ua-parser-js/src/ua-parser.js
 var ua_parser = __webpack_require__(2238);
@@ -16984,8 +17034,8 @@ var ua_parser_default = /*#__PURE__*/__webpack_require__.n(ua_parser);
 ;
 var CommentNode_component = normalizeComponent(
   components_CommentNodevue_type_script_lang_js_,
-  CommentNodevue_type_template_id_0bfa0bf7_render,
-  CommentNodevue_type_template_id_0bfa0bf7_staticRenderFns,
+  CommentNodevue_type_template_id_0589b13a_render,
+  CommentNodevue_type_template_id_0589b13a_staticRenderFns,
   false,
   null,
   null,
@@ -17591,8 +17641,8 @@ const defaultConfig = {
   imageUploadApi: undefined,
   anonymousUserName: undefined,
   enableBloggerOperation: false,
-  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.1.0/dist/"}assets/img/loading.svg`,
-  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.1.0/dist/"}assets/img/avatar.svg`
+  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/img/loading.svg`,
+  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/img/avatar.svg`
 };
 /* harmony default export */ var Commentvue_type_script_lang_js_shadow = ({
   name: 'Comment',
