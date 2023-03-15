@@ -20,7 +20,7 @@ import { AdminApiClient, Axios, HaloRestAPIClient } from '@halo-dev/admin-api'
 let accessToken = localStorage && localStorage.getItem('HALO__Access-Token')
 accessToken = accessToken ? JSON.parse(accessToken) : undefined
 
-let adminClient
+let adminClient = {}
 
 if (accessToken) {
   //halo http 请求客户端.
