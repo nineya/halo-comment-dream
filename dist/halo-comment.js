@@ -12235,7 +12235,7 @@ var __webpack_exports__ = {};
 
 if (typeof window !== 'undefined') {
   var currentScript = window.document.currentScript
-  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
+  if (({"NODE_ENV":"production","BASE_URL":"https://unpkg.com/halo-comment-dream@1.1.2/dist/"}).NEED_CURRENTSCRIPT_POLYFILL) {
     var getCurrentScript = __webpack_require__(7679)
     currentScript = getCurrentScript()
 
@@ -15986,7 +15986,7 @@ var admin_api_lib = __webpack_require__(5597);
 
 let accessToken = localStorage && localStorage.getItem('HALO__Access-Token');
 accessToken = accessToken ? JSON.parse(accessToken) : undefined;
-let adminClient;
+let adminClient = {};
 if (accessToken) {
   //halo http 请求客户端.
   const haloRestApiClient = new admin_api_lib.HaloRestAPIClient({
@@ -16110,7 +16110,7 @@ var DreamEmojivue_type_template_id_2a4d7e70_staticRenderFns = [];
     url: {
       type: String,
       required: false,
-      default: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/emoji/`
+      default: `${"https://unpkg.com/halo-comment-dream@1.1.2/dist/"}assets/emoji/`
     }
   },
   computed: {
@@ -16340,7 +16340,7 @@ function renderedEmojiHtml(html) {
   const emojiData = (__webpack_require__(5601)/* ["default"] */ .Z);
   for (let emoji of emojiData) {
     let name = emoji.name;
-    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
+    let img = `<img class="dream-emoji" src="${"https://unpkg.com/halo-comment-dream@1.1.2/dist/"}assets/emoji/${emoji.fileName}.png" alt="${name}"/>`;
     html = html.replace(new RegExp(`\\[/${name}\\]`, 'gm'), img);
   }
   return html;
@@ -17641,8 +17641,8 @@ const defaultConfig = {
   imageUploadApi: undefined,
   anonymousUserName: undefined,
   enableBloggerOperation: false,
-  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/img/loading.svg`,
-  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.1.1/dist/"}assets/img/avatar.svg`
+  avatarLoading: `${"https://unpkg.com/halo-comment-dream@1.1.2/dist/"}assets/img/loading.svg`,
+  defaultAvatar: `${"https://unpkg.com/halo-comment-dream@1.1.2/dist/"}assets/img/avatar.svg`
 };
 /* harmony default export */ var Commentvue_type_script_lang_js_shadow = ({
   name: 'Comment',
