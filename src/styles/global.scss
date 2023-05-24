@@ -118,6 +118,11 @@ ul {
       color: #fff;
     }
   }
+
+  &-forbid {
+    filter: opacity(0.8);
+    pointer-events: none;
+  }
 }
 
 .halo-comment {

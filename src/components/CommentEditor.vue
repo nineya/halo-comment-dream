@@ -104,7 +104,14 @@
           </button>
         </li>
         <li>
-          <button class="btn btn-primary" type="button" @click="handleSubmitClick">提交</button>
+          <button
+            class="btn btn-primary"
+            :class="commentSumbit ? 'btn-forbid' : ''"
+            type="button"
+            @click="handleSubmitClick"
+          >
+            {{ commentSumbit ? '提交中 ~' : '提交' }}
+          </button>
         </li>
       </ul>
       <div class="comment-alert">
@@ -197,6 +204,7 @@ export default {
       previewMode: false,
       globalData: globals,
       bloggerComment: true,
+      commentSumbit: false,
       infoes: [],
       warnings: [],
       successes: []
@@ -288,6 +296,7 @@ export default {
         this.comment.parentId = this.replyComment.id
       }
 
+      this.commentSumbit = true
       apiComment
         .create(this.target, this.comment)
         .then(response => {
@@ -315,6 +324,7 @@ export default {
             console.error('onCommentErrorEvent执行异常', e)
           }
         })
+        .finally(() => setTimeout(() => (this.commentSumbit = false), 300))
     },
     handleCommentCreated(createdComment) {
       this.clearAlertClose()
