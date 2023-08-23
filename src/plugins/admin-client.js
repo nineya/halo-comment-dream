@@ -22,7 +22,7 @@ accessToken = accessToken ? JSON.parse(accessToken) : undefined
 
 let adminClient = {}
 
-if (accessToken) {
+if (accessToken && accessToken['value']) {
   //halo http 请求客户端.
   const haloRestApiClient = new HaloRestAPIClient({
     baseUrl: process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8090'
