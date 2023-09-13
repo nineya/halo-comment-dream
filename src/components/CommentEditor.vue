@@ -309,6 +309,7 @@ export default {
 
           // clear comment
           this.comment.content = ''
+          this.previewMode = false
           this.handleCommentCreated(response.data)
           try {
             window.onCommentSuccessEvent && window.onCommentSuccessEvent(this.comment, this.target)
