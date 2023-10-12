@@ -157,7 +157,7 @@ export default {
 .comment-page {
   margin-top: 30px;
   text-align: center;
-  border-top: 2px solid var(--bg-b);
+  border-top: 2px solid var(--comment-bg-b);
 
   .page {
     display: inline-block;
@@ -175,12 +175,12 @@ export default {
       font-size: inherit;
       font-family: inherit;
       padding: 5px 10px;
-      border: 1px solid var(--color-a);
+      border: 1px solid var(--comment-color-a);
       border-radius: 4px;
       transition: all 0.8s;
       font-weight: normal;
-      color: var(--color-f);
-      background-color: var(--bg-a);
+      color: var(--comment-color-f);
+      background-color: var(--comment-bg-a);
 
       &:not(.disabled) {
         cursor: pointer;

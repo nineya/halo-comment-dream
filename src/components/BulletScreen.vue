@@ -200,10 +200,10 @@ export default {
   z-index: 1000;
   cursor: pointer;
   overflow: hidden;
-  background: var(--bg-a);
+  background: var(--comment-bg-a);
   border-radius: 13px;
   transition: color 0.8s, max-width 0.5s, max-height 0.5s;
-  border: 1px solid var(--color-a);
+  border: 1px solid var(--comment-color-a);
 
   &:hover,
   &:hover .avatar {
@@ -254,7 +254,7 @@ export default {
   .comment-meta {
     padding-bottom: 2px;
     margin-bottom: 4px;
-    border-bottom: 1px solid var(--color-a);
+    border-bottom: 1px solid var(--comment-color-a);
     .avatar {
       width: 32px;
       height: 32px;
@@ -282,7 +282,7 @@ export default {
   .comment-time {
     display: block;
     font-size: 0.8em;
-    color: var(--color-c);
+    color: var(--comment-color-c);
   }
 
   .markdown-content {
