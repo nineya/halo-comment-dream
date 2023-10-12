@@ -28,6 +28,7 @@ $table-max-width: 1023px;
   --comment-color-f: var(--comm-color-f, #909399);
   --color-g: #50bfff;
   --color-h: #deecff;
+  --comment-color-i: var(--comm-color-i, #aeaeae);
   --comment-bg-a: var(--comm-bg-a, rgb(255 255 255 / 80%));
   --comment-bg-b: var(--comm-bg-b, rgb(243 248 255 / 80%));
   --bg-c: rgb(237 244 253 / 75%);
@@ -51,6 +52,7 @@ $table-max-width: 1023px;
     --comment-color-f: var(--comm-color-f, #777);
     --color-g: #276b92;
     --color-h: #3a3b3f;
+    --comment-color-i: var(--comm-color-i, #aeaeae);
     --comment-bg-a: var(--comm-bg-a, rgb(40 39 39 / 60%));
     --comment-bg-b: var(--comm-bg-b, rgb(58 59 63 / 50%));
     --bg-c: rgb(65 68 74 / 60%);
@@ -191,7 +193,7 @@ ul {
 
     .edit-btn {
       cursor: pointer;
-      color: rgba(174, 174, 174, 1);
+      color: var(--comment-color-i);
 
       &:not(:first-child) {
         margin-left: 6px;
@@ -206,7 +208,7 @@ ul {
       }
 
       svg {
-        fill: rgba(174, 174, 174, 1);
+        fill: var(--comment-color-i);
         vertical-align: bottom;
       }
     }
@@ -458,8 +460,8 @@ ul {
     cursor: pointer;
     position: relative;
     margin-right: 6px;
-    color: #aeaeae;
-    background-image: linear-gradient(45deg, transparent 46%, #aeaeae 46%, #aeaeae 54%, transparent 54%);
+    color: var(--comment-color-i);
+    background-image: linear-gradient(45deg, transparent 46%, var(--comment-color-i) 46%, var(--comment-color-i) 54%, transparent 54%);
 
     &.operation-open {
       color: var(--comment-theme);
