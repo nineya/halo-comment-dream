@@ -2,7 +2,7 @@
   <section class="comment-editor" role="form">
     <div class="avatar-body">
       <div v-if="configs.enableBloggerOperation && bloggerComment" class="blogger-avatar" title="博主登录">
-        <avatar :src="avatar" :configs="configs" @click="randomAuthor" style="cursor: pointer" title="点击头像试试" />
+        <avatar :src="avatar" :configs="configs" style="cursor: pointer" />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170">
           <path
             fill="var(--comment-theme)"
