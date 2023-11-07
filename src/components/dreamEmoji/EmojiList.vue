@@ -34,7 +34,7 @@ export default {
   user-select: none;
   border-radius: 4px;
   padding: 6px;
-  background: var(--bg-g);
+  background: var(--comment-bg-g);
   margin: 5px 0;
   overflow-y: auto;
 

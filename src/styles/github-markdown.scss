@@ -26,7 +26,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: var(--color-e);
+    color: var(--comment-color-e);
     margin-bottom: 12px;
   }
 
@@ -106,12 +106,12 @@
     table-layout: fixed;
     border-collapse: unset;
     color: var(--comment-main);
-    background: var(--bg-d);
+    background: var(--comment-bg-d);
     margin-bottom: 8px;
     overflow: hidden;
     font-size: 0.95em;
     border: 1px solid var(--comment-color-b);
-    border-radius: var(--radius-inner);
+    border-radius: var(--comment-radius-inner);
 
     td,
     th {
@@ -123,7 +123,7 @@
     thead {
       th {
         font-weight: 500;
-        background: var(--bg-c);
+        background: var(--comment-bg-c);
 
         &:last-child {
           border-right: none;
@@ -136,7 +136,7 @@
         transition: background 0.35s;
 
         &:nth-child(2n) {
-          background: var(--bg-e);
+          background: var(--comment-bg-e);
         }
 
         &:last-child td {
@@ -173,7 +173,7 @@
     vertical-align: baseline;
     word-break: break-word;
     background: rgb(175 184 193 / 20%);
-    border-radius: var(--radius-inner);
+    border-radius: var(--comment-radius-inner);
   }
 
   blockquote {
@@ -181,9 +181,9 @@
     margin-bottom: 8px;
     padding: 6px 10px;
     color: var(--comment-color-f);
-    background: var(--bg-f);
-    border-left: 5px solid var(--color-g);
-    border-radius: var(--radius-inner);
+    background: var(--comment-bg-f);
+    border-left: 5px solid var(--comment-color-g);
+    border-radius: var(--comment-radius-inner);
 
     * {
       margin: 0 !important;

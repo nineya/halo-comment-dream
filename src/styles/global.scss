@@ -24,22 +24,22 @@ $table-max-width: 1023px;
   --comment-color-b: var(--comm-color-b, #ebeef5);
   --comment-color-c: var(--comm-color-c, #4a4a4a);
   --comment-color-d: var(--comm-color-d, #bfbfbf);
-  --color-e: #333;
+  --comment-color-e: var(--comm-color-e, #333);
   --comment-color-f: var(--comm-color-f, #909399);
-  --color-g: #50bfff;
-  --color-h: #deecff;
+  --comment-color-g: var(--comm-color-g, #50bfff);
+  --comment-color-h: var(--comm-color-h, #deecff);
   --comment-color-i: var(--comm-color-i, #aeaeae);
   --comment-bg-a: var(--comm-bg-a, rgb(255 255 255 / 80%));
   --comment-bg-b: var(--comm-bg-b, rgb(243 248 255 / 80%));
-  --bg-c: rgb(237 244 253 / 75%);
-  --bg-d: rgba(255, 255, 255, 0.8);
-  --bg-e: rgb(243 244 245 / 25%);
-  --bg-f: rgb(214 239 255 / 60%);
-  --bg-g: rgb(245 245 245 / 80%);
+  --comment-bg-c: var(--comm-bg-c, rgb(237 244 253 / 75%));
+  --comment-bg-d: var(--comm-bg-d, rgba(255, 255, 255, 0.8));
+  --comment-bg-e: var(--comm-bg-e, rgb(243 244 245 / 25%));
+  --comment-bg-f: var(--comm-bg-f, rgb(214 239 255 / 60%));
+  --comment-bg-g: var(--comm-bg-g, rgb(245 245 245 / 80%));
   --comment-bg-h: var(--comm-bg-h, #FFF);
-  --bg-i: rgb(255 236 207 / 80%);
-  --bg-j: rgb(255 207 207 / 80%);
-  --radius-inner: 4px;
+  --comment-bg-i: var(--comm-bg-i, rgb(255 236 207 / 80%));
+  --comment-bg-j: var(--comm-bg-j, rgb(255 207 207 / 80%));
+  --comment-radius-inner: var(--comm-radius-inner, 4px);
 
   &.night {
     --comment-theme: var(--theme, #5d93db);
@@ -48,21 +48,21 @@ $table-max-width: 1023px;
     --comment-color-b: var(--comm-color-b, #414243);
     --comment-color-c: var(--comm-color-c, #c0c0c0);
     --comment-color-d: var(--comm-color-d, #848484);
-    --color-e: #c0c0c0;
+    --comment-color-e: var(--comm-color-e, #c0c0c0);
     --comment-color-f: var(--comm-color-f, #777);
-    --color-g: #276b92;
-    --color-h: #3a3b3f;
+    --comment-color-g: var(--comm-color-g, #276b92);
+    --comment-color-h: var(--comm-color-h, #3a3b3f);
     --comment-color-i: var(--comm-color-i, #aeaeae);
     --comment-bg-a: var(--comm-bg-a, rgb(40 39 39 / 60%));
     --comment-bg-b: var(--comm-bg-b, rgb(58 59 63 / 50%));
-    --bg-c: rgb(65 68 74 / 60%);
-    --bg-d: rgba(40, 44, 52, .8);
-    --bg-e: rgb(36 36 36 / 15%);
-    --bg-f: rgb(65 68 74 / 60%);
-    --bg-g: rgb(40 39 39 / 60%);
+    --comment-bg-c: var(--comm-bg-c, rgb(65 68 74 / 60%));
+    --comment-bg-d: var(--comm-bg-d, rgba(40, 44, 52, .8));
+    --comment-bg-e: var(--comm-bg-e, rgb(36 36 36 / 15%));
+    --comment-bg-f: var(--comm-bg-f, rgb(65 68 74 / 60%));
+    --comment-bg-g: var(--comm-bg-g, rgb(40 39 39 / 60%));
     --comment-bg-h: var(--comm-bg-h, rgb(40 39 39 / 95%));
-    --bg-i: rgb(102 78 53 / 50%);
-    --bg-j: rgb(102 53 53 / 50%);
+    --comment-bg-i: var(--comm-bg-i, rgb(102 78 53 / 50%));
+    --comment-bg-j: var(--comm-bg-j, rgb(102 53 53 / 50%));
 
     iframe, img, video, svg {
       filter: brightness(.8);
@@ -86,7 +86,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: var(--color-e);
+    color: var(--comment-color-e);
   }
 }
 
@@ -102,7 +102,7 @@ ul {
   color: var(--comment-main);
   user-select: none;
   border: 1px solid var(--comment-color-a);
-  border-radius: var(--radius-inner);
+  border-radius: var(--comment-radius-inner);
   background: rgb(255 255 255 / 6%);;
 
   &:hover {
@@ -272,7 +272,7 @@ ul {
     input, textarea, .comment-preview, .blogger-info {
       box-shadow: none;
       border: 1px solid var(--comment-color-a);
-      border-radius: var(--radius-inner);
+      border-radius: var(--comment-radius-inner);
       background: var(--comment-bg-a);
       box-sizing: border-box;
       padding: 6px 10px;
@@ -324,7 +324,7 @@ ul {
     animation: top20 .5s;
     transition: opacity .6s;
     background-color: rgb(244 67 54 / 80%);;
-    border-radius: var(--radius-inner);
+    border-radius: var(--comment-radius-inner);
     margin-bottom: 15px;
 
     &.warning {
@@ -384,12 +384,12 @@ ul {
 
     &.recycle > .comment-body .markdown-body {
       color: #ff9800;
-      background: var(--bg-i);
+      background: var(--comment-bg-i);
     }
 
     &.delete .comment-main .markdown-body {
       color: #ff0000;
-      background: var(--bg-j);
+      background: var(--comment-bg-j);
       text-decoration: line-through;
     }
   }
@@ -542,7 +542,7 @@ ul {
         overflow: hidden;
         color: var(--comment-main) !important;
         background: var(--comment-bg-h);
-        border-radius: var(--radius-inner);
+        border-radius: var(--comment-radius-inner);
         box-shadow: 0 2px 8px rgb(0 0 0 / 5%);
 
         li {
@@ -603,7 +603,7 @@ ul {
     }
 
     .markdown-body {
-      background: var(--color-h);
+      background: var(--comment-color-h);
       box-shadow: 0 24px 20px -14px rgb(63 83 122 / 30%)
     }
   }
