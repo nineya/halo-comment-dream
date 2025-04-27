@@ -265,7 +265,7 @@ export default {
         .then(response => response.json())
         .then(data => {
           this.comment.email = this.comment.author + '@qq.com'
-          this.comment.author = data.name
+          this.comment.author = data?.data?.name
         })
         .catch(error => {
           this.clearAlertClose()
