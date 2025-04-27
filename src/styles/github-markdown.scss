@@ -26,13 +26,13 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: var(--color-e);
+    color: var(--comment-color-e);
     margin-bottom: 12px;
   }
 
   h1, h2 {
     padding-bottom: 0.2em;
-    border-bottom: 1px solid var(--color-b);
+    border-bottom: 1px solid var(--comment-color-b);
   }
 
   h1 {
@@ -105,25 +105,25 @@
     max-width: 100%;
     table-layout: fixed;
     border-collapse: unset;
-    color: var(--main);
-    background: var(--bg-d);
+    color: var(--comment-main);
+    background: var(--comment-bg-d);
     margin-bottom: 8px;
     overflow: hidden;
     font-size: 0.95em;
-    border: 1px solid var(--color-b);
-    border-radius: var(--radius-inner);
+    border: 1px solid var(--comment-color-b);
+    border-radius: var(--comment-radius-inner);
 
     td,
     th {
       padding: 8px;
-      border-right: 1px solid var(--color-b);
-      border-bottom: 1px solid var(--color-b);
+      border-right: 1px solid var(--comment-color-b);
+      border-bottom: 1px solid var(--comment-color-b);
     }
 
     thead {
       th {
         font-weight: 500;
-        background: var(--bg-c);
+        background: var(--comment-bg-c);
 
         &:last-child {
           border-right: none;
@@ -136,7 +136,7 @@
         transition: background 0.35s;
 
         &:nth-child(2n) {
-          background: var(--bg-e);
+          background: var(--comment-bg-e);
         }
 
         &:last-child td {
@@ -160,30 +160,30 @@
     font-size: 85%;
     line-height: 1.45;
     margin-bottom: 8px;
-    background-color: var(--bg-a);
+    background-color: var(--comment-bg-a);
     border-radius: 6px;
   }
 
   *:not(pre) > code {
     font-size: 0.9em;
-    color: var(--color-c);
+    color: var(--comment-color-c);
     margin: 0 2px;
     padding: 3px 6px;
     white-space: normal;
     vertical-align: baseline;
     word-break: break-word;
     background: rgb(175 184 193 / 20%);
-    border-radius: var(--radius-inner);
+    border-radius: var(--comment-radius-inner);
   }
 
   blockquote {
     line-height: 1.5em;
     margin-bottom: 8px;
     padding: 6px 10px;
-    color: var(--color-f);
-    background: var(--bg-f);
-    border-left: 5px solid var(--color-g);
-    border-radius: var(--radius-inner);
+    color: var(--comment-color-f);
+    background: var(--comment-bg-f);
+    border-left: 5px solid var(--comment-color-g);
+    border-radius: var(--comment-radius-inner);
 
     * {
       margin: 0 !important;
