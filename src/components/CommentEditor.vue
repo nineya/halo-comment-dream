@@ -261,11 +261,11 @@ export default {
       if (!isQQ(this.comment.author)) {
         return
       }
-      fetch('https://api.coor.top/qqinfo/?qq=' + this.comment.author)
+      fetch('https://api.nsmao.net/api/qq/v1/query?key=YvmkHw55XwyW0W8N4FJVwkrbjo&qq=' + this.comment.author)
         .then(response => response.json())
         .then(data => {
-          this.comment.author = data.nickname
-          this.comment.email = data.email
+          this.comment.email = this.comment.author + '@qq.com'
+          this.comment.author = data.name
         })
         .catch(error => {
           this.clearAlertClose()
